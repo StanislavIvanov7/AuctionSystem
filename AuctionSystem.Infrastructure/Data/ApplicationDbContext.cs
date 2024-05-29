@@ -1,4 +1,5 @@
-﻿using AuctionSystem.Infrastructure.Data.Models;
+﻿using AuctionSystem.Infrastructure.Data.Configuration;
+using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,15 @@ namespace AuctionSystem.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new AuctionConditionConfiguration());
+            builder.ApplyConfiguration(new AuctionConfiguration());
+            builder.ApplyConfiguration(new AuctionImageConfiguration());
+            builder.ApplyConfiguration(new BiddingConfiguration());
 
             base.OnModelCreating(builder);
         }
+
+        
 
         public DbSet<Auction> Auctions { get; set; } = null!;
 

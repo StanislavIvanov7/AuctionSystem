@@ -4,6 +4,7 @@ using AuctionSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuctionSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529185746_SeededDatabase")]
+    partial class SeededDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +93,9 @@ namespace AuctionSystem.Infrastructure.Migrations
                             BiddingPeriodInDays = 5,
                             ConditionId = 5,
                             Description = "Mercedes C200 2018 car for sale with a starting price of 12,000lv and a minimum bid of BGN 100.On actual kilometers without any remarks.",
-                            InitialPrice = 12000m,
+                            InitialPrice = 12.000m,
                             LastBuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
-                            LastPrice = 20000m,
+                            LastPrice = 20.000m,
                             MinBiddingStep = 100,
                             Name = "Car auction",
                             SellerId = "ea9548dc-aac6-49b5-abe1-561136ac48c7"
@@ -245,7 +247,7 @@ namespace AuctionSystem.Infrastructure.Migrations
                             Id = 1,
                             BuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
                             DateAndTimeOfBidding = new DateTime(2024, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Price = 20000m
+                            Price = 20.000m
                         });
                 });
 
