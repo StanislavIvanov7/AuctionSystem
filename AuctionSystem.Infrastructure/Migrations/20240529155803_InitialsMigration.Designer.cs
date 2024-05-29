@@ -4,6 +4,7 @@ using AuctionSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuctionSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529155803_InitialsMigration")]
+    partial class InitialsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,154 +23,6 @@ namespace AuctionSystem.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Auction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Auction Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BiddingPeriodInDays")
-                        .HasColumnType("int")
-                        .HasComment("Auction Bidding Period In Days");
-
-                    b.Property<int>("ConditionId")
-                        .HasColumnType("int")
-                        .HasComment("Auction Condition Identifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasComment("Auction Description");
-
-                    b.Property<decimal>("InitialPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Auction Initial Price");
-
-                    b.Property<string>("LastBuyerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("Auction Last Buyer Identifier");
-
-                    b.Property<decimal>("LastPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Auction Last Price");
-
-                    b.Property<int>("MinBiddingStep")
-                        .HasColumnType("int")
-                        .HasComment("Auction Min Bidding Step");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasComment("Auction Name");
-
-                    b.Property<string>("SellerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("Auction Seller Identifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ConditionId");
-
-                    b.HasIndex("LastBuyerId");
-
-                    b.HasIndex("SellerId");
-
-                    b.ToTable("Auctions");
-
-                    b.HasComment("Auction table");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.AuctionCondition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Condition Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasComment("Auction Condition Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AuctionConditions");
-
-                    b.HasComment("Auction Condition table");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.AuctionImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Image Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AuctionId")
-                        .HasColumnType("int")
-                        .HasComment("Auction Identifier");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)")
-                        .HasComment("Image Url");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit")
-                        .HasComment("Is Main Image");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuctionId");
-
-                    b.ToTable("AuctionImages");
-
-                    b.HasComment("Auction Image Table");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Bidding", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Bidding Identifier");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("BuyerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("Buyer Identifier");
-
-                    b.Property<DateTime>("DateAndTimeOfBidding")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date And Time Of Bidding");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)")
-                        .HasComment("Bidding Price");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuyerId");
-
-                    b.ToTable("Biddings");
-
-                    b.HasComment("Bidding Table");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -372,53 +226,6 @@ namespace AuctionSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Auction", b =>
-                {
-                    b.HasOne("AuctionSystem.Infrastructure.Data.Models.AuctionCondition", "Condition")
-                        .WithMany("Auctions")
-                        .HasForeignKey("ConditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "LastBuyer")
-                        .WithMany()
-                        .HasForeignKey("LastBuyerId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Condition");
-
-                    b.Navigation("LastBuyer");
-
-                    b.Navigation("Seller");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.AuctionImage", b =>
-                {
-                    b.HasOne("AuctionSystem.Infrastructure.Data.Models.Auction", "Auction")
-                        .WithMany("Images")
-                        .HasForeignKey("AuctionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Auction");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Bidding", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -468,16 +275,6 @@ namespace AuctionSystem.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Auction", b =>
-                {
-                    b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.AuctionCondition", b =>
-                {
-                    b.Navigation("Auctions");
                 });
 #pragma warning restore 612, 618
         }

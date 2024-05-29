@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AuctionSystem.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialsMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
