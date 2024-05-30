@@ -52,6 +52,10 @@ namespace AuctionSystem.Infrastructure.Data.Models
         [Comment("Auction Last Price")]
         public decimal LastPrice { get; set; }
 
+        [Required]
+        [Comment("Bidding Count")]
+        public int BiddingCount { get; set; }
+
 
         [Comment("Auction Last Buyer Identifier")]
         public string? LastBuyerId { get; set; }
