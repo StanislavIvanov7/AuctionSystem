@@ -16,6 +16,17 @@ namespace AuctionSystem.Infrastructure.Constants
             public const int MaxLengthDescription = 500;
             public const int MinLengthDescription = 10;
 
+            public const string MaxLengthPrice = "100000000";
+            public const string MinLengthPrice = "0";
+
+            public const int MaxLengthMinBiddingStep = 100000;
+            public const int MinLengthMinBiddingStep = 1;
+
+            public const int MaxLengthBiddingPeriodInDays = 50;
+            public const int MinLengthBiddingPeriodInDays = 1;
+
+
+
         }
 
         public static class AuctionCondition
