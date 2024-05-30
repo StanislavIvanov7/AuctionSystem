@@ -59,6 +59,7 @@ namespace AuctionSystem.Core.Services
                     LastPrice = x.LastPrice,
                     MinBiddingStep = x.MinBiddingStep,
                     BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    ImageUrl = x.Images.Where(x=>x.AuctionId == x.Auction.Id).ToList(),
 
 
                 })
@@ -110,6 +111,16 @@ namespace AuctionSystem.Core.Services
         {
            return await repository.AllAsReadOnly<Auction>()
                 .AnyAsync(x=>x.Id == id);
+        }
+
+        public async Task<IEnumerable<AllAuctionConditionsViewModel>> GetAuctionConditionsAsync()
+        {
+            return await repository.AllAsReadOnly<AuctionCondition>()
+                .Select(x => new AllAuctionConditionsViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToListAsync();
         }
     }
 }

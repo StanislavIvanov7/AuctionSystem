@@ -44,5 +44,16 @@ namespace AuctionSystem.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+            var model = new AuctionFormViewModel();
+            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+
+            return View(model);
+        }
+
     }
 }
