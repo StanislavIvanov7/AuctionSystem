@@ -13,5 +13,9 @@ namespace AuctionSystem.Core.Contracts
        int housesPerPage = 1);
 
         Task<IEnumerable<string>> AllConditionNamesAsync();
+
+        Task<bool> ExistAsync(int id);
+
+        Task<DetailsAuctionViewModel> DetailsAuctionAsync(int id);
     }
 }

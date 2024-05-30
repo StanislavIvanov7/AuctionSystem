@@ -79,5 +79,37 @@ namespace AuctionSystem.Core.Services
                 .Select(x=>x.Name)
                 .ToListAsync();
         }
+
+        public async Task<DetailsAuctionViewModel> DetailsAuctionAsync(int id)
+        {
+            var auction = await repository.AllAsReadOnly<Auction>()
+              .Where(x => x.Id == id)
+              .Select(x => new DetailsAuctionViewModel()
+              {
+                  Id = x.Id,
+                  Name = x.Name,
+                  InitialPrice = x.InitialPrice,
+                  Description = x.Description,
+                  Condition = x.Condition.Name,
+                  Seller = x.Seller.Email,
+                  LastBuyer = x.LastBuyer.Email,
+                  BiddingCount = x.BiddingCount,
+                  LastPrice = x.LastPrice,
+                  MinBiddingStep = x.MinBiddingStep,
+                  BiddingPeriodInDays = x.BiddingPeriodInDays
+                  
+
+
+
+              }).FirstAsync();
+
+            return auction;
+        }
+
+        public async Task<bool> ExistAsync(int id)
+        {
+           return await repository.AllAsReadOnly<Auction>()
+                .AnyAsync(x=>x.Id == id);
+        }
     }
 }

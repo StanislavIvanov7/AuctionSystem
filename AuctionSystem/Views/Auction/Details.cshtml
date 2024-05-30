@@ -1,0 +1,34 @@
+﻿@model DetailsAuctionViewModel
+@{
+    ViewBag.Title = "Auction Details";
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="card w-100">
+        <div class="card-body">
+            <h3 class="card-title text-center">@Model.Name</h3>
+          @*   <img class="card-img-top" style="width: 18rem;"
+                 src="@Model.ImageUrl" alt="Book Image"> *@
+            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <p class="mb-0"><span class="fw-bold">Product Initial Price: </span>@Model.InitialPrice lv.</p>
+            <p class="mb-0"><span class="fw-bold">Product Last Price: </span>@Model.LastPrice lv.</p>
+            <p class="mb-0"><span class="fw-bold">Seller Email: </span>@Model.Seller</p>
+            <p class="mb-0"><span class="fw-bold">Buyer Email: </span>@Model.LastBuyer</p>
+            <p class="mb-0"><span class="fw-bold">Product Condition: </span>@Model.Condition</p>
+            <p class="mb-0"><span class="fw-bold">Min Bidding Step: </span>@Model.MinBiddingStep</p>
+            <p class="mb-0"><span class="fw-bold">Bidding Duration In Days: </span>@Model.BiddingPeriodInDays</p>
+            <p class="mb-0"><span class="fw-bold">Bidding Count: </span>@Model.BiddingCount</p>
+        </div>
+
+        <a asp-controller="Auction" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Auction</a>
+      
+
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
