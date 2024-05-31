@@ -17,7 +17,7 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public string BuyerId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(BuyerId))]
-        public IdentityUser Buyer { get; set; } = null!;
+        public ApplicationUser Buyer { get; set; } = null!;
 
         [Required]
         [Comment("Date And Time Of Bidding")]

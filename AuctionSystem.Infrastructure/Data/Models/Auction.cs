@@ -46,7 +46,7 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public string SellerId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(SellerId))]
-        public IdentityUser Seller { get; set; } = null!;
+        public ApplicationUser Seller { get; set; } = null!;
 
         [Required]
         [Comment("Auction Last Price")]
@@ -61,7 +61,7 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public string? LastBuyerId { get; set; }
 
         [ForeignKey(nameof(LastBuyerId))]
-        public IdentityUser? LastBuyer { get; set; }
+        public ApplicationUser? LastBuyer { get; set; }
       
         public List<AuctionImage> Images { get; set; } = new List<AuctionImage>();
     }

@@ -2,6 +2,7 @@
 using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data;
 using AuctionSystem.Infrastructure.Data.Common;
+using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;
