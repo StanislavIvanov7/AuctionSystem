@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Enumeration;
 using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Infrastructure.Data.Models;
 
 namespace AuctionSystem.Core.Contracts
 {
@@ -27,5 +28,10 @@ namespace AuctionSystem.Core.Contracts
         Task<AuctionFormViewModel> GetAuctionForEditAsync(int id);
 
         Task EditAsync(int id, AuctionFormViewModel model);
+
+        Task<Auction> GetAuctionByNameAsync(string name);
+
+        Task AddImagesAsync(Auction auction,List<string> imageUrls);
+
     }
 }

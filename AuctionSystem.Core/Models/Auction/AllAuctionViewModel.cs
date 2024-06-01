@@ -17,7 +17,7 @@ namespace AuctionSystem.Core.Models.Auction
 
         public string Description { get; set; } = string.Empty;
 
-        public List<AuctionImage> ImageUrl { get; set; } = new List<AuctionImage>();
+        public List<AuctionImage> Images { get; set; } = new List<AuctionImage>();
 
         public int BiddingPeriodInDays { get; set; }
 

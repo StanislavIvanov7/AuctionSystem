@@ -28,11 +28,42 @@ namespace AuctionSystem.Core.Services
                 InitialPrice = model.InitialPrice,
                 SellerId = userId,
                 MinBiddingStep = model.MinBiddingStep,
-
+              
 
             };
 
             await repository.AddAsync(auction);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task AddImagesAsync(Auction auction, List<string> imageUrls)
+        {
+            foreach (var imageUrl in imageUrls)
+            {
+                if (!string.IsNullOrWhiteSpace(imageUrl))
+                {
+                    var a = await repository.All<Auction>()
+                        .Where(x => x.Id == auction.Id)
+                        .Include(x => x.Images)
+                        .FirstOrDefaultAsync();
+
+                    a.Images.Add(new AuctionImage()
+                    {
+                        AuctionId = a.Id,
+                        ImageUrl = imageUrl,
+                        IsMain = false
+                    });
+
+                    //var auctionImage = new AuctionImage()
+                    //{
+                    //    AuctionId = auction.Id,
+                    //    ImageUrl = imageUrl,
+                    //    IsMain = false,
+                    //};
+                    //auction.Images.Add(auctionImage);
+                    //await repository.AddAsync(auctionImage);
+                }
+            }
             await repository.SaveChangesAsync();
         }
 
@@ -80,7 +111,7 @@ namespace AuctionSystem.Core.Services
                     LastPrice = x.LastPrice,
                     MinBiddingStep = x.MinBiddingStep,
                     BiddingPeriodInDays = x.BiddingPeriodInDays,
-                    ImageUrl = x.Images.Where(x=>x.AuctionId == x.Auction.Id).ToList(),
+                    Images = x.Images.Where(x=>x.AuctionId == x.Auction.Id).ToList(),
 
 
                 })
@@ -155,6 +186,13 @@ namespace AuctionSystem.Core.Services
         {
            return await repository.AllAsReadOnly<Auction>()
                 .AnyAsync(x=>x.Id == id);
+        }
+
+        public async Task<Auction> GetAuctionByNameAsync(string name)
+        {
+            var auction= await repository.AllAsReadOnly<Auction>()
+                .FirstAsync(x => x.Name == name);
+            return auction;
         }
 
         public async Task<IEnumerable<AllAuctionConditionsViewModel>> GetAuctionConditionsAsync()

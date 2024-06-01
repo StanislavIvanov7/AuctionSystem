@@ -57,7 +57,7 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AuctionFormViewModel model)
+        public async Task<IActionResult> Add(AuctionFormViewModel model,List<string> imageUrls)
         {
 
             if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
@@ -71,7 +71,15 @@ namespace AuctionSystem.Controllers
                 return View(model);
             }
             string userId = GetUserId();
+
             await auctionService.AddAsync(model, userId);
+
+            var auction = await auctionService.GetAuctionByNameAsync(model.Name);
+
+            await auctionService.AddImagesAsync(auction, imageUrls);
+
+
+
             return RedirectToAction(nameof(All));
 
         }
