@@ -1,7 +1,7 @@
-﻿@model IEnumerable<AllAuctionViewModel>
-@{
+﻿@model AllAuctionViewModel
+@* @{
     var auctions = Model.ToList();
-}
+} *@
 
 
 <div class="col-md-3">
@@ -10,13 +10,19 @@
         <div class="mb-5"></div>
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @for (int i = 0; i < auctions.Count(); i++)
-                {
-                    var diet = auctions[i];
+               
+                    @foreach (var item in Model.ImageUrl)
+                    {
+                        var diet = item;
+                        <div class="carousel-item">
+                            <img class="d-block w-100" style="height:150px" src="@diet.ImageUrl">
+                        </div>
+                    }
+                   @*  var diet = auctions[i];
                     <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
                         <img class="d-block w-100" style="height:150px" src="@diet.ImageUrl">
-                    </div>
-                }
+                    </div> *@
+                
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -26,28 +32,27 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
-       @*  <img class="card-img-top" src="@Model.ImageUrl" alt="Product Image"> *@
+        </div> 
+       <img class="card-img-top" src="@Model.ImageUrl" alt="Product Image">
 
-       @foreach (var auction in Model)
-        {
+       
             <div class="card-body text-center">
 
-                <h5 class="card-title mt-1">@auction.Name</h5>
-                <p class="mb-0">Price: @auction.LastPrice lv.</p>
-                <p class="mb-0">Description: @auction.Description</p>
-                <p class="mb-0">Min bidding step: @auction.MinBiddingStep</p>
-                <p class="mb-0">Bidding period in days: @auction.BiddingPeriodInDays</p>
+                <h5 class="card-title mt-1">@Model.Name</h5>
+                <p class="mb-0">Price: @Model.LastPrice lv.</p>
+                <p class="mb-0">Description: @Model.Description</p>
+                <p class="mb-0">Min bidding step: @Model.MinBiddingStep</p>
+                <p class="mb-0">Bidding period in days: @Model.BiddingPeriodInDays</p>
 
 
-                <a asp-controller="Auction" asp-action="Details" asp-route-id="@auction.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
+                <a asp-controller="Auction" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
 
-                @* <form class="input-group-sm" asp-controller="Product" asp-action="AddToCart" asp-route-id="@Model.Id">
-            <input type="submit" value="Add Product to cart" class="fs-6 btn btn-success mb-3 p-2" />
-            </form> *@
+                <form class="input-group-sm" asp-controller="Product" asp-action="AddToCart" asp-route-id="@Model.Id">
+                  <input type="submit" value="Add Product to cart" class="fs-6 btn btn-success mb-3 p-2" />
+                </form>
 
             </div>
-        }
+        
         
     </div>
 </div>

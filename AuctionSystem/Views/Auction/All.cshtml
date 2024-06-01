@@ -92,9 +92,9 @@
 }
 
 <div class="row">
-  @*   @foreach (var auction in Model.Auction)
+
+    @foreach (var auction in Model.Auction)
     {
         <partial name="_AuctionPartial" model="@auction" />
-    } *@
-    <partial name="_AuctionPartial" model="@Model.Auction"/>
+    }
 </div>
