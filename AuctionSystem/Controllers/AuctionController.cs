@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuctionSystem.Controllers
 {
-    public class AuctionController : Controller
+    public class AuctionController : BaseController
     {
         private readonly IAuctionService auctionService;
 
