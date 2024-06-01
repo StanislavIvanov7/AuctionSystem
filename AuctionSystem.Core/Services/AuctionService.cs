@@ -15,6 +15,27 @@ namespace AuctionSystem.Core.Services
         {
             repository = _repository;
         }
+
+        public async Task AddAsync(AuctionFormViewModel model, string userId)
+        {
+            Auction auction = new Auction()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                BiddingPeriodInDays = model.BiddingPeriodInDays,
+                ConditionId = model.ConditionId,
+                InitialPrice = model.InitialPrice,
+                SellerId = userId,
+                MinBiddingStep = model.MinBiddingStep,
+
+
+            };
+
+            await repository.AddAsync(auction);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<AuctionQueryViewModel> AllAuctionAsync(
             string? condition,
             string? searchTerm,
@@ -79,6 +100,12 @@ namespace AuctionSystem.Core.Services
             return await repository.AllAsReadOnly<AuctionCondition>()
                 .Select(x=>x.Name)
                 .ToListAsync();
+        }
+
+        public async Task<bool> ConditionExistAsync(int id)
+        {
+            return await repository.AllAsReadOnly<AuctionCondition>()
+                .AnyAsync(x=>x.Id == id);
         }
 
         public async Task<DetailsAuctionViewModel> DetailsAuctionAsync(int id)

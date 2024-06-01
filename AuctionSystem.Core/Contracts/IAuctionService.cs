@@ -19,5 +19,9 @@ namespace AuctionSystem.Core.Contracts
         Task<DetailsAuctionViewModel> DetailsAuctionAsync(int id);
 
         Task<IEnumerable<AllAuctionConditionsViewModel>> GetAuctionConditionsAsync();
+
+        Task<bool> ConditionExistAsync(int id);
+
+        Task AddAsync(AuctionFormViewModel model, string userId);
     }
 }
