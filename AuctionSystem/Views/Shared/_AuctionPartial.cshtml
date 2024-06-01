@@ -6,24 +6,24 @@
 
 <div class="col-md-3">
     <div class="card mb-4">
-        <div class="mb-5"></div>
-        <div class="mb-5"></div>
+      @*   <div class="mb-5"></div> *@
+        @* <div class="mb-5"></div>
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                
-                    @foreach (var item in Model.ImageUrl)
+                    @foreach (var item in Model.Images)
                     {
                         var diet = item;
                         <div class="carousel-item">
                             <img class="d-block w-100" style="height:150px" src="@diet.ImageUrl">
                         </div>
-                    }
+                    } *@
                    @*  var diet = auctions[i];
                     <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
                         <img class="d-block w-100" style="height:150px" src="@diet.ImageUrl">
                     </div> *@
                 
-            </div>
+            @* </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -32,8 +32,26 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div> 
-       <img class="card-img-top" src="@Model.ImageUrl" alt="Product Image">
+        </div>  *@
+        <div>
+            @if (Model.Images != null && Model.Images.Any())
+            {
+                @* var mainImage = Model.Images.FirstOrDefault(i => i.IsMain);
+            if (mainImage != null)
+            {
+            <img src="@mainImage.ImageUrl" alt="Main Image" class="img-thumbnail" />
+            } *@
+
+                foreach (var image in Model.Images)
+                {
+                    <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                }
+            }
+            @* else
+            {
+            <p>Няма налични снимки за този продукт.</p>
+            } *@
+        </div>
 
        
             <div class="card-body text-center">
@@ -56,4 +74,6 @@
         
     </div>
 </div>
+
+            
 
