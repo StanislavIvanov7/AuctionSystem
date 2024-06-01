@@ -76,6 +76,57 @@ namespace AuctionSystem.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            //if (User.IsAdmin() == false)
+            //{
+            //    return Unauthorized();
+            //}
+
+            var model = await auctionService.GetAuctionForEditAsync(id);
+
+            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AuctionFormViewModel model)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            //if (User.IsAdmin() == false)
+            //{
+            //    return Unauthorized();
+            //}
+
+            if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+            {
+                ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                return View(model);
+            }
+
+            await auctionService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(All));
+
+
+        }
+
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);

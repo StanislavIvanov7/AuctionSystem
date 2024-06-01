@@ -134,6 +134,23 @@ namespace AuctionSystem.Core.Services
             return auction;
         }
 
+        public async Task EditAsync(int id, AuctionFormViewModel model)
+        {
+            var auction = await repository.GetByIdAsync<Auction>(id);
+
+            if (auction != null)
+            {
+                auction.Name = model.Name;
+                auction.Description = model.Description;
+                auction.InitialPrice = model.InitialPrice;
+                auction.MinBiddingStep = model.MinBiddingStep;
+                auction.BiddingPeriodInDays = model.BiddingPeriodInDays;
+                auction.ConditionId = model.ConditionId;
+
+                await repository.SaveChangesAsync();
+            }
+        }
+
         public async Task<bool> ExistAsync(int id)
         {
            return await repository.AllAsReadOnly<Auction>()
@@ -148,6 +165,25 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Name = x.Name,
                 }).ToListAsync();
+        }
+
+        public async Task<AuctionFormViewModel> GetAuctionForEditAsync(int id)
+        {
+            var auction = await repository.AllAsReadOnly<Auction>()
+               .Where(x => x.Id == id)
+               .Select(x => new AuctionFormViewModel()
+               {
+                   Id = id,
+                   Name = x.Name,
+                   BiddingPeriodInDays= x.BiddingPeriodInDays,
+                   InitialPrice = x.InitialPrice,
+                   ConditionId = x.ConditionId,
+                   Description = x.Description,
+                   MinBiddingStep = x.MinBiddingStep,
+                   
+               }).FirstAsync();
+
+            return auction;
         }
     }
 }

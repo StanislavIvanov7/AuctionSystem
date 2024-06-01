@@ -23,5 +23,9 @@ namespace AuctionSystem.Core.Contracts
         Task<bool> ConditionExistAsync(int id);
 
         Task AddAsync(AuctionFormViewModel model, string userId);
+
+        Task<AuctionFormViewModel> GetAuctionForEditAsync(int id);
+
+        Task EditAsync(int id, AuctionFormViewModel model);
     }
 }
