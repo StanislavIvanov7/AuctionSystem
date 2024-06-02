@@ -13,6 +13,8 @@ namespace AuctionSystem.Core.Contracts
         Task EditAsync(string id ,MyInformationViewModel model);
 
         Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId);
-    }
 
+        Task<IEnumerable<MyBiddingsViewModel>> GetMyBiddings(string userId);
+    }
 }
+

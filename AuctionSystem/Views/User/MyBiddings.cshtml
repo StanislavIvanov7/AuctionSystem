@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MyBiddingsViewModel>
+@{
+    ViewBag.Title = "My Biddings";
+}
+<style>
+    .card-body {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row flex gap-4 m-4 justify-content-center">
+    @foreach (var a in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+           
+            <div class="card-body">
+
+                <p class="card-title mt-1">Price: @a.Price lv.</p>
+                <p class="mb-0">Date of bidding: @a.DateAndTimeOfBidding</p>
+                
+
+            </div>
+
+
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

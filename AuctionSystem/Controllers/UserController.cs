@@ -164,6 +164,15 @@ namespace AuctionSystem.Controllers
             return View(auctions);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> MyBiddings()
+        {
+            string userId = GetUserId();
+            var biddings = await userService.GetMyBiddings(userId);
+
+            return View(biddings);
+        }
+
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);
