@@ -15,6 +15,12 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
+        public async Task<bool> ExistAsync(string id)
+        {
+            return await repository.AllAsReadOnly<ApplicationUser>()
+                .AnyAsync(x => x.Id == id);
+        }
+
         public async Task<MyInformationViewModel> MyInformationAsync(string userId)
         {
             var user = await repository.AllAsReadOnly<ApplicationUser>()

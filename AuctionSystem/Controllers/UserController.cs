@@ -1,5 +1,7 @@
 ﻿using AuctionSystem.Core.Contracts;
+using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.User;
+using AuctionSystem.Core.Services;
 using AuctionSystem.Extensions;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
@@ -101,7 +103,7 @@ namespace AuctionSystem.Controllers
             //}
             return Redirect(model.ReturnUrl ?? "/Home/Index");
         }
-
+        [HttpGet]
         public async Task<IActionResult> MyInfo()
         {
             var userId = GetUserId();
@@ -109,6 +111,59 @@ namespace AuctionSystem.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+           
+            var user = await userManager.GetUserAsync(User);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var model = new MyInformationViewModel()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
+
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Edit(int id, AuctionFormViewModel model)
+        //{
+        //    if (await auctionService.ExistAsync(id) == false)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    //if (User.IsAdmin() == false)
+        //    //{
+        //    //    return Unauthorized();
+        //    //}
+
+        //    if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+        //    {
+        //        ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        model.Conditions = await auctionService.GetAuctionConditionsAsync();
+        //        return View(model);
+        //    }
+
+        //    await auctionService.EditAsync(id, model);
+
+        //    return RedirectToAction(nameof(All));
+
+
+        //}
 
         private string GetUserId()
         {
