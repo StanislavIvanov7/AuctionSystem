@@ -17,9 +17,18 @@
             </ul>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="MyInfo">My Profile</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Profile
+            </a>
+            <ul class="dropdown-menu">
+
+                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="MyInfo">My Profile</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="MyAuctions">My Auctions</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="MyBiddings">My Biddings</a></li>
+            </ul>
         </li>
+       
 
     }
 </ul>

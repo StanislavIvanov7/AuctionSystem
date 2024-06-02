@@ -40,6 +40,24 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId)
+        {
+           var auctions = await repository.AllAsReadOnly<Auction>()
+                .Where(x=>x.SellerId == userId)
+                .Select(x=> new MyAuctionViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    LastPrice = x.LastPrice,
+                    MinBiddingStep = x.MinBiddingStep,
+                    Images = x.Images
+                }).ToListAsync();
+
+            return auctions;
+        }
+
         public async Task<MyInformationViewModel> MyInformationAsync(string userId)
         {
             var user = await repository.AllAsReadOnly<ApplicationUser>()

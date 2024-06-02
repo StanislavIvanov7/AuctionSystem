@@ -137,21 +137,6 @@ namespace AuctionSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(MyInformationViewModel model)
         {
-            //if (await auctionService.ExistAsync(id) == false)
-            //{
-            //    return BadRequest();
-            //}
-
-            ////if (User.IsAdmin() == false)
-            ////{
-            ////    return Unauthorized();
-            ////}
-
-            //if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-            //{
-            //    ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
-            //}
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -169,6 +154,14 @@ namespace AuctionSystem.Controllers
             return RedirectToAction(nameof(MyInfo));
 
 
+        }
+        [HttpGet]
+        public async Task<IActionResult> MyAuctions()
+        {
+            string userId = GetUserId();
+            var auctions = await userService.GetMyAuctions(userId);
+
+            return View(auctions);
         }
 
         private string GetUserId()
