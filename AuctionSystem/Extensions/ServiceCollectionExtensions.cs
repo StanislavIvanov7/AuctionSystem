@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IAuctionService, AuctionService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

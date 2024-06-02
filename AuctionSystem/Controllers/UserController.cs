@@ -1,4 +1,6 @@
-﻿using AuctionSystem.Core.Models.User;
+﻿using AuctionSystem.Core.Contracts;
+using AuctionSystem.Core.Models.User;
+using AuctionSystem.Extensions;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +12,16 @@ namespace AuctionSystem.Controllers
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserService userService;
 
         public UserController(SignInManager<ApplicationUser> _signInManager,
             UserManager<ApplicationUser> _userManager,
-            IUserStore<ApplicationUser> _userStore)
+            IUserStore<ApplicationUser> _userStore,
+            IUserService _userService)
         {
             signInManager = _signInManager;
             userManager = _userManager;
+            userService = _userService;
 
         }
         [HttpGet]
@@ -95,6 +100,20 @@ namespace AuctionSystem.Controllers
             //    return RedirectToAction("DashBoard", "Home", new { area = "Admin" });
             //}
             return Redirect(model.ReturnUrl ?? "/Home/Index");
+        }
+
+        public async Task<IActionResult> MyInfo()
+        {
+            var userId = GetUserId();
+            var model = await userService.MyInformationAsync(userId);
+
+            return View(model);
+        }
+
+        private string GetUserId()
+        {
+            var userId = ClaimsPrincipalExtensions.Id(this.User);
+            return userId;
         }
     }
 }
