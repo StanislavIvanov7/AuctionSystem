@@ -134,36 +134,42 @@ namespace AuctionSystem.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, AuctionFormViewModel model)
-        //{
-        //    if (await auctionService.ExistAsync(id) == false)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Edit(MyInformationViewModel model)
+        {
+            //if (await auctionService.ExistAsync(id) == false)
+            //{
+            //    return BadRequest();
+            //}
 
-        //    //if (User.IsAdmin() == false)
-        //    //{
-        //    //    return Unauthorized();
-        //    //}
+            ////if (User.IsAdmin() == false)
+            ////{
+            ////    return Unauthorized();
+            ////}
 
-        //    if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-        //    {
-        //        ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
-        //    }
+            //if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+            //{
+            //    ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+            //}
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        model.Conditions = await auctionService.GetAuctionConditionsAsync();
-        //        return View(model);
-        //    }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await userManager.GetUserAsync(User);
 
-        //    await auctionService.EditAsync(id, model);
+            if(user == null)
+            {
+                return NotFound();
+            }
 
-        //    return RedirectToAction(nameof(All));
+
+            await userService.EditAsync(user.Id, model);
+
+            return RedirectToAction(nameof(MyInfo));
 
 
-        //}
+        }
 
         private string GetUserId()
         {

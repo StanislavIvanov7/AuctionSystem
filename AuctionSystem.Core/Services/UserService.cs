@@ -15,6 +15,25 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
+        public async Task EditAsync(string id,MyInformationViewModel model)
+        {
+            var user = await repository.All<ApplicationUser>()
+                .FirstOrDefaultAsync(x=>x.Id == id);
+
+            if (user != null)
+            {
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+                user.NormalizedEmail = model.Email.ToUpper();
+                user.UserName = model.Email;
+                user.NormalizedUserName = model.Email.ToUpper();
+                user.PhoneNumber = model.PhoneNumber;
+                
+                await repository.SaveChangesAsync();
+            }
+        }
+
         public async Task<bool> ExistAsync(string id)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()

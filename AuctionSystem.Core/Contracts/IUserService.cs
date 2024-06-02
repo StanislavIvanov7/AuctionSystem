@@ -1,12 +1,16 @@
-﻿using AuctionSystem.Core.Models.User;
+﻿using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Models.User;
+using System.Threading.Tasks;
 
 namespace AuctionSystem.Core.Contracts
 {
     public interface IUserService
     {
-        public Task<MyInformationViewModel> MyInformationAsync(string userId);
+        Task<MyInformationViewModel> MyInformationAsync(string userId);
 
         Task<bool> ExistAsync(string id);
+
+        Task EditAsync(string id ,MyInformationViewModel model);
     }
 
 }

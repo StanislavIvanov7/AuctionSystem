@@ -54,6 +54,9 @@ namespace AuctionSystem.Infrastructure.Constants
             public const int MaxLengthLastName = 50;
             public const int MinLengthLastName = 3;
 
+            public const int MaxLengthPhoneNumber = 10;
+            public const int MinLengthPhoneNumber = 10;
+
         }
     }
 }
