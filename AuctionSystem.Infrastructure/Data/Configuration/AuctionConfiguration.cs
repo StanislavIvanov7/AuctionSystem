@@ -35,7 +35,6 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 LastPrice = 20000,
                 LastBuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
                 BiddingCount = 5,
-
             };
 
             auctions.Add(auction);

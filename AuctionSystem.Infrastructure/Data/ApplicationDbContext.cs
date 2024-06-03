@@ -19,6 +19,7 @@ namespace AuctionSystem.Infrastructure.Data
             builder.ApplyConfiguration(new AuctionConfiguration());
             builder.ApplyConfiguration(new AuctionImageConfiguration());
             builder.ApplyConfiguration(new BiddingConfiguration());
+            builder.ApplyConfiguration(new AuctionCommentConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -30,6 +31,8 @@ namespace AuctionSystem.Infrastructure.Data
         public DbSet<AuctionCondition> AuctionConditions { get; set; } = null!;
 
         public DbSet<AuctionImage> AuctionImages { get; set; } = null!;
+
+        public DbSet<AuctionComment> AuctionComments { get; set; } = null!;
 
         public DbSet<Bidding> Biddings { get; set; } = null!;
     }

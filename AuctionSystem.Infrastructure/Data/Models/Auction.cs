@@ -48,6 +48,8 @@ namespace AuctionSystem.Infrastructure.Data.Models
         [ForeignKey(nameof(SellerId))]
         public ApplicationUser Seller { get; set; } = null!;
 
+        public List<AuctionComment> Comments { get; set; } = new List<AuctionComment>();
+
         [Required]
         [Comment("Auction Last Price")]
         public decimal LastPrice { get; set; }
