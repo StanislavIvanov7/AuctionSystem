@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using static AuctionSystem.Infrastructure.Constants.DataConstants.AuctionComment;
 namespace AuctionSystem.Infrastructure.Data.Models
 {
     [Comment("Auction Comment Table")]
@@ -16,7 +16,7 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public int AuctionId { get; set; }
 
         [Required]
-        [MaxLength(600)]
+        [MaxLength(MaxLengthContent)]
         public string Content { get; set; } = string.Empty;
 
         [ForeignKey(nameof(AuctionId))]

@@ -43,6 +43,13 @@ namespace AuctionSystem.Infrastructure.Constants
 
         }
 
+        public static class AuctionComment
+        {
+            public const int MaxLengthContent = 600;
+            public const int MinLengthContent = 3;
+
+        }
+
         public static class ApplicationUser
         {
             public const int MaxLengthPassword = 100;
