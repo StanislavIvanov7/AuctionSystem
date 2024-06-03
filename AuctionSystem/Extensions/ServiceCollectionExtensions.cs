@@ -1,4 +1,5 @@
-﻿using AuctionSystem.Core.Contracts;
+﻿using AuctionSystem.Controllers;
+using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data;
 using AuctionSystem.Infrastructure.Data.Common;
@@ -15,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAuctionService, AuctionService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuctionCommentService, AuctionCommentService>();
+            services.AddScoped<IUserCommentService, UserCommentService>();
 
             return services;
         }
