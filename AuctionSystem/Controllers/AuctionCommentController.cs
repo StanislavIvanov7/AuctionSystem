@@ -25,12 +25,12 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AuctionCommentFormViewModel model,int id)
+        public async Task<IActionResult> Add(AuctionCommentFormViewModel model)
         {
 
-            if (await auctionCommentService.AuctionExistAsync(id) == false)
+            if (await auctionCommentService.AuctionExistAsync(model.Id) == false)
             {
-                ModelState.AddModelError(nameof(id), "Auction does not exist");
+                ModelState.AddModelError(nameof(model.Id), "Auction does not exist");
 
             }
             if (!ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace AuctionSystem.Controllers
                 return View(model);
             }
            
-            await auctionCommentService.AddAsync(model, id);
+            await auctionCommentService.AddAsync(model);
 
 
 

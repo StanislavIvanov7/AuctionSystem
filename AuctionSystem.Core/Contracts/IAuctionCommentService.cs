@@ -14,6 +14,6 @@ namespace AuctionSystem.Core.Contracts
 
         Task<bool> AuctionExistAsync(int id);
 
-        Task AddAsync(AuctionCommentFormViewModel model,int id);
+        Task AddAsync(AuctionCommentFormViewModel model);
     }
 }
