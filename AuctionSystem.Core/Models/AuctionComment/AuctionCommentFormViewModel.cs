@@ -18,9 +18,9 @@ namespace AuctionSystem.Core.Models.AuctionComment
         [StringLength(MaxLengthContent,MinimumLength =MinLengthContent,ErrorMessage = LengthMessage)]
         public string Content { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = RequiredMessage)]
-        public int AuctionId { get; set; }
+        //[Required(ErrorMessage = RequiredMessage)]
+        //public int AuctionId { get; set; }
 
-        public IEnumerable<AuctionNameViewModel> Auctions { get; set; } = new List<AuctionNameViewModel>();
+        //public IEnumerable<AuctionNameViewModel> Auctions { get; set; } = new List<AuctionNameViewModel>();
     }
 }

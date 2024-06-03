@@ -19,27 +19,27 @@ namespace AuctionSystem.Controllers
         {
 
             var model = new AuctionCommentFormViewModel();
-            model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+            //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AuctionCommentFormViewModel model)
+        public async Task<IActionResult> Add(AuctionCommentFormViewModel model,int id)
         {
 
-            if (await auctionCommentService.AuctionExistAsync(model.AuctionId) == false)
+            if (await auctionCommentService.AuctionExistAsync(id) == false)
             {
-                ModelState.AddModelError(nameof(model.AuctionId), "Auction does not exist");
+                ModelState.AddModelError(nameof(id), "Auction does not exist");
 
             }
             if (!ModelState.IsValid)
             {
-                model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+                //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
                 return View(model);
             }
            
-            await auctionCommentService.AddAsync(model);
+            await auctionCommentService.AddAsync(model, id);
 
 
 

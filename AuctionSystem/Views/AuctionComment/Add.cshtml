@@ -15,7 +15,7 @@
                 <input asp-for="@Model.Content" class="form-control" aria-required="true" placeholder="Write auction comment here..." />
                 <span asp-validation-for="@Model.Content" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+           @*  <div class="mb-3">
                 <label asp-for="@Model.AuctionId" class="form-label-add-edit">Name Of Auction</label>
                 <select asp-for="@Model.AuctionId" class="form-control" aria-required="true">
                     <option disabled selected value="">Select Auction...</option>
@@ -25,7 +25,7 @@
                     }
                 </select>
                 <span asp-validation-for="@Model.AuctionId" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="mb-3">
                 <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Create" />
             </div>
