@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AuctionSystem.Core.Models.UserComment;
 
 namespace AuctionSystem.Core.Contracts
 {
     public interface IUserCommentService
     {
+        Task<bool> UserExistAsync(string id);
+
+        Task AddAsync(UserCommentFormViewModel model, string userId);
     }
 }

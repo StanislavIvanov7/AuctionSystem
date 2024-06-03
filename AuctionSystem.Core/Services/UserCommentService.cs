@@ -1,4 +1,9 @@
 ﻿using AuctionSystem.Core.Contracts;
+using AuctionSystem.Core.Models.AuctionComment;
+using AuctionSystem.Core.Models.UserComment;
+using AuctionSystem.Infrastructure.Data.Common;
+using AuctionSystem.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +14,30 @@ namespace AuctionSystem.Core.Services
 {
     public class UserCommentService : IUserCommentService
     {
+        private readonly IRepository repository;
+
+        public UserCommentService(IRepository _repository)
+        {
+            repository = _repository;
+        }
+
+        public async Task AddAsync(UserCommentFormViewModel model, string userId)
+        {
+            UserComment comment = new UserComment()
+            {
+                Content = model.Content,
+                SendingCommentUserId = userId,
+                ReceivingCommentUserId = model.Id
+            };
+
+            await repository.AddAsync(comment);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> UserExistAsync(string id)
+        {
+            return await repository.AllAsReadOnly<ApplicationUser>()
+                .AnyAsync(x=> x.Id == id);
+        }
     }
 }

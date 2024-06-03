@@ -43,14 +43,14 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x=>x.Id == id);
         }
 
-        public async Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync()
-        {
-            return await repository.AllAsReadOnly<Auction>()
-                .Select(x => new AuctionNameViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                }).ToListAsync();
-        }
+        //public async Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync()
+        //{
+        //    return await repository.AllAsReadOnly<Auction>()
+        //        .Select(x => new AuctionNameViewModel
+        //        {
+        //            Id = x.Id,
+        //            Name = x.Name,
+        //        }).ToListAsync();
+        //}
     }
 }

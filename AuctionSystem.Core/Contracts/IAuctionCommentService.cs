@@ -10,7 +10,7 @@ namespace AuctionSystem.Core.Contracts
 {
     public interface IAuctionCommentService
     {
-        Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync();
+        //Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync();
 
         Task<bool> AuctionExistAsync(int id);
 
