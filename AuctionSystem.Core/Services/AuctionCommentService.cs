@@ -21,6 +21,28 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
+        public async Task AddAsync(AuctionCommentFormViewModel model)
+        {
+            AuctionComment comment = new AuctionComment()
+            {
+                Id = model.Id,
+                AuctionId = model.AuctionId,
+                Content = model.Content,
+                
+
+
+            };
+
+            await repository.AddAsync(comment);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> AuctionExistAsync(int id)
+        {
+            return await repository.AllAsReadOnly<Auction>()
+                .AnyAsync(x=>x.Id == id);
+        }
+
         public async Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync()
         {
             return await repository.AllAsReadOnly<Auction>()
