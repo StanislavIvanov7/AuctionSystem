@@ -12,8 +12,12 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [Comment("Comment Identifier")]
+        [Comment("Auction Identifier")]
         public int AuctionId { get; set; }
+
+        [Required]
+        [Comment("User Identifier")]
+        public string UserId { get; set; } = string.Empty;
 
         [Required]
         [MaxLength(MaxLengthContent)]
@@ -21,6 +25,9 @@ namespace AuctionSystem.Infrastructure.Data.Models
 
         [ForeignKey(nameof(AuctionId))]
         public Auction Auction { get; set; } = null!;
+
+        [ForeignKey(nameof(UserId))]
+        public ApplicationUser User { get; set; } = null!;
 
     }
 }

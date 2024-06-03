@@ -24,9 +24,10 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
 
             comment = new AuctionComment()
             {
-                Id = 1,
+                Id = 6,
                 AuctionId = 1,
-                Content = "Very good car"
+                Content = "Very good car",
+                UserId = "39fb9235-83a6-4bb9-9236-490a99f6bb83"
             };
 
             comments.Add(comment);
