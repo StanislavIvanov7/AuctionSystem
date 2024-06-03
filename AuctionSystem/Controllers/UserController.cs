@@ -104,6 +104,14 @@ namespace AuctionSystem.Controllers
             return Redirect(model.ReturnUrl ?? "/Home/Index");
         }
         [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            var model = await userService.AllUsersAsync();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> MyInfo()
         {
             var userId = GetUserId();

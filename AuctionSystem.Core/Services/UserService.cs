@@ -15,6 +15,22 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
+        public async Task<IEnumerable<AllUsersViewModel>> AllUsersAsync()
+        {
+            var users = await repository.AllAsReadOnly<ApplicationUser>()
+                .Select(x => new AllUsersViewModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+
+                }).ToListAsync();
+
+            return users;
+        }
+
         public async Task EditAsync(string id,MyInformationViewModel model)
         {
             var user = await repository.All<ApplicationUser>()
