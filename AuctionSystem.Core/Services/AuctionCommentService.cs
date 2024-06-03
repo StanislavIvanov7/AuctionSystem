@@ -21,12 +21,13 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
-        public async Task AddAsync(AuctionCommentFormViewModel model)
+        public async Task AddAsync(AuctionCommentFormViewModel model,string userId)
         {
             AuctionComment comment = new AuctionComment()
             {
                 AuctionId = model.Id,
                 Content = model.Content,
+                UserId = userId
                 
 
 

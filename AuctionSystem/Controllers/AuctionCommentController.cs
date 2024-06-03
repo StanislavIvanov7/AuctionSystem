@@ -38,8 +38,9 @@ namespace AuctionSystem.Controllers
                 //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
                 return View(model);
             }
-           
-            await auctionCommentService.AddAsync(model);
+
+            var userId = GetUserId();
+            await auctionCommentService.AddAsync(model,userId);
 
 
 
