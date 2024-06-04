@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.AuctionComment;
+using AuctionSystem.Core.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,11 @@ namespace AuctionSystem.Core.Contracts
         Task<bool> AuctionExistAsync(int id);
 
         Task AddAsync(AuctionCommentFormViewModel model,string userId);
+
+        Task<bool> ExistAsync(int id);
+
+        Task<DeleteCommentViewModel> GetCommentForDeleteAsync(int id);
+
+        Task<IEnumerable<AllCommentsViewModel>> AllCommentsAsync();
     }
 }

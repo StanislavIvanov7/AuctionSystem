@@ -14,6 +14,15 @@ namespace AuctionSystem.Controllers
         {
             auctionCommentService = _auctionCommentService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            var model = await auctionCommentService.AllCommentsAsync();
+
+            return View(model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -47,6 +56,44 @@ namespace AuctionSystem.Controllers
             return RedirectToAction("All","Auction");
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await auctionCommentService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (User.IsModerator() == false && User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await auctionCommentService.GetCommentForDeleteAsync(id);
+
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+
+        //    if (await dietService.ExistAsync(id) == false)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    if (User.IsAdmin() == false)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    await dietService.RemoveAsync(id);
+
+        //    return RedirectToAction(nameof(All));
+
+        //}
 
         private string GetUserId()
         {
