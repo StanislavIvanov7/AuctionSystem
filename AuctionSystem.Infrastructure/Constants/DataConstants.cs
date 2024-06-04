@@ -57,6 +57,12 @@ namespace AuctionSystem.Infrastructure.Constants
 
         }
 
+        public static class Bidding
+        {
+            public const string MaxLengthLastPrice = "100000000";
+            public const string MinLengthLastPrice = "0";
+        }
+
         public static class ApplicationUser
         {
             public const int MaxLengthPassword = 100;
