@@ -27,7 +27,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
             bidding = new Bidding()
             {
                 Id = 1,
-                Price = 160000,
+                Price = 20000,
                 DateAndTimeOfBidding = fixedDate,
                 BuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
                 AuctionId = 1

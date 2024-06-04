@@ -7,7 +7,7 @@ namespace AuctionSystem.Core.Models.Bidding
 {
     public class BiddingFormViewModel
     {
-        public string Id { get; set; } = string.Empty;
+        public int Id { get; set; } 
 
         [Required(ErrorMessage = RequiredMessage)]
         [Range(typeof(decimal),

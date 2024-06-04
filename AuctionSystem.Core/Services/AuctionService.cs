@@ -28,7 +28,8 @@ namespace AuctionSystem.Core.Services
                 InitialPrice = model.InitialPrice,
                 SellerId = userId,
                 MinBiddingStep = model.MinBiddingStep,
-                LastPrice = model.InitialPrice
+                LastPrice = model.InitialPrice,
+                StartingAuctionDateTime = DateTime.Now
               
 
             };
