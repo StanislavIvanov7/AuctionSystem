@@ -20,6 +20,13 @@ namespace AuctionSystem.Infrastructure.Data.Models
         public ApplicationUser Buyer { get; set; } = null!;
 
         [Required]
+        [Comment("Auction Identifier")]
+        public int AuctionId { get; set; }
+
+        [ForeignKey(nameof(AuctionId))]
+        public Auction Auction { get; set; } = null!;
+
+        [Required]
         [Comment("Date And Time Of Bidding")]
         public DateTime DateAndTimeOfBidding { get; set; }
 

@@ -50,6 +50,8 @@ namespace AuctionSystem.Infrastructure.Data.Models
 
         public List<AuctionComment> Comments { get; set; } = new List<AuctionComment>();
 
+        public List<Bidding> Biddings { get; set; } = new List<Bidding>();
+
         [Required]
         [Comment("Auction Last Price")]
         public decimal LastPrice { get; set; }
