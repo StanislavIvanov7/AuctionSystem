@@ -15,6 +15,8 @@ namespace AuctionSystem.Core.Models.Auction
 
         public decimal LastPrice { get; set; }
 
+        public decimal InitialPrice { get; set; }
+
         public string Description { get; set; } = string.Empty;
 
         public List<AuctionImage> Images { get; set; } = new List<AuctionImage>();

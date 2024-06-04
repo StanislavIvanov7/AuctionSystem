@@ -28,6 +28,7 @@ namespace AuctionSystem.Core.Services
                 InitialPrice = model.InitialPrice,
                 SellerId = userId,
                 MinBiddingStep = model.MinBiddingStep,
+                LastPrice = model.InitialPrice
               
 
             };
@@ -111,6 +112,7 @@ namespace AuctionSystem.Core.Services
                     LastPrice = x.LastPrice,
                     MinBiddingStep = x.MinBiddingStep,
                     BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    InitialPrice = x.InitialPrice,
                     Images = x.Images.Where(x=>x.AuctionId == x.Auction.Id).ToList(),
 
 
