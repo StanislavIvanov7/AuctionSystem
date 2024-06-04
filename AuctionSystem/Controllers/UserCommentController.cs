@@ -59,6 +59,44 @@ namespace AuctionSystem.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await userCommentService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (User.IsModerator() == false && User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await userCommentService.GetUserCommentForDeleteAsync(id);
+
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+
+        //    if (await auctionCommentService.ExistAsync(id) == false)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    if (User.IsModerator() == false && User.IsAdmin() == false)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    await auctionCommentService.RemoveAsync(id);
+
+        //    return RedirectToAction(nameof(All));
+
+        //}
+
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);

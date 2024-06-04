@@ -10,5 +10,9 @@ namespace AuctionSystem.Core.Contracts
         Task AddAsync(UserCommentFormViewModel model, string userId);
 
         Task<IEnumerable<AllUserCommentsViewModel>> AllCommentsAsync();
+
+        Task<bool> ExistAsync(int id);
+
+        Task<DeleteUserCommentViewModel> GetUserCommentForDeleteAsync(int id);
     }
 }
