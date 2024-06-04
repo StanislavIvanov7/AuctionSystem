@@ -13,12 +13,12 @@ public static class ApplicationBuilderExtension
 
         if (roleManager != null && userManager != null
             && await roleManager.RoleExistsAsync(AdminRole) == false
-            && await roleManager.RoleExistsAsync(AdminRole2) == false
-            && await roleManager.RoleExistsAsync(AdminRole3) == false)
+            && await roleManager.RoleExistsAsync(ModeratorRole) == false
+            && await roleManager.RoleExistsAsync(CustomerRole) == false)
         {
             var role = new IdentityRole(AdminRole);
-            var role2 = new IdentityRole(AdminRole2);
-            var role3 = new IdentityRole(AdminRole3);
+            var role2 = new IdentityRole(ModeratorRole);
+            var role3 = new IdentityRole(CustomerRole);
 
             await roleManager.CreateAsync(role);
             await roleManager.CreateAsync(role2);

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 
+using static AuctionSystem.Core.Constants.RoleConstants;
 namespace AuctionSystem.Extensions
 {
     public static class ClaimsPrincipalExtensions
@@ -7,6 +8,21 @@ namespace AuctionSystem.Extensions
         public static string Id(this ClaimsPrincipal user)
         {
             return user.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public static bool IsAdmin(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(AdminRole);
+        }
+
+        public static bool IsModerator(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(ModeratorRole);
+        }
+
+        public static bool IsCustomer(this ClaimsPrincipal user)
+        {
+            return user.IsInRole(CustomerRole);
         }
     }
 }

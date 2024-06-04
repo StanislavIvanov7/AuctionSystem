@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Extensions;
+using AuctionSystem.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuctionSystem.Controllers
@@ -122,13 +123,39 @@ namespace AuctionSystem.Controllers
                 ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
             }
 
+            
+
             if (!ModelState.IsValid)
             {
                 model.Conditions = await auctionService.GetAuctionConditionsAsync();
                 return View(model);
             }
+               
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+            var userId = GetUserId();
 
-            await auctionService.EditAsync(id, model);
+            if (auction.ConditionId == 1 && userId == auction.SellerId)
+            {
+                await auctionService.EditAsync(id, model);
+               
+                //return BadRequest();
+            }
+
+            else if (auction.ConditionId == 2 && User.IsModerator())
+            {
+
+                await auctionService.EditAsync(id, model);
+               
+                //return BadRequest();
+            }
+
+            else if(User.IsCustomer() && userId == auction.SellerId)
+            {
+                await auctionService.EditAsync(id, model);
+              
+            }
+
+            //await auctionService.EditAsync(id, model);
 
             return RedirectToAction(nameof(All));
 

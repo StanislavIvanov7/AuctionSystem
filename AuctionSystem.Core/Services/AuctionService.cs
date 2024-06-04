@@ -172,6 +172,8 @@ namespace AuctionSystem.Core.Services
         {
             var auction = await repository.GetByIdAsync<Auction>(id);
 
+
+
             if (auction != null)
             {
                 auction.Name = model.Name;
@@ -191,9 +193,16 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x=>x.Id == id);
         }
 
+        public async Task<Auction> GetAuctionByIdAsync(int id)
+        {
+            var auction = await repository.All<Auction>()
+                .FirstAsync(x => x.Id == id);
+            return auction;
+        }
+
         public async Task<Auction> GetAuctionByNameAsync(string name)
         {
-            var auction= await repository.AllAsReadOnly<Auction>()
+            var auction= await repository.All<Auction>()
                 .FirstAsync(x => x.Name == name);
             return auction;
         }

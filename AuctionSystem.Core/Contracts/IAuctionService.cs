@@ -31,6 +31,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task<Auction> GetAuctionByNameAsync(string name);
 
+        Task<Auction> GetAuctionByIdAsync(int id);
+
         Task AddImagesAsync(Auction auction,List<string> imageUrls);
 
     }
