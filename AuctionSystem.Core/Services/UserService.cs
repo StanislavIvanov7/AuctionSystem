@@ -83,12 +83,31 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Price = x.Price,
                     DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
-                    Auction = x.Auction.Name
+                    AuctionName = x.Auction.Name,
+                    AuctionImageUrl = x.Auction.Images.First().ImageUrl,
                     
 
                 }).ToListAsync();
 
             return biddings;
+        }
+
+        public async  Task<IEnumerable<MyCommentViewModel>> GetMyComment(string userId)
+        {
+            var comments = await repository.AllAsReadOnly<AuctionComment>()
+                .Where(x => x.UserId == userId)
+                .Select(x => new MyCommentViewModel()
+                {
+                    //Id = x.Id,
+                    Content = x.Content, 
+                    AuctionName = x.Auction.Name,
+                    AuctionImageUrl = x.Auction.Images.First().ImageUrl
+
+
+
+                }).ToListAsync();
+
+            return comments;
         }
 
         public async Task<MyInformationViewModel> MyInformationAsync(string userId)

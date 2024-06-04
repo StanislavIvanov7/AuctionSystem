@@ -16,6 +16,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task<IEnumerable<MyBiddingsViewModel>> GetMyBiddings(string userId);
 
+        Task<IEnumerable<MyCommentViewModel>> GetMyComment(string userId);
+
         Task<IEnumerable<AllUsersViewModel>> AllUsersAsync();
     }
 }
