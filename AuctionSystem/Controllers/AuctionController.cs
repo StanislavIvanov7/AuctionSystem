@@ -51,6 +51,11 @@ namespace AuctionSystem.Controllers
         public async Task<IActionResult> Add()
         {
 
+            if(User.IsCustomer() == false)
+            {
+                return Unauthorized();
+            }
+
             var model = new AuctionFormViewModel();
             model.Conditions = await auctionService.GetAuctionConditionsAsync();
 
@@ -60,6 +65,11 @@ namespace AuctionSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AuctionFormViewModel model,List<string> imageUrls)
         {
+
+            if (User.IsCustomer() == false)
+            {
+                return Unauthorized();
+            }
 
             if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
             {
@@ -154,6 +164,11 @@ namespace AuctionSystem.Controllers
                 await auctionService.EditAsync(id, model);
               
             }
+
+            //else if(User.IsModerator() || User.IsAdmin())
+            //{
+            //    await auctionService.EditConditionAsync(id, model);
+            //}
 
             //await auctionService.EditAsync(id, model);
 

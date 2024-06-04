@@ -187,6 +187,21 @@ namespace AuctionSystem.Core.Services
             }
         }
 
+        //public async Task EditConditionAsync(int id, AuctionFormViewModel model)
+        //{
+        //    var auction = await repository.GetByIdAsync<Auction>(id);
+
+
+
+        //    if (auction != null)
+        //    {
+                
+        //        auction.ConditionId = model.ConditionId;
+
+        //        await repository.SaveChangesAsync();
+        //    }
+        //}
+
         public async Task<bool> ExistAsync(int id)
         {
            return await repository.AllAsReadOnly<Auction>()

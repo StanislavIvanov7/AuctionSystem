@@ -29,6 +29,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task EditAsync(int id, AuctionFormViewModel model);
 
+        //Task EditConditionAsync(int id, AuctionFormViewModel model);
+
         Task<Auction> GetAuctionByNameAsync(string name);
 
         Task<Auction> GetAuctionByIdAsync(int id);
