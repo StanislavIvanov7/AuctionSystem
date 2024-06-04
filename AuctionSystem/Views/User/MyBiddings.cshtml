@@ -13,15 +13,16 @@
 <hr />
 
 <div class="text-center row flex gap-4 m-4 justify-content-center">
-    @foreach (var a in Model)
+    @foreach (var b in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
            
             <div class="card-body">
 
-                <p class="card-title mt-1">Price: @a.Price lv.</p>
-                <p class="mb-0">Date of bidding: @a.DateAndTimeOfBidding</p>
-                <p class="mb-0">Auction Name: @a.Auction</p>
+                <p class="card-title mt-1">Price: @b.Price lv.</p>
+                <p class="mb-0">Date of bidding: @b.DateAndTimeOfBidding</p>
+                <p class="mb-0">Auction Name: @b.AuctionName</p>
+                <img src="@b.AuctionImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
 
             </div>
 

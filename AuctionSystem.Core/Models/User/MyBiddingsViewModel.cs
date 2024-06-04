@@ -14,6 +14,8 @@ namespace AuctionSystem.Core.Models.User
 
         public string DateAndTimeOfBidding { get; set; } = string.Empty;
 
-        public string Auction { get; set; } = string.Empty;
+        public string AuctionName { get; set; } = string.Empty;
+
+        public string AuctionImageUrl { get; set; } = string.Empty;
     }
 }
