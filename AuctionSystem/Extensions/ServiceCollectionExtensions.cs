@@ -17,6 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuctionCommentService, AuctionCommentService>();
             services.AddScoped<IUserCommentService, UserCommentService>();
+            services.AddScoped<IBiddingService, BiddingService>();
 
             return services;
         }
