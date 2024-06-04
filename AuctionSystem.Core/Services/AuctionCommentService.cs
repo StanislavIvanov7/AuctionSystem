@@ -82,6 +82,17 @@ namespace AuctionSystem.Core.Services
             return comment;
         }
 
+        public async Task RemoveAsync(int id)
+        {
+            var comment = await repository.GetByIdAsync<AuctionComment>(id);
+
+            if (comment != null)
+            {
+                repository.Delete<AuctionComment>(comment);
+                await repository.SaveChangesAsync();
+            }
+        }
+
         //public async Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync()
         //{
         //    return await repository.AllAsReadOnly<Auction>()

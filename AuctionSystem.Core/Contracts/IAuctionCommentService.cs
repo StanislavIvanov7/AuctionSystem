@@ -22,5 +22,7 @@ namespace AuctionSystem.Core.Contracts
         Task<DeleteCommentViewModel> GetCommentForDeleteAsync(int id);
 
         Task<IEnumerable<AllCommentsViewModel>> AllCommentsAsync();
+
+        Task RemoveAsync(int id);
     }
 }

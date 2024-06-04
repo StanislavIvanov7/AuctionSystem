@@ -75,25 +75,25 @@ namespace AuctionSystem.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
 
-        //    if (await dietService.ExistAsync(id) == false)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (await auctionCommentService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
 
-        //    if (User.IsAdmin() == false)
-        //    {
-        //        return Unauthorized();
-        //    }
+            if (User.IsModerator() == false && User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
 
-        //    await dietService.RemoveAsync(id);
+            await auctionCommentService.RemoveAsync(id);
 
-        //    return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(All));
 
-        //}
+        }
 
         private string GetUserId()
         {
