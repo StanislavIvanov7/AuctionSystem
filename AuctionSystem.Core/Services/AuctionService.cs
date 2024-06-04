@@ -96,10 +96,11 @@ namespace AuctionSystem.Core.Services
             {
                 AuctionSorting.MinPriceAuction => auctionToShow
                     .OrderBy(h => h.LastPrice),
-                    AuctionSorting.AuctionWithTheMostBids => auctionToShow
-                    .OrderByDescending(x=>x.BiddingCount),
+                AuctionSorting.AuctionWithTheMostBids => auctionToShow
+                .OrderByDescending(x => x.BiddingCount),
                 _ => auctionToShow
-                    .OrderByDescending(x=>x.Condition.Name == "active")
+                    .Where(x => x.Condition.Name == "Active")
+                    .OrderByDescending(x => x.Id)
             };
 
             var auction = await auctionToShow
