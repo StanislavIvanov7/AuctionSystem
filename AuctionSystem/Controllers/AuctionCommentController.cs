@@ -53,7 +53,7 @@ namespace AuctionSystem.Controllers
 
 
 
-            return RedirectToAction("All","Auction");
+            return RedirectToAction(nameof(All));
 
         }
 

@@ -92,7 +92,7 @@ namespace AuctionSystem.Core.Services
             return biddings;
         }
 
-        public async  Task<IEnumerable<MyCommentViewModel>> GetMyComment(string userId)
+        public async  Task<IEnumerable<MyCommentViewModel>> GetMyAuctionComment(string userId)
         {
             var comments = await repository.AllAsReadOnly<AuctionComment>()
                 .Where(x => x.UserId == userId)

@@ -1,6 +1,6 @@
-﻿@model IEnumerable<AllCommentsViewModel>
+﻿@model IEnumerable<AllUserCommentsViewModel>
 @{
-    ViewBag.Title = "All Auction Comments";
+    ViewBag.Title = "All User Comments";
 }
 <style>
     .card-body {
@@ -20,12 +20,12 @@
             <div class="card-body">
 
                 <p class="card-title mt-1">Comment: @c.Content</p>
-                <p class="mb-0">Commented Auction: @c.AuctionName</p>
-                <img src="@c.AuctionImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                <p class="mb-0">Receiving Comment User: @c.ReceivingCommentUserName</p>
+                <p class="mb-0">Sending Comment User: @c.SendingCommentUserName</p>
 
             </div>
 
-            <a asp-area="" asp-controller="AuctionComment" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
+            <a asp-area="" asp-controller="UserComment" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger mb-2 w-100 p-3 fw-bold">Delete</a>
         </div>
     }
 </div>

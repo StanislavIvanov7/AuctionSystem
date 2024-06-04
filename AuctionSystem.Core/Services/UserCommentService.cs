@@ -34,6 +34,21 @@ namespace AuctionSystem.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<AllUserCommentsViewModel>> AllCommentsAsync()
+        {
+            var comments = await repository.AllAsReadOnly<UserComment>()
+                .Select(x => new AllUserCommentsViewModel()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
+                    SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+
+                }).ToListAsync();
+
+            return comments;
+        }
+
         public async Task<bool> UserExistAsync(string id)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()

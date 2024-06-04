@@ -18,6 +18,14 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            var model = await userCommentService.AllCommentsAsync();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
 
@@ -47,7 +55,7 @@ namespace AuctionSystem.Controllers
 
 
 
-            return RedirectToAction("All", "User");
+            return RedirectToAction(nameof(All));
 
         }
 

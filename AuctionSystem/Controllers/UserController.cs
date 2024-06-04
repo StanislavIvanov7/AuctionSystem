@@ -173,10 +173,10 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MyComments()
+        public async Task<IActionResult> MyAuctionComments()
         {
             string userId = GetUserId();
-            var comments = await userService.GetMyComment(userId);
+            var comments = await userService.GetMyAuctionComment(userId);
 
             return View(comments);
         }
