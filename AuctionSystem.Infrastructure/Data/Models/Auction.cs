@@ -60,6 +60,10 @@ namespace AuctionSystem.Infrastructure.Data.Models
         [Comment("Bidding Count")]
         public int BiddingCount { get; set; }
 
+        [Required]
+        [Comment("Starting Date And Time Of Auction")]
+        public DateTime StartingAuctionDateTime { get; set; }
+
 
         [Comment("Auction Last Buyer Identifier")]
         public string? LastBuyerId { get; set; }
