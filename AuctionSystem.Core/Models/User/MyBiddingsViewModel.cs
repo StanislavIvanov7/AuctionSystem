@@ -13,5 +13,7 @@ namespace AuctionSystem.Core.Models.User
         public decimal Price { get; set; }
 
         public string DateAndTimeOfBidding { get; set; } = string.Empty;
+
+        public string Auction { get; set; } = string.Empty;
     }
 }

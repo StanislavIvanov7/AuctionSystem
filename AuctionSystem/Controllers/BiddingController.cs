@@ -84,6 +84,8 @@ namespace AuctionSystem.Controllers
 
         }
 
+
+
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);

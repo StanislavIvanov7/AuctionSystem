@@ -83,6 +83,8 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Price = x.Price,
                     DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
+                    Auction = x.Auction.Name
+                    
 
                 }).ToListAsync();
 
