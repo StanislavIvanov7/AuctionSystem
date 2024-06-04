@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Bidding;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,22 @@ namespace AuctionSystem.Core.Services
 
             await repository.AddAsync(bidding);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsAsync()
+        {
+            var users = await repository.AllAsReadOnly<Bidding>()
+                 .Select(x => new AllBiddingsViewModel()
+                 {
+                     Price = x.Price,
+                     DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
+                     AuctionName = x.Auction.Name,
+                     BiddingUser = x.Buyer.FirstName +" " + x.Buyer.LastName,
+                     AuctionImageUrl = x.Auction.Images.First().ImageUrl,
+                     
+                 }).ToListAsync();
+
+            return users;
         }
 
         public async Task<bool> AuctionExistAsync(int id)

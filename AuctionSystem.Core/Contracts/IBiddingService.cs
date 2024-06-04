@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.Bidding;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,7 @@ namespace AuctionSystem.Core.Contracts
         Task AddBiddingAsync(BiddingFormViewModel model, string userId);
 
         Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id);
+
+        Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsAsync();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Bidding;
+using AuctionSystem.Core.Services;
 using AuctionSystem.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,15 @@ namespace AuctionSystem.Controllers
         {
             biddingService = _biddingService;
 
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            var model = await biddingService.AllBiddingsAsync();
+
+            return View(model);
         }
 
         [HttpGet]
