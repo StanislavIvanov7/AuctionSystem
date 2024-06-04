@@ -14,5 +14,7 @@ namespace AuctionSystem.Core.Contracts
         Task<bool> ExistAsync(int id);
 
         Task<DeleteUserCommentViewModel> GetUserCommentForDeleteAsync(int id);
+
+        Task RemoveAsync(int id);
     }
 }
