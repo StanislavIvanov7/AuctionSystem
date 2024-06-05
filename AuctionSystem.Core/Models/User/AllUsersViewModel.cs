@@ -14,7 +14,7 @@ namespace AuctionSystem.Core.Models.User
         
         public string FirstName { get; set; } = string.Empty;
 
-
+        public string UserRole { get; set; } = string.Empty;
 
         public string LastName { get; set; } = string.Empty;
 

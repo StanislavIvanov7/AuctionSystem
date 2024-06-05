@@ -2,6 +2,7 @@
 using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuctionSystem.Core.Services
@@ -9,26 +10,50 @@ namespace AuctionSystem.Core.Services
     public class UserService : IUserService
     {
         private readonly IRepository repository;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserService(IRepository _repository)
+        public UserService(IRepository _repository, 
+            UserManager<ApplicationUser> _userManager)
         {
             repository = _repository;
+            userManager = _userManager; 
         }
 
         public async Task<IEnumerable<AllUsersViewModel>> AllUsersAsync()
         {
-            var users = await repository.AllAsReadOnly<ApplicationUser>()
-                .Select(x => new AllUsersViewModel()
+
+            //var users = await repository.AllAsReadOnly<ApplicationUser>()
+            //    .Select(x => new AllUsersViewModel()
+            //    {
+            //        Id = x.Id,
+            //        FirstName = x.FirstName,
+            //        LastName = x.LastName,
+            //        Email = x.Email,
+            //        PhoneNumber = x.PhoneNumber,
+            //        UserRole = await userManager.GetRolesAsync(user)
+
+            //    }).ToListAsync();
+             var users = userManager.Users.ToList();
+            var allUsers = new List<AllUsersViewModel>();
+
+            foreach (var user in users)
+            {
+                var role = await userManager.GetRolesAsync(user);
+
+                var model = new AllUsersViewModel()
                 {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Email = x.Email,
-                    PhoneNumber = x.PhoneNumber,
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    UserRole = role.FirstOrDefault()
+                };
 
-                }).ToListAsync();
+                allUsers.Add(model);
+            }
 
-            return users;
+            return allUsers;
         }
 
         public async Task EditAsync(string id,MyInformationViewModel model)
