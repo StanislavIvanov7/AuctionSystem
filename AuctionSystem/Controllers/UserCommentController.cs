@@ -15,13 +15,6 @@ namespace AuctionSystem.Controllers
             userCommentService = _userCommentService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            var model = await userCommentService.AllCommentsAsync();
-
-            return View(model);
-        }
 
         [HttpGet]
         public async Task<IActionResult> Add()
@@ -53,47 +46,47 @@ namespace AuctionSystem.Controllers
 
 
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("");
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            if (await userCommentService.ExistAsync(id) == false)
-            {
-                return BadRequest();
-            }
+        //[HttpGet]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    if (await userCommentService.ExistAsync(id) == false)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            if (User.IsModerator() == false && User.IsAdmin() == false)
-            {
-                return Unauthorized();
-            }
+        //    if (User.IsModerator() == false && User.IsAdmin() == false)
+        //    {
+        //        return Unauthorized();
+        //    }
 
-            var model = await userCommentService.GetUserCommentForDeleteAsync(id);
+        //    var model = await userCommentService.GetUserCommentForDeleteAsync(id);
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
 
-            if (await userCommentService.ExistAsync(id) == false)
-            {
-                return BadRequest();
-            }
+        //    if (await userCommentService.ExistAsync(id) == false)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            if (User.IsModerator() == false && User.IsAdmin() == false)
-            {
-                return Unauthorized();
-            }
+        //    if (User.IsModerator() == false && User.IsAdmin() == false)
+        //    {
+        //        return Unauthorized();
+        //    }
 
-            await userCommentService.RemoveAsync(id);
+        //    await userCommentService.RemoveAsync(id);
 
-            return RedirectToAction(nameof(All));
+        //    return RedirectToAction(nameof(All));
 
-        }
+        //}
 
         private string GetUserId()
         {
