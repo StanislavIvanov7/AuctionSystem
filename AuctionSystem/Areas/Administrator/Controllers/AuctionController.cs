@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AuctionSystem.Areas.Administrator.Controllers
 {
@@ -32,5 +33,54 @@ namespace AuctionSystem.Areas.Administrator.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var model = await auctionService.GetModeratorAuctionForEditAsync(id);
+
+            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ModeratorAuctionFormViewModel model)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+        
+            if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+            {
+                ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+            }
+
+
+
+            if (!ModelState.IsValid)
+            {
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                return View(model);
+            }
+
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+           
+            await auctionService.ModeratorEditAsync(id, model);
+
+
+            return RedirectToAction(nameof(All));
+
+
+        }
+
+       
     }
 }
