@@ -251,5 +251,34 @@ namespace AuctionSystem.Core.Services
 
             return auction;
         }
+
+        public async Task<ModeratorAuctionFormViewModel> GetModeratorAuctionForEditAsync(int id)
+        {
+            var auction = await repository.AllAsReadOnly<Auction>()
+               .Where(x => x.Id == id)
+               .Select(x => new ModeratorAuctionFormViewModel()
+               {
+                   ConditionId = x.ConditionId,
+                   
+
+               }).FirstAsync();
+
+            return auction;
+        }
+
+        public async Task ModeratorEditAsync(int id, ModeratorAuctionFormViewModel model)
+        {
+            var auction = await repository.GetByIdAsync<Auction>(id);
+
+
+
+            if (auction != null)
+            {
+               
+                auction.ConditionId = model.ConditionId;
+
+                await repository.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AuctionSystem.Core.Enumeration;
 using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Infrastructure.Data.Models;
-
 namespace AuctionSystem.Core.Contracts
 {
     public interface IAuctionService
@@ -27,7 +26,11 @@ namespace AuctionSystem.Core.Contracts
 
         Task<AuctionFormViewModel> GetAuctionForEditAsync(int id);
 
+        Task<ModeratorAuctionFormViewModel> GetModeratorAuctionForEditAsync(int id);
+
         Task EditAsync(int id, AuctionFormViewModel model);
+
+        Task ModeratorEditAsync(int id, ModeratorAuctionFormViewModel model);
 
         //Task EditConditionAsync(int id, AuctionFormViewModel model);
 

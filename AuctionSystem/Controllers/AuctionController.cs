@@ -146,7 +146,7 @@ namespace AuctionSystem.Controllers
             if (auction.ConditionId == 1 && userId == auction.SellerId)
             {
                 await auctionService.EditAsync(id, model);
-               
+
                 //return BadRequest();
             }
 
@@ -154,15 +154,22 @@ namespace AuctionSystem.Controllers
             {
 
                 await auctionService.EditAsync(id, model);
-               
+
                 //return BadRequest();
             }
 
-            else if(User.IsCustomer() && userId == auction.SellerId)
+            else if (User.IsCustomer() && userId == auction.SellerId)
             {
                 await auctionService.EditAsync(id, model);
-              
+
             }
+
+            //else
+            //{
+            //    return BadRequest();
+            //}
+
+           
 
             //else if(User.IsModerator() || User.IsAdmin())
             //{

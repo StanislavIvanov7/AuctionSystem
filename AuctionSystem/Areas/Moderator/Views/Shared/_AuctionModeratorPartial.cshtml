@@ -1,0 +1,45 @@
+﻿@model AllAuctionViewModel
+
+<div class="col-md-3">
+    <div class="card mb-4">
+
+        <div>
+            @if (Model.Images != null && Model.Images.Any())
+            {
+               
+
+                foreach (var image in Model.Images)
+                {
+                    <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                }
+            }
+            @* else
+            {
+            <p>Няма налични снимки за този продукт.</p>
+            } *@
+        </div>
+
+       
+            <div class="card-body text-center">
+
+                <h5 class="card-title mt-1">@Model.Name</h5>
+                <p class="mb-0">Last Price: @Model.LastPrice lv.</p>
+                <p class="mb-0">Initial Price: @Model.InitialPrice lv.</p>
+                <p class="mb-0">Description: @Model.Description</p>
+                <p class="mb-0">Min bidding step: @Model.MinBiddingStep</p>
+                <p class="mb-0">Bidding period in days: @Model.BiddingPeriodInDays</p>
+
+
+                <a asp-area="Moderator" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+
+      
+
+          
+            </div>
+        
+        
+    </div>
+</div>
+
+            
+
