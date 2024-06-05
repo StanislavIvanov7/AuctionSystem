@@ -1,7 +1,5 @@
-﻿using System.Security.Claims;
-
-using static AuctionSystem.Core.Constants.RoleConstants;
-namespace AuctionSystem.Extensions
+﻿using static AuctionSystem.Core.Constants.RoleConstants;
+namespace System.Security.Claims
 {
     public static class ClaimsPrincipalExtensions
     {

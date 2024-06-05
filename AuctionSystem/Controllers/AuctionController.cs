@@ -1,8 +1,7 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
-using AuctionSystem.Extensions;
-using AuctionSystem.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AuctionSystem.Controllers
 {

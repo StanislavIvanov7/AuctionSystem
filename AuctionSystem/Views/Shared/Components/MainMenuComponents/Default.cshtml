@@ -37,29 +37,13 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Bidding" asp-action="All">All Biddings</a>
         </li>
-      
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Comments
-            </a>
-            <ul class="dropdown-menu">
 
-                <li><a class="dropdown-item" asp-area="" asp-controller="AuctionComment" asp-action="All">All Auction Comments</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-controller="UserComment" asp-action="All">All User Comments</a></li>
-                
-            </ul>
-        </li>
-      @*   <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Auction Comments
-            </a>
-            <ul class="dropdown-menu">
+        @if (User.IsModerator())
+        {
+            <li><a class="nav-link text-dark" asp-area="Moderator" asp-controller="ModeratorHome" asp-action="Dashboard">Dashboard</a></li>
+        }
 
-                <li><a class="dropdown-item" asp-area="" asp-controller="AuctionComment" asp-action="Add">Add Comment</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="MyAuctions">My Auctions</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="MyBiddings">My Biddings</a></li>
-            </ul>
-        </li> *@
+     
        
 
     }

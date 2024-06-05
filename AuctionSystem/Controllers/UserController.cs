@@ -1,13 +1,10 @@
 ﻿using AuctionSystem.Core.Contracts;
-using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.User;
-using AuctionSystem.Core.Services;
-using AuctionSystem.Extensions;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static AuctionSystem.Core.Constants.CustomClaim;
-using static AuctionSystem.Core.Constants.RoleConstants;
 namespace AuctionSystem.Controllers
 {
     public class UserController : Controller
