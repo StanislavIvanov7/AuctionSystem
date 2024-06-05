@@ -1,4 +1,5 @@
 ﻿using AuctionSystem.Core.Contracts;
+using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
@@ -11,12 +12,14 @@ namespace AuctionSystem.Core.Services
     {
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
-
+        private readonly RoleManager<IdentityRole> roleManager;
         public UserService(IRepository _repository, 
-            UserManager<ApplicationUser> _userManager)
+            UserManager<ApplicationUser> _userManager,
+            RoleManager<IdentityRole> _roleManager)
         {
             repository = _repository;
             userManager = _userManager; 
+            roleManager = _roleManager;
         }
 
         public async Task<IEnumerable<AllUsersViewModel>> AllUsersAsync()
@@ -150,6 +153,20 @@ namespace AuctionSystem.Core.Services
                   }).FirstOrDefaultAsync();
 
             return user;
+        }
+
+        public async Task<ChangeUserRoleViewModel> GetUserForEditAsync(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            var model = new ChangeUserRoleViewModel()
+            {
+                UserId = user.Id,
+                UserRole = (await userManager.GetRolesAsync(user)).FirstOrDefault(),
+                UserRoles = roleManager.Roles.ToList(),
+            };
+
+            return model;
         }
     }
 }
