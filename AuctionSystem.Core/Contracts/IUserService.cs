@@ -24,6 +24,8 @@ namespace AuctionSystem.Core.Contracts
         Task<IEnumerable<MyUserCommentViewModel>> GetMyUserComment(string userId);
 
         Task<IEnumerable<AllUsersViewModel>> AllUsersAsync();
+        Task<DetailsUsersViewModel> DetailsUsersAsync(string id);
+        Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync();
 
         Task<ChangeUserRoleViewModel> GetUserForEditAsync(string id);
 

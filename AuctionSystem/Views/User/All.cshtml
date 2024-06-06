@@ -22,14 +22,12 @@
                 <h5 class="card-title mt-1">User Information</h5>
                 <p class="card-title mt-1">First Name: @u.FirstName</p>
                 <p class="mb-0">Last Name: @u.LastName</p>
-                <p class="mb-0">Email: @u.Email</p>
-                <p class="mb-0">Phone Number: @u.PhoneNumber</p>
-                <p class="mb-0">User Role: @u.UserRole</p>
+               
 
             </div>
 
             <a asp-controller="UserComment" asp-action="Add" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add comment for this user</a>
-
+            <a asp-controller="User" asp-action="Details" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
 
         </div>
     }

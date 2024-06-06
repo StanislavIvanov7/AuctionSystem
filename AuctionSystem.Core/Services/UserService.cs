@@ -48,9 +48,7 @@ namespace AuctionSystem.Core.Services
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    UserRole = role.FirstOrDefault()
+                   
                 };
 
                 allUsers.Add(model);
@@ -241,6 +239,53 @@ namespace AuctionSystem.Core.Services
                 }).ToList();
 
             return result;
+        }
+
+        public async Task<DetailsUsersViewModel> DetailsUsersAsync(string id)
+        {
+            var user = await repository.All<ApplicationUser>()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+                var role = await userManager.GetRolesAsync(user);
+
+                var model = new DetailsUsersViewModel()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    UserRole = role.FirstOrDefault()
+                };
+
+            return model;
+
+        }
+
+        public async Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync()
+        {
+            var users = userManager.Users.ToList();
+            var allUsers = new List<DetailsUsersViewModel>();
+
+            foreach (var user in users)
+            {
+                var role = await userManager.GetRolesAsync(user);
+
+                var model = new DetailsUsersViewModel()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    UserRole = role.FirstOrDefault()
+                };
+
+                allUsers.Add(model);
+            }
+
+            return allUsers;
         }
     }
 }

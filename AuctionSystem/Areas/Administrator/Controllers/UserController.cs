@@ -23,7 +23,7 @@ namespace AuctionSystem.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var model = await userService.AllUsersAsync();
+            var model = await userService.AllUsersForAdminAreaAsync();
 
             return View(model);
         }

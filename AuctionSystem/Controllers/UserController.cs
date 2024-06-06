@@ -109,6 +109,14 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            var model = await userService.DetailsUsersAsync(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> MyInfo()
         {
             var userId = GetUserId();
