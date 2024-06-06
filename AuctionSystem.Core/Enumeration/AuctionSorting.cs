@@ -8,8 +8,8 @@ namespace AuctionSystem.Core.Enumeration
 {
     public enum AuctionSorting
     {
-        LastActiveAuction = 0,
-        MinPriceAuction = 1,
+        MinPriceAuction = 0,
+        LastActiveAuction = 1,
         AuctionWithTheMostBids = 2,
 
     }

@@ -8,7 +8,7 @@ namespace AuctionSystem.Core.Contracts
         Task<AuctionQueryViewModel> AllAuctionAsync(
        string? category = null,
        string? searchTerm = null,
-       AuctionSorting sorting = AuctionSorting.LastActiveAuction,
+       AuctionSorting? sorting = null,
        int currentPage = 1,
        int auctionPerPage = 1);
 

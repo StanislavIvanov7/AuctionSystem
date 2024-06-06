@@ -72,7 +72,7 @@ namespace AuctionSystem.Core.Services
         public async Task<AuctionQueryViewModel> AllAuctionAsync(
             string? condition,
             string? searchTerm,
-            AuctionSorting sorting = AuctionSorting.LastActiveAuction,
+            AuctionSorting? sorting,
             int currentPage = 1,
             int auctionPerPage = 1)
         {
@@ -98,7 +98,7 @@ namespace AuctionSystem.Core.Services
                     .OrderBy(h => h.LastPrice),
                 AuctionSorting.AuctionWithTheMostBids => auctionToShow
                 .OrderByDescending(x => x.BiddingCount),
-                _ => auctionToShow
+                AuctionSorting.LastActiveAuction => auctionToShow
                     .Where(x => x.Condition.Name == "Active")
                     .OrderByDescending(x => x.Id)
             };
