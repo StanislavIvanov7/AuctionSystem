@@ -118,6 +118,15 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> SellerProfile(int id)
+        {
+       
+            var model = await userService.SellerProfileAsync(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Edit()
         {
            

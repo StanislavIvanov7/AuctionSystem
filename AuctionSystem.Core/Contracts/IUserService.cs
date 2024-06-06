@@ -8,6 +8,8 @@ namespace AuctionSystem.Core.Contracts
     {
         Task<MyInformationViewModel> MyInformationAsync(string userId);
 
+        Task<SellerProfileViewModel> SellerProfileAsync(int auctionId);
+
         Task<bool> ExistAsync(string id);
 
         Task EditAsync(string id ,MyInformationViewModel model);

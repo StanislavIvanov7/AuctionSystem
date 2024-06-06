@@ -186,5 +186,26 @@ namespace AuctionSystem.Core.Services
 
             return comments;
         }
+
+        public async Task<SellerProfileViewModel> SellerProfileAsync(int auctionId)
+        {
+            var auction = await repository.GetByIdAsync<Auction>(auctionId);
+
+            string userIdentifier = auction.SellerId;
+
+            var user = await repository.AllAsReadOnly<ApplicationUser>()
+                .Where(x => x.Id == userIdentifier)
+                .Select(x => new SellerProfileViewModel()
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
+
+                }).FirstOrDefaultAsync();
+
+            return user;
+        }
     }
 }
