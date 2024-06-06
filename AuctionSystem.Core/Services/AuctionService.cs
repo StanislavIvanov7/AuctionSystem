@@ -130,6 +130,61 @@ namespace AuctionSystem.Core.Services
             };
         }
 
+        public async Task<AuctionQueryViewModel> AllAuctionAsync(
+            string? searchTerm = null, 
+            AuctionSorting sorting = AuctionSorting.LastActiveAuction, 
+            int currentPage = 1, 
+            int auctionPerPage = 1)
+        {
+            var auctionToShow = repository.All<Auction>().Where(x=>x.ConditionId == 4);
+
+           
+
+            if (searchTerm != null)
+            {
+                string normalizedSearchTerm = searchTerm.ToLower();
+                auctionToShow = auctionToShow.Where(x => (x.Name.ToLower().Contains(normalizedSearchTerm) ||
+                                                           x.Description.ToLower().Contains(normalizedSearchTerm)));
+
+            }
+
+            auctionToShow = sorting switch
+            {
+                AuctionSorting.MinPriceAuction => auctionToShow
+                    .OrderBy(h => h.LastPrice),
+                AuctionSorting.AuctionWithTheMostBids => auctionToShow
+                .OrderByDescending(x => x.BiddingCount),
+                _ => auctionToShow
+                    .OrderByDescending(x => x.Id)
+            };
+
+            var auction = await auctionToShow
+                .Skip((currentPage - 1) * auctionPerPage)
+                .Take(auctionPerPage)
+                .Select(x => new AllAuctionViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    LastPrice = x.LastPrice,
+                    MinBiddingStep = x.MinBiddingStep,
+                    BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    InitialPrice = x.InitialPrice,
+                    Images = x.Images.Where(x => x.AuctionId == x.Auction.Id).ToList(),
+
+
+                })
+                .ToListAsync();
+
+            int totalAuction = await auctionToShow.CountAsync();
+
+            return new AuctionQueryViewModel()
+            {
+                Auction = auction,
+                TotalAuctionCount = totalAuction
+            };
+        }
+
         public async Task<IEnumerable<string>> AllConditionNamesAsync()
         {
             return await repository.AllAsReadOnly<AuctionCondition>()

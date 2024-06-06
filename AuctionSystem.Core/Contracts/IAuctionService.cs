@@ -10,7 +10,14 @@ namespace AuctionSystem.Core.Contracts
        string? searchTerm = null,
        AuctionSorting sorting = AuctionSorting.LastActiveAuction,
        int currentPage = 1,
-       int housesPerPage = 1);
+       int auctionPerPage = 1);
+
+
+        Task<AuctionQueryViewModel> AllAuctionAsync(
+       string? searchTerm = null,
+       AuctionSorting sorting = AuctionSorting.LastActiveAuction,
+       int currentPage = 1,
+       int auctionPerPage = 1);
 
         Task<IEnumerable<string>> AllConditionNamesAsync();
 
