@@ -1,4 +1,5 @@
 ﻿using AuctionSystem.Core.Models.AuctionComment;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Core.Models.UserComment;
 
 namespace AuctionSystem.Core.Contracts
@@ -16,5 +17,8 @@ namespace AuctionSystem.Core.Contracts
         Task<DeleteUserCommentViewModel> GetUserCommentForDeleteAsync(int id);
 
         Task RemoveAsync(int id);
+
+        Task<IEnumerable<AllCommentAboutUserFromOtherUsers>> GetAllCommentAboutUserFromOtherUsers(string userId);
+
     }
 }

@@ -27,7 +27,10 @@
 
             </div>
 
-            @* <a asp-controller="UserComment" asp-action="Add" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add comment for this user</a> *@
+            <a asp-controller="UserComment" asp-action="AllCommentAboutUserFromOtherUsers" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Comments For This User From Other Users</a>
+            <a asp-controller="UserComment" asp-action="AllAuctionForUser" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">User Auctions</a>
+            <a asp-controller="UserComment" asp-action="AllUserCommentsForOtherUsers" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">User Comments About Other Users</a>
+            <a asp-controller="UserComment" asp-action="AllUserCommentForAuction" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">User Comments About Auctions</a>
 
 
         </div>

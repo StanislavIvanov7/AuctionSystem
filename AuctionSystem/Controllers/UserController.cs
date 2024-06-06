@@ -230,6 +230,7 @@ namespace AuctionSystem.Controllers
             return View(auctions);
         }
 
+
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);

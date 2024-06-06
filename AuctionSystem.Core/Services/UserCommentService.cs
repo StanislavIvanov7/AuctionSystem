@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.AuctionComment;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Core.Models.UserComment;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
@@ -53,6 +54,24 @@ namespace AuctionSystem.Core.Services
         {
             return await repository.AllAsReadOnly<UserComment>()
                 .AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<AllCommentAboutUserFromOtherUsers>> GetAllCommentAboutUserFromOtherUsers(string userId)
+        {
+            var comments = await repository.AllAsReadOnly<UserComment>()
+                .Where(x => x.ReceivingCommentUserId == userId)
+                .Select(x => new AllCommentAboutUserFromOtherUsers()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+
+
+
+
+                }).ToListAsync();
+
+            return comments;
         }
 
         public async Task<DeleteUserCommentViewModel> GetUserCommentForDeleteAsync(int id)
