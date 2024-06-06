@@ -25,5 +25,7 @@ namespace AuctionSystem.Core.Contracts
         Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id,string userId);
 
         Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsAsync();
+
+        Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsForAuctionAsync(int auctionId);
     }
 }

@@ -55,6 +55,25 @@ namespace AuctionSystem.Core.Services
             return users;
         }
 
+        public async Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsForAuctionAsync(int auctionId)
+        {
+            var users = await repository.AllAsReadOnly<Bidding>()
+                .Where(x=>x.AuctionId == auctionId)
+                 .Select(x => new AllBiddingsViewModel()
+                 {
+                     Price = x.Price,
+                     DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
+                     AuctionName = x.Auction.Name,
+                     BiddingUser = x.Buyer.FirstName + " " + x.Buyer.LastName,
+                     AuctionImageUrl = x.Auction.Images.First().ImageUrl,
+
+                 })
+                 .OrderByDescending(x=>x.DateAndTimeOfBidding)
+                 .ToListAsync();
+
+            return users;
+        }
+
         public async Task<bool> AuctionExistAsync(int id)
         {
             return await repository.AllAsReadOnly<Auction>()

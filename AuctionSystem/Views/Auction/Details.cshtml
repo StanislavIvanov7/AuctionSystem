@@ -27,8 +27,8 @@
         <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
         <a asp-controller="Auction" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back To All Auction</a>
         <a asp-controller="User" asp-action="SellerProfile" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Seller Profile</a>
-        <a asp-controller="Bidding" asp-action="AllBiddingForAuction" class="btn btn-warning mb-2 w-100 p-3 fw-bold">All Bidding For Auction</a>
-        <a asp-controller="Auction" asp-action="Comment" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Comment For Auction</a>
+        <a asp-controller="Bidding" asp-action="AllBiddingsForAuction" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">All Bidding For Auction</a>
+        <a asp-controller="AuctionComment" asp-action="AllCommentsForAuction" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Comment For Auction</a>
     </div>
 </div>
 @section Scripts {
