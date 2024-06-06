@@ -120,11 +120,11 @@ namespace AuctionSystem.Core.Services
             return biddings;
         }
 
-        public async  Task<IEnumerable<MyCommentViewModel>> GetMyAuctionComment(string userId)
+        public async  Task<IEnumerable<MyAuctionCommentViewModel>> GetMyAuctionComment(string userId)
         {
             var comments = await repository.AllAsReadOnly<AuctionComment>()
                 .Where(x => x.UserId == userId)
-                .Select(x => new MyCommentViewModel()
+                .Select(x => new MyAuctionCommentViewModel()
                 {
                     //Id = x.Id,
                     Content = x.Content, 
@@ -167,6 +167,24 @@ namespace AuctionSystem.Core.Services
             };
 
             return model;
+        }
+
+        public async Task<IEnumerable<MyUserCommentViewModel>> GetMyUserComment(string userId)
+        {
+            var comments = await repository.AllAsReadOnly<UserComment>()
+                .Where(x => x.SendingCommentUserId == userId)
+                .Select(x => new MyUserCommentViewModel()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
+                   
+
+
+
+                }).ToListAsync();
+
+            return comments;
         }
     }
 }

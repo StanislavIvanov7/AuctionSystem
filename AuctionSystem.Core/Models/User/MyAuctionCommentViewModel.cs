@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuctionSystem.Core.Models.User
 {
-    public class MyCommentViewModel
+    public class MyAuctionCommentViewModel
     {
         
         public string Content { get; set; } = string.Empty;

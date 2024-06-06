@@ -1,6 +1,6 @@
-﻿@model IEnumerable<MyCommentViewModel>
+﻿@model IEnumerable<MyUserCommentViewModel>
 @{
-    ViewBag.Title = "My Comments";
+    ViewBag.Title = "My User Comments";
 }
 <style>
     .card-body {
@@ -20,8 +20,7 @@
             <div class="card-body">
 
                 <p class="card-title mt-1">Comment: @c.Content</p>
-                <p class="mb-0">Commented Auction: @c.AuctionName</p>
-                <img src="@c.AuctionImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                <p class="mb-0">Receiving Comment User: @c.ReceivingCommentUserName</p>
 
             </div>
 
