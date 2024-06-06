@@ -207,5 +207,40 @@ namespace AuctionSystem.Core.Services
 
             return user;
         }
+
+        public async Task<IEnumerable<MyAuctionViewModel>> GetMyWinningAuctions(string userId)
+        {
+            
+            var auctions = await repository.AllAsReadOnly<Auction>()
+                .Include(x=>x.Images)
+                .ToListAsync();
+            List<Auction> CompletedAuction = new List<Auction>();
+
+            foreach (var auction in auctions) 
+            {
+                var days = auction.BiddingPeriodInDays;
+                var finalDateTime = auction.StartingAuctionDateTime.AddDays(days);
+                if(finalDateTime < DateTime.Now)
+                {
+                    CompletedAuction.Add(auction);
+                }
+
+            }
+
+            var result = CompletedAuction
+                .Where(x => x.LastBuyerId == userId)
+                .Select(x => new MyAuctionViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    LastPrice = x.LastPrice,
+                    MinBiddingStep = x.MinBiddingStep,
+                    Images = x.Images
+                }).ToList();
+
+            return result;
+        }
     }
 }

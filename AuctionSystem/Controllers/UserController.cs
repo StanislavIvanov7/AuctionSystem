@@ -169,6 +169,7 @@ namespace AuctionSystem.Controllers
 
 
         }
+
         [HttpGet]
         public async Task<IActionResult> MyAuctions()
         {
@@ -202,6 +203,15 @@ namespace AuctionSystem.Controllers
             var biddings = await userService.GetMyBiddings(userId);
 
             return View(biddings);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyWinningAuctions()
+        {
+            string userId = GetUserId();
+            var auctions = await userService.GetMyWinningAuctions(userId);
+
+            return View(auctions);
         }
 
         private string GetUserId()
