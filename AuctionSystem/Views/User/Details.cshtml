@@ -26,7 +26,7 @@
             <p class="mb-0">User Role: @Model.UserRole</p>
 
             </div>
-
+        <a asp-controller="User" asp-action="All" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back To All Users</a>
             <a asp-controller="UserComment" asp-action="AllCommentAboutUserFromOtherUsers" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Comments For This User From Other Users</a>
             <a asp-controller="Auction" asp-action="AllAuctionsForUser" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">User Auctions</a>
             <a asp-controller="UserComment" asp-action="AllUserCommentsForOtherUsers" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">User Comments About Other Users</a>

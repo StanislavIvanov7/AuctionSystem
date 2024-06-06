@@ -65,6 +65,7 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Content = x.Content,
                     SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+                    UserId = x.SendingCommentUserId
 
 
 
