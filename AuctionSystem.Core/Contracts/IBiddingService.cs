@@ -22,7 +22,7 @@ namespace AuctionSystem.Core.Contracts
 
         Task AddBiddingAsync(BiddingFormViewModel model, string userId);
 
-        Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id);
+        Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id,string userId);
 
         Task<IEnumerable<AllBiddingsViewModel>> AllBiddingsAsync();
     }

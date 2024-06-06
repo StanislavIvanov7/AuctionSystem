@@ -97,11 +97,12 @@ namespace AuctionSystem.Core.Services
             return true;
         }
 
-        public async Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id)
+        public async Task SetNewValuesForAuctionAsync(BiddingFormViewModel model, int id,string userId)
         {
             var auction = await GetAuctionByIdAsync(id);
             auction.LastPrice = model.LastPrice;
             auction.BiddingCount += 1;
+            auction.LastBuyerId = userId;
             await repository.SaveChangesAsync();
         }
     }

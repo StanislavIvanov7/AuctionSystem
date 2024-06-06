@@ -84,7 +84,7 @@ namespace AuctionSystem.Controllers
 
             var userId = GetUserId();
             await biddingService.AddBiddingAsync(model, userId);
-            await biddingService.SetNewValuesForAuctionAsync(model,auction.Id);
+            await biddingService.SetNewValuesForAuctionAsync(model,auction.Id ,userId);
             //auction.LastPrice = model.LastPrice;
 
 
