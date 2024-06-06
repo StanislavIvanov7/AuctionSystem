@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -31,6 +32,19 @@ namespace AuctionSystem.Controllers
            
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllAuctionsForUser(string id)
+        {
+            if (await auctionService.UserExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var auctions = await auctionService.GetAllAuctionsForUser(id);
+
+            return View(auctions);
         }
 
         [HttpGet]

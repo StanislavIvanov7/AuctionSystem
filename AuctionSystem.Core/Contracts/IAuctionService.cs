@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Enumeration;
 using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Models;
 namespace AuctionSystem.Core.Contracts
 {
@@ -46,6 +47,10 @@ namespace AuctionSystem.Core.Contracts
         Task<Auction> GetAuctionByIdAsync(int id);
 
         Task AddImagesAsync(Auction auction,List<string> imageUrls);
+
+        Task<IEnumerable<MyAuctionViewModel>> GetAllAuctionsForUser(string userId);
+
+        Task<bool> UserExistAsync(string id);
 
     }
 }

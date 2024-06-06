@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Enumeration;
 using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -264,6 +265,24 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x=>x.Id == id);
         }
 
+        public async Task<IEnumerable<MyAuctionViewModel>> GetAllAuctionsForUser(string userId)
+        {
+            var auctions = await repository.AllAsReadOnly<Auction>()
+                .Where(x => x.SellerId == userId)
+                .Select(x => new MyAuctionViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    BiddingPeriodInDays = x.BiddingPeriodInDays,
+                    LastPrice = x.LastPrice,
+                    MinBiddingStep = x.MinBiddingStep,
+                    Images = x.Images
+                }).ToListAsync();
+
+            return auctions;
+        }
+
         public async Task<Auction> GetAuctionByIdAsync(int id)
         {
             var auction = await repository.All<Auction>()
@@ -334,6 +353,12 @@ namespace AuctionSystem.Core.Services
 
                 await repository.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> UserExistAsync(string id)
+        {
+            return await repository.AllAsReadOnly<ApplicationUser>()
+                .AnyAsync(x => x.Id == id);
         }
     }
 }
