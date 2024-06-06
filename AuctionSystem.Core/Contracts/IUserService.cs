@@ -12,6 +12,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task<bool> ExistAsync(string id);
 
+        Task<bool> ExistAuctionAsync(int id);
+
         Task EditAsync(string id ,MyInformationViewModel model);
 
         Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId);

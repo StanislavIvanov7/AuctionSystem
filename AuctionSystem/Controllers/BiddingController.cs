@@ -27,7 +27,11 @@ namespace AuctionSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> AllBiddingsForAuction(int id)
         {
-            
+            if(await biddingService.AuctionExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var model = await biddingService.AllBiddingsForAuctionAsync(id);
 
             return View("All",model);

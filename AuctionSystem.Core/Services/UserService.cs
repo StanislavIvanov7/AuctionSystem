@@ -188,7 +188,7 @@ namespace AuctionSystem.Core.Services
         public async Task<SellerProfileViewModel> SellerProfileAsync(int auctionId)
         {
             var auction = await repository.GetByIdAsync<Auction>(auctionId);
-
+          
             string userIdentifier = auction.SellerId;
 
             var user = await repository.AllAsReadOnly<ApplicationUser>()
@@ -204,6 +204,7 @@ namespace AuctionSystem.Core.Services
                 }).FirstOrDefaultAsync();
 
             return user;
+
         }
 
         public async Task<IEnumerable<MyAuctionViewModel>> GetMyWinningAuctions(string userId)
@@ -286,6 +287,12 @@ namespace AuctionSystem.Core.Services
             }
 
             return allUsers;
+        }
+
+        public async Task<bool> ExistAuctionAsync(int id)
+        {
+            return await repository.AllAsReadOnly<Auction>()
+                 .AnyAsync(x => x.Id == id);
         }
     }
 }

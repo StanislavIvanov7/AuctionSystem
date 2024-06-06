@@ -80,6 +80,8 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x => x.Id == id);
         }
 
+       
+
         public async Task<Auction> GetAuctionByIdAsync(int id)
         {
             var auction = await repository.All<Auction>()

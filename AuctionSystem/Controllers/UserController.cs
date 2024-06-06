@@ -111,6 +111,10 @@ namespace AuctionSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
+            if(await userService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
             var model = await userService.DetailsUsersAsync(id);
 
             return View(model);
@@ -128,7 +132,11 @@ namespace AuctionSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> SellerProfile(int id)
         {
-       
+            if(await userService.ExistAuctionAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
             var model = await userService.SellerProfileAsync(id);
 
             return View(model);

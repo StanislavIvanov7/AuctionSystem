@@ -181,6 +181,9 @@ namespace AuctionSystem.Controllers
 
 
         }
+        
+
+
 
         private string GetUserId()
         {

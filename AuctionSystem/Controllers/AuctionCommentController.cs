@@ -15,6 +15,10 @@ namespace AuctionSystem.Controllers
         [HttpGet]
         public async Task<IActionResult> AllCommentsForAuction(int id)
         {
+            if(await auctionCommentService.AuctionExistAsync(id)== false)
+            {
+                return BadRequest();
+            }
             var model = await auctionCommentService.AllCommentsForAuctionAsync(id);
 
             return View(model);
