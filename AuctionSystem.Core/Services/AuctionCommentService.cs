@@ -53,6 +53,22 @@ namespace AuctionSystem.Core.Services
             return comments;
         }
 
+        public async Task<IEnumerable<AllCommentsViewModel>> AllCommentsForAuctionAsync(int id)
+        {
+            var comments = await repository.AllAsReadOnly<AuctionComment>()
+                .Where(x=>x.AuctionId == id)
+                .Select(x => new AllCommentsViewModel()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    AuctionImageUrl = x.Auction.Images.First().ImageUrl,
+                    AuctionName = x.Auction.Name
+
+                }).ToListAsync();
+
+            return comments;
+        }
+
         public async Task<bool> AuctionExistAsync(int id)
         {
             return await repository.AllAsReadOnly<Auction>()

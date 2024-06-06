@@ -12,7 +12,13 @@ namespace AuctionSystem.Controllers
         {
             auctionCommentService = _auctionCommentService;
         }
+        [HttpGet]
+        public async Task<IActionResult> AllCommentsForAuction(int id)
+        {
+            var model = await auctionCommentService.AllCommentsForAuctionAsync(id);
 
+            return View(model);
+        }
         [HttpGet]
         public async Task<IActionResult> Add()
         {
