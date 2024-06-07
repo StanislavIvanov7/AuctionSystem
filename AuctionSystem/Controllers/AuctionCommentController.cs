@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.AuctionComment;
+using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -22,6 +23,18 @@ namespace AuctionSystem.Controllers
             var model = await auctionCommentService.AllCommentsForAuctionAsync(id);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllAuctionCommentsFromUser(string id)
+        {
+            if (await auctionCommentService.UserExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var comments = await auctionCommentService.GetAllAuctionCommentsFromUser(id);
+
+            return View(comments);
         }
         [HttpGet]
         public async Task<IActionResult> Add()

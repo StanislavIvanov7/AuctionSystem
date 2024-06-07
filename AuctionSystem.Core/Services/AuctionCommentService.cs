@@ -81,6 +81,22 @@ namespace AuctionSystem.Core.Services
                 .AnyAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<AllCommentsViewModel>> GetAllAuctionCommentsFromUser(string id)
+        {
+            var comments = await repository.AllAsReadOnly<AuctionComment>()
+                 .Where(x => x.UserId == id)
+                 .Select(x => new AllCommentsViewModel()
+                 {
+                     Id = x.AuctionId,
+                     Content = x.Content,
+                     AuctionImageUrl = x.Auction.Images.First().ImageUrl,
+                     AuctionName = x.Auction.Name
+
+                 }).ToListAsync();
+
+            return comments;
+        }
+
         public async Task<DeleteCommentViewModel> GetCommentForDeleteAsync(int id)
         {
             var comment = await repository.AllAsReadOnly<AuctionComment>()
@@ -107,6 +123,12 @@ namespace AuctionSystem.Core.Services
                 repository.Delete<AuctionComment>(comment);
                 await repository.SaveChangesAsync();
             }
+        }
+
+        public async Task<bool> UserExistAsync(string id)
+        {
+            return await repository.AllAsReadOnly<ApplicationUser>()
+                .AnyAsync(x => x.Id == id);
         }
 
         //public async Task<IEnumerable<AuctionNameViewModel>> GetAuctionNamesAsync()

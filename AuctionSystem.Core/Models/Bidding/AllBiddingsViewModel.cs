@@ -10,6 +10,8 @@ namespace AuctionSystem.Core.Models.Bidding
     {
         public int Id { get; set; }
 
+        public int AuctionId { get; set; }
+
         public decimal Price { get; set; }
 
         public string DateAndTimeOfBidding { get; set; } = string.Empty;

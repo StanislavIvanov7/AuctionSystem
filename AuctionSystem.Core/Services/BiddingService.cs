@@ -44,13 +44,17 @@ namespace AuctionSystem.Core.Services
             var users = await repository.AllAsReadOnly<Bidding>()
                  .Select(x => new AllBiddingsViewModel()
                  {
+                     AuctionId = x.AuctionId,
                      Price = x.Price,
                      DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
                      AuctionName = x.Auction.Name,
                      BiddingUser = x.Buyer.FirstName +" " + x.Buyer.LastName,
                      AuctionImageUrl = x.Auction.Images.First().ImageUrl,
                      
-                 }).ToListAsync();
+                 })
+                 .OrderBy(x=>x.AuctionId)
+                 .ThenByDescending(x => x.DateAndTimeOfBidding)
+                 .ToListAsync();
 
             return users;
         }

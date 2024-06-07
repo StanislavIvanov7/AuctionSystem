@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AllCommentsViewModel>
+@{
+    ViewBag.Title = "All Auction Comments From This User";
+}
+<style>
+    .card-body {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row flex gap-4 m-4 justify-content-center">
+    @foreach (var c in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+
+            <div class="card-body">
+
+                <p class="card-title mt-1">Comment: @c.Content</p>
+                <p class="mb-0">Commented Auction: @c.AuctionName</p>
+                <img src="@c.AuctionImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+
+            </div>
+
+            <a asp-controller="Auction" asp-action="Details" asp-route-id="@c.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Auction Page</a>
+
+
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
