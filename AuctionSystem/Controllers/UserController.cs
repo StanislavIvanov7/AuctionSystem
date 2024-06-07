@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static AuctionSystem.Core.Constants.CustomClaim;
+using static AuctionSystem.Core.Constants.RoleConstants;
 namespace AuctionSystem.Controllers
 {
     public class UserController : Controller
@@ -59,6 +60,7 @@ namespace AuctionSystem.Controllers
             }
 
             await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
+            await userManager.AddToRoleAsync(applicationUser, CustomerRole);
             await signInManager.SignInAsync(applicationUser, false);
 
             return RedirectToAction("Index", "Home");
