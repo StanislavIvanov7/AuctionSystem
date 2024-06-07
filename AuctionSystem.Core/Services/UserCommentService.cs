@@ -75,6 +75,25 @@ namespace AuctionSystem.Core.Services
             return comments;
         }
 
+        public async Task<IEnumerable<AllUserCommentForOtherUsers>> GetAllUserCommentsForOtherUsers(string userId)
+        {
+            var comments = await repository.AllAsReadOnly<UserComment>()
+                .Where(x => x.SendingCommentUserId == userId)
+                .Select(x => new AllUserCommentForOtherUsers()
+                {
+                    Id = x.Id,
+                    Content = x.Content,
+                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
+                    UserId = x.ReceivingCommentUserId
+
+
+
+
+                }).ToListAsync();
+
+            return comments;
+        }
+
         public async Task<DeleteUserCommentViewModel> GetUserCommentForDeleteAsync(int id)
         {
             var comment = await repository.AllAsReadOnly<UserComment>()

@@ -29,6 +29,18 @@ namespace AuctionSystem.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AllUserCommentsForOtherUsers(string id)
+        {
+            if (await userCommentService.UserExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var comments = await userCommentService.GetAllUserCommentsForOtherUsers(id);
+
+            return View(comments);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Add()
         {
 

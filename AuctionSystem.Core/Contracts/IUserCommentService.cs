@@ -20,5 +20,7 @@ namespace AuctionSystem.Core.Contracts
 
         Task<IEnumerable<AllCommentAboutUserFromOtherUsers>> GetAllCommentAboutUserFromOtherUsers(string userId);
 
+        Task<IEnumerable<AllUserCommentForOtherUsers>> GetAllUserCommentsForOtherUsers(string userId);
+
     }
 }
