@@ -355,6 +355,14 @@ namespace AuctionSystem.Core.Services
             }
         }
 
+        public async Task SetConditionToFinish(int auctionId)
+        {
+            var auction = await GetAuctionByIdAsync(auctionId);
+
+            auction.ConditionId = 5;
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<bool> UserExistAsync(string id)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()

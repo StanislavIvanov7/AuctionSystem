@@ -1,8 +1,13 @@
 ﻿using AuctionSystem.Core.Contracts;
+using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.User;
+using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using static AuctionSystem.Core.Constants.CustomClaim;
+using static AuctionSystem.Core.Constants.RoleConstants;
 
 namespace AuctionSystem.Areas.Administrator.Controllers
 {
@@ -10,14 +15,16 @@ namespace AuctionSystem.Areas.Administrator.Controllers
     {
         private readonly IUserService userService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
         public UserController(IUserService _userService,
-              UserManager<ApplicationUser> _userManager)
+              UserManager<ApplicationUser> _userManager,
+              SignInManager<ApplicationUser> _signInManager)
         {
            
             userService = _userService;
             userManager = _userManager;
-
+            signInManager = _signInManager;
         }
 
         [HttpGet]
@@ -72,6 +79,64 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             }
 
             return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+
+            if (User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = new RegisterFormModel();
+           
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(RegisterFormModel model)
+        {
+
+            if (User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            ApplicationUser applicationUser = new ApplicationUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+
+            };
+
+            await userManager.SetEmailAsync(applicationUser, model.Email);
+            await userManager.SetUserNameAsync(applicationUser, model.Email);
+
+            var result = await userManager.CreateAsync(applicationUser, model.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(model);
+            }
+
+            await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
+            await userManager.AddToRoleAsync(applicationUser, CustomerRole);
+
+            return RedirectToAction(nameof(All));
+
         }
     }
 }

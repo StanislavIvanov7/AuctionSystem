@@ -1,6 +1,5 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
-using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -100,10 +99,24 @@ namespace AuctionSystem.Controllers
             var auction = await auctionService.GetAuctionByNameAsync(model.Name);
 
             await auctionService.AddImagesAsync(auction, imageUrls);
+            var days = auction.BiddingPeriodInDays;
+            var endDate = auction.StartingAuctionDateTime.AddDays(days);
+            Task.Run(() => EndAuctionAfterTimeExpires(auction.Id, endDate));
 
 
 
             return RedirectToAction(nameof(All));
+
+        }
+
+        private async Task EndAuctionAfterTimeExpires(int auctionId, DateTime endDate)
+        {
+            await Task.Delay(endDate - DateTime.Now);
+
+
+            await auctionService.SetConditionToFinish(auctionId);
+         
+            
 
         }
 
