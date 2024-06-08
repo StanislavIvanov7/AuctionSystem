@@ -223,7 +223,9 @@ namespace AuctionSystem.Core.Services
                   BiddingCount = x.BiddingCount,
                   LastPrice = x.LastPrice,
                   MinBiddingStep = x.MinBiddingStep,
-                  BiddingPeriodInDays = x.BiddingPeriodInDays
+                  BiddingPeriodInDays = x.BiddingPeriodInDays,
+                  StartingAuctionDateTime = x.StartingAuctionDateTime.ToString(),
+                  
                   
 
 

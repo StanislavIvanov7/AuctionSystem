@@ -29,6 +29,8 @@ namespace AuctionSystem.Core.Models.Auction
 
         public string Seller { get; set; } = null!;
 
+        public string StartingAuctionDateTime { get; set; } = null!;
+
         public decimal LastPrice { get; set; }
 
         public int BiddingCount { get; set; }
