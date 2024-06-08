@@ -1,4 +1,5 @@
 ﻿using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Models.AuctionComment;
 using AuctionSystem.Core.Models.User;
 using System.Threading.Tasks;
 
@@ -30,6 +31,10 @@ namespace AuctionSystem.Core.Contracts
         Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync();
 
         Task<ChangeUserRoleViewModel> GetUserForEditAsync(string id);
+
+        Task<DeleteUserViewModel> GetUserForDeleteAsync(string id);
+
+        Task RemoveAsync(string id);
 
     }
 }

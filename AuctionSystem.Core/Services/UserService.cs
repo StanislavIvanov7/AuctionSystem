@@ -1,5 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
+using AuctionSystem.Core.Models.AuctionComment;
 using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
@@ -293,6 +294,35 @@ namespace AuctionSystem.Core.Services
         {
             return await repository.AllAsReadOnly<Auction>()
                  .AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<DeleteUserViewModel> GetUserForDeleteAsync(string id)
+        {
+            var user = await repository.AllAsReadOnly<ApplicationUser>()
+               .Where(x => x.Id == id)
+               .Select(x => new DeleteUserViewModel()
+               {
+                   Id = x.Id,
+                   FirstName = x.FirstName,
+                   LastName = x.LastName,
+
+               })
+               .FirstAsync();
+
+            return user;
+        }
+
+        public async Task RemoveAsync(string id)
+        {
+            var user = await repository.All<ApplicationUser>()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                repository.Delete<ApplicationUser>(user);
+                await repository.SaveChangesAsync();
+            }
         }
     }
 }

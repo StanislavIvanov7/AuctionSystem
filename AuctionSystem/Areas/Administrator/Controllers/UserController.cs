@@ -138,6 +138,51 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             return RedirectToAction(nameof(All));
 
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (await userService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+
+            if (User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            var model = await userService.GetUserForDeleteAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+
+            if (await userService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            if (User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
+
+            await userService.RemoveAsync(id);
+
+            return RedirectToAction(nameof(All));
+
+        }
+
+        private string GetUserId()
+        {
+            var userId = ClaimsPrincipalExtensions.Id(this.User);
+            return userId;
+        }
     }
 }
 
