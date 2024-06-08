@@ -44,7 +44,15 @@
 
                 foreach (var image in Model.Images)
                 {
-                    <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                    if (image.IsMain)
+                    {
+                        <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 300px; height: 150px;" />
+                    }
+                    else
+                    {
+                        <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 95px; height: 80px;" />
+                    }
+                    
                 }
             }
             @* else
