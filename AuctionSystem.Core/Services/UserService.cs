@@ -334,6 +334,28 @@ namespace AuctionSystem.Core.Services
                .AnyAsync(x => x.Id == id && x.Enable == true);
         }
 
-       
+        public async Task<IEnumerable<AllUsersViewModel>> AllUsersForEnableForAdminAreaAsync()
+        {
+            var users = userManager.Users.Where(x=>x.Enable == false).ToList();
+            var allUsers = new List<AllUsersViewModel>();
+
+            foreach (var user in users)
+            {
+                
+
+                var model = new AllUsersViewModel()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                   
+                };
+
+                allUsers.Add(model);
+            }
+
+            return allUsers;
+        }
     }
 }

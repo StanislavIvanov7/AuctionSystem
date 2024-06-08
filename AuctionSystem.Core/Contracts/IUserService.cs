@@ -33,6 +33,8 @@ namespace AuctionSystem.Core.Contracts
         Task<DetailsUsersViewModel> DetailsUsersAsync(string id);
         Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync();
 
+        Task<IEnumerable<AllUsersViewModel>> AllUsersForEnableForAdminAreaAsync();
+
         Task<ChangeUserRoleViewModel> GetUserForEditAsync(string id);
 
         Task<DeleteUserViewModel> GetUserForDeleteAsync(string id);

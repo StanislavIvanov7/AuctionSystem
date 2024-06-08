@@ -36,6 +36,13 @@ namespace AuctionSystem.Areas.Administrator.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AllUserForEnable()
+        {
+            var model = await userService.AllUsersForEnableForAdminAreaAsync();
+
+            return View(model);
+        }
+        [HttpGet]
         public async Task<IActionResult> ChangeUserRole(string id)
         {
 
