@@ -10,7 +10,14 @@
 
                 foreach (var image in Model.Images)
                 {
-                    <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
+                    if (image.IsMain)
+                    {
+                        <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 300px; height: 150px;" />
+                    }
+                    else
+                    {
+                        <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 95px; height: 80px;" />
+                    }
                 }
             }
             @* else
@@ -26,6 +33,7 @@
                 <p class="mb-0">Last Price: @Model.LastPrice lv.</p>
                 <p class="mb-0">Initial Price: @Model.InitialPrice lv.</p>
                 <p class="mb-0">Description: @Model.Description</p>
+                <p class="mb-0">Condition: @Model.Condition</p>
                 <p class="mb-0">Min bidding step: @Model.MinBiddingStep</p>
                 <p class="mb-0">Bidding period in days: @Model.BiddingPeriodInDays</p>
 

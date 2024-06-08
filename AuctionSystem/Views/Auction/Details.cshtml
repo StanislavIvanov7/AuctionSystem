@@ -29,7 +29,7 @@
             <a asp-area="" asp-controller="Auction" asp-action="EditCondition" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
         }
 
-        @if (@Model.ConditionId == 1 && User.Id() == @Model.SellerId)
+        else if(@Model.ConditionId == 1 && User.Id() == @Model.SellerId)
         {
             <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
         }

@@ -42,6 +42,7 @@ namespace AuctionSystem.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Enable = false
 
             };
 
@@ -61,9 +62,14 @@ namespace AuctionSystem.Controllers
 
             await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
             await userManager.AddToRoleAsync(applicationUser, CustomerRole);
-            await signInManager.SignInAsync(applicationUser, false);
+            if(applicationUser.Enable == true)
+            {
+                await signInManager.SignInAsync(applicationUser, false);
+                return RedirectToAction("Index", "Home");
+            }
 
-            return RedirectToAction("Index", "Home");
+            TempData["Message"] = "Wait for admin approval";
+            return RedirectToAction(nameof(Login));
         }
 
         [HttpGet]
@@ -79,6 +85,12 @@ namespace AuctionSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginFormModel model)
         {
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (await userService.IsEnableAsync(user.Id) == false)
+            {
+                TempData["Message"] = "Wait for admin approval";
+                return RedirectToAction(nameof(Login));
+            }
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -94,7 +106,7 @@ namespace AuctionSystem.Controllers
                 return View(model);
             }
 
-            var user = await userManager.FindByEmailAsync(model.Email);
+          
 
             //if (await userManager.IsInRoleAsync(user, AdminRole))
             //{

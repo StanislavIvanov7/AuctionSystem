@@ -68,7 +68,7 @@ namespace AuctionSystem.Controllers
             }
 
             var model = new AuctionFormViewModel();
-            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+            //model.Conditions = await auctionService.GetAuctionConditionsAsync();
 
             return View(model);
         }
@@ -82,14 +82,14 @@ namespace AuctionSystem.Controllers
                 return Unauthorized();
             }
 
-            if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-            {
-                ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+            //if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+            //{
+            //    ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
 
-            }
+            //}
             if (!ModelState.IsValid)
             {
-                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                //model.Conditions = await auctionService.GetAuctionConditionsAsync();
                 return View(model);
             }
             string userId = GetUserId();
@@ -151,7 +151,7 @@ namespace AuctionSystem.Controllers
         {
             var auction = await auctionService.GetAuctionByIdAsync(id);
             string userId = GetUserId();
-            if (User.IsCustomer() && userId == auction.SellerId)
+            if (User.IsCustomer() && userId == auction.SellerId && auction.ConditionId != 2)
             {
                 if (await auctionService.ExistAsync(id) == false)
                 {
@@ -197,16 +197,35 @@ namespace AuctionSystem.Controllers
                 return BadRequest();
             }
 
-            //if (User.IsAdmin() == false)
-            //{
-            //    return Unauthorized();
-            //}
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+            string userId = GetUserId();
 
-            var model = await auctionService.GetAuctionForEditAsync(id);
+            if (auction.ConditionId == 1 && userId == auction.SellerId)
+            {
+                var model = await auctionService.GetAuctionForEditAsync(id);
 
-            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
 
-            return View(model);
+                return View(model);
+            }
+
+            else if (auction.ConditionId == 2 && User.IsModerator())
+            {
+                var model = await auctionService.GetAuctionForEditAsync(id);
+
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+
+                return View(model);
+
+            }
+
+            else
+            {
+                return Unauthorized();
+            }
+         
+
+            
         }
 
         [HttpPost]

@@ -24,13 +24,29 @@
                 <h5 class="card-title mt-1">@a.Name</h5>
                 <p class="mb-0">Price: @a.LastPrice lv.</p>
                 <p class="mb-0">Description: @a.Description</p>
+                <p class="mb-0">Condition: @a.Condition</p>
                 <p class="mb-0">Min bidding step: @a.MinBiddingStep</p>
                 <p class="mb-0">Bidding period in days: @a.BiddingPeriodInDays</p>
 
             </div>
 
+            @if (a.ConditionId == 1 && User.Id() == a.SellerId)
+            {
+                <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@a.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            }
+
+            else if (User.IsCustomer() && User.Id() == a.SellerId && a.ConditionId != 2)
+            {
+                <a asp-area="" asp-controller="Auction" asp-action="EditCondition" asp-route-id="@a.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            }
+
+            
 
         </div>
+
+        
+
+       
     }
 </div>
 

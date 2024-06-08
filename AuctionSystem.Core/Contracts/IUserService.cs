@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.AuctionComment;
 using AuctionSystem.Core.Models.User;
+using AuctionSystem.Infrastructure.Data.Models;
 using System.Threading.Tasks;
 
 namespace AuctionSystem.Core.Contracts
@@ -12,6 +13,8 @@ namespace AuctionSystem.Core.Contracts
         Task<SellerProfileViewModel> SellerProfileAsync(int auctionId);
 
         Task<bool> ExistAsync(string id);
+
+        Task<bool> IsEnableAsync(string id);
 
         Task<bool> ExistAuctionAsync(int id);
 
@@ -33,6 +36,8 @@ namespace AuctionSystem.Core.Contracts
         Task<ChangeUserRoleViewModel> GetUserForEditAsync(string id);
 
         Task<DeleteUserViewModel> GetUserForDeleteAsync(string id);
+
+
 
         Task RemoveAsync(string id);
 

@@ -1,4 +1,5 @@
 ﻿@model LoginFormModel
+@inject IUserService userService
 @{
     ViewData["Title"] = "Log in";
 }
@@ -38,6 +39,12 @@
                     </p>
                 </div>
             </form>
+
+           
+            @if (await userService.IsEnableAsync(User.Id()) == false)
+            {
+                @TempData["Message"]
+            }
         </section>
     </div>
 </div>

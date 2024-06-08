@@ -10,8 +10,11 @@ namespace AuctionSystem.Core.Models.Auction
     public class AllAuctionViewModel
     {
         public int Id { get; set; }
+        public int ConditionId  { get; set; }
 
         public string Name { get; set; } = string.Empty;
+
+        public string Condition { get; set; } = string.Empty;
 
         public decimal LastPrice { get; set; }
 

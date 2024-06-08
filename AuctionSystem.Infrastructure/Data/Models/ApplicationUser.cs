@@ -21,6 +21,9 @@ namespace AuctionSystem.Infrastructure.Data.Models
         [PersonalData]
         public string LastName { get; set; } = string.Empty;
 
+        [Required]
+        public bool Enable { get; set; } = false;
+
         public List<AuctionComment> AuctionComments = new List<AuctionComment>();
 
         public List<UserComment> UserComments = new List<UserComment>();

@@ -11,6 +11,11 @@ namespace AuctionSystem.Core.Models.User
     {
         public int Id { get; set; }
 
+        public int ConditionId { get; set; }
+        public string  Condition { get; set; } = string.Empty;
+
+        public string SellerId { get; set; } = string.Empty;
+
         public string Name { get; set; } = string.Empty;
 
         public decimal LastPrice { get; set; }

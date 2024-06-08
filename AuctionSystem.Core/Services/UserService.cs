@@ -92,10 +92,13 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
+                    Condition = x.Condition.Name,
                     BiddingPeriodInDays = x.BiddingPeriodInDays,
                     LastPrice = x.LastPrice,
                     MinBiddingStep = x.MinBiddingStep,
-                    Images = x.Images
+                    Images = x.Images,
+                    ConditionId = x.ConditionId,
+                    SellerId = x.SellerId 
                 }).ToListAsync();
 
             return auctions;
@@ -324,5 +327,13 @@ namespace AuctionSystem.Core.Services
                 await repository.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> IsEnableAsync(string id)
+        {
+            return await repository.AllAsReadOnly<ApplicationUser>()
+               .AnyAsync(x => x.Id == id && x.Enable == true);
+        }
+
+       
     }
 }

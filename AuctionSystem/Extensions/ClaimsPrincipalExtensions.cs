@@ -22,5 +22,6 @@ namespace System.Security.Claims
         {
             return user.IsInRole(CustomerRole);
         }
+        
     }
 }
