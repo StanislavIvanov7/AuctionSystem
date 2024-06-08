@@ -57,6 +57,20 @@ namespace AuctionSystem.Areas.Administrator.Controllers
 
             return RedirectToAction(nameof(AllUserForEnable));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DisableUsers(string id)
+        {
+            if (await userService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+
+            await userService.DisableUserAsync(id);
+
+            return RedirectToAction(nameof(All));
+        }
         [HttpGet]
         public async Task<IActionResult> ChangeUserRole(string id)
         {

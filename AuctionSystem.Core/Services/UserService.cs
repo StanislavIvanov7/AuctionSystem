@@ -14,12 +14,12 @@ namespace AuctionSystem.Core.Services
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        public UserService(IRepository _repository, 
+        public UserService(IRepository _repository,
             UserManager<ApplicationUser> _userManager,
             RoleManager<IdentityRole> _roleManager)
         {
             repository = _repository;
-            userManager = _userManager; 
+            userManager = _userManager;
             roleManager = _roleManager;
         }
 
@@ -37,7 +37,7 @@ namespace AuctionSystem.Core.Services
             //        UserRole = await userManager.GetRolesAsync(user)
 
             //    }).ToListAsync();
-             var users = userManager.Users.ToList();
+            var users = userManager.Users.ToList();
             var allUsers = new List<AllUsersViewModel>();
 
             foreach (var user in users)
@@ -49,7 +49,7 @@ namespace AuctionSystem.Core.Services
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                   
+
                 };
 
                 allUsers.Add(model);
@@ -58,10 +58,10 @@ namespace AuctionSystem.Core.Services
             return allUsers;
         }
 
-        public async Task EditAsync(string id,MyInformationViewModel model)
+        public async Task EditAsync(string id, MyInformationViewModel model)
         {
             var user = await repository.All<ApplicationUser>()
-                .FirstOrDefaultAsync(x=>x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (user != null)
             {
@@ -72,7 +72,7 @@ namespace AuctionSystem.Core.Services
                 user.UserName = model.Email;
                 user.NormalizedUserName = model.Email.ToUpper();
                 user.PhoneNumber = model.PhoneNumber;
-                
+
                 await repository.SaveChangesAsync();
             }
         }
@@ -85,21 +85,21 @@ namespace AuctionSystem.Core.Services
 
         public async Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId)
         {
-           var auctions = await repository.AllAsReadOnly<Auction>()
-                .Where(x=>x.SellerId == userId)
-                .Select(x=> new MyAuctionViewModel()
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Condition = x.Condition.Name,
-                    BiddingPeriodInDays = x.BiddingPeriodInDays,
-                    LastPrice = x.LastPrice,
-                    MinBiddingStep = x.MinBiddingStep,
-                    Images = x.Images,
-                    ConditionId = x.ConditionId,
-                    SellerId = x.SellerId 
-                }).ToListAsync();
+            var auctions = await repository.AllAsReadOnly<Auction>()
+                 .Where(x => x.SellerId == userId)
+                 .Select(x => new MyAuctionViewModel()
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     Description = x.Description,
+                     Condition = x.Condition.Name,
+                     BiddingPeriodInDays = x.BiddingPeriodInDays,
+                     LastPrice = x.LastPrice,
+                     MinBiddingStep = x.MinBiddingStep,
+                     Images = x.Images,
+                     ConditionId = x.ConditionId,
+                     SellerId = x.SellerId
+                 }).ToListAsync();
 
             return auctions;
         }
@@ -115,21 +115,21 @@ namespace AuctionSystem.Core.Services
                     DateAndTimeOfBidding = x.DateAndTimeOfBidding.ToString(),
                     AuctionName = x.Auction.Name,
                     AuctionImageUrl = x.Auction.Images.First().ImageUrl,
-                    
+
 
                 }).ToListAsync();
 
             return biddings;
         }
 
-        public async  Task<IEnumerable<MyAuctionCommentViewModel>> GetMyAuctionComment(string userId)
+        public async Task<IEnumerable<MyAuctionCommentViewModel>> GetMyAuctionComment(string userId)
         {
             var comments = await repository.AllAsReadOnly<AuctionComment>()
                 .Where(x => x.UserId == userId)
                 .Select(x => new MyAuctionCommentViewModel()
                 {
                     //Id = x.Id,
-                    Content = x.Content, 
+                    Content = x.Content,
                     AuctionName = x.Auction.Name,
                     AuctionImageUrl = x.Auction.Images.First().ImageUrl
 
@@ -143,7 +143,7 @@ namespace AuctionSystem.Core.Services
         public async Task<MyInformationViewModel> MyInformationAsync(string userId)
         {
             var user = await repository.AllAsReadOnly<ApplicationUser>()
-                  .Where(x=>x.Id == userId)
+                  .Where(x => x.Id == userId)
                   .Select(x => new MyInformationViewModel()
                   {
                       Id = x.Id,
@@ -180,7 +180,7 @@ namespace AuctionSystem.Core.Services
                     Id = x.Id,
                     Content = x.Content,
                     ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
-                   
+
 
 
 
@@ -192,7 +192,7 @@ namespace AuctionSystem.Core.Services
         public async Task<SellerProfileViewModel> SellerProfileAsync(int auctionId)
         {
             var auction = await repository.GetByIdAsync<Auction>(auctionId);
-          
+
             string userIdentifier = auction.SellerId;
 
             var user = await repository.AllAsReadOnly<ApplicationUser>()
@@ -213,17 +213,17 @@ namespace AuctionSystem.Core.Services
 
         public async Task<IEnumerable<MyAuctionViewModel>> GetMyWinningAuctions(string userId)
         {
-            
+
             var auctions = await repository.AllAsReadOnly<Auction>()
-                .Include(x=>x.Images)
+                .Include(x => x.Images)
                 .ToListAsync();
             List<Auction> CompletedAuction = new List<Auction>();
 
-            foreach (var auction in auctions) 
+            foreach (var auction in auctions)
             {
                 var days = auction.BiddingPeriodInDays;
                 var finalDateTime = auction.StartingAuctionDateTime.AddDays(days);
-                if(finalDateTime < DateTime.Now)
+                if (finalDateTime < DateTime.Now)
                 {
                     CompletedAuction.Add(auction);
                 }
@@ -252,17 +252,17 @@ namespace AuctionSystem.Core.Services
                 .Where(x => x.Id == id)
                 .FirstOrDefaultAsync();
 
-                var role = await userManager.GetRolesAsync(user);
+            var role = await userManager.GetRolesAsync(user);
 
-                var model = new DetailsUsersViewModel()
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    UserRole = role.FirstOrDefault()
-                };
+            var model = new DetailsUsersViewModel()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                UserRole = role.FirstOrDefault()
+            };
 
             return model;
 
@@ -270,7 +270,7 @@ namespace AuctionSystem.Core.Services
 
         public async Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync()
         {
-            var users = userManager.Users.Where(x=>x.Enable == true).ToList();
+            var users = userManager.Users.Where(x => x.Enable == true).ToList();
             var allUsers = new List<DetailsUsersViewModel>();
 
             foreach (var user in users)
@@ -336,12 +336,12 @@ namespace AuctionSystem.Core.Services
 
         public async Task<IEnumerable<AllUsersViewModel>> AllUsersForEnableForAdminAreaAsync()
         {
-            var users = userManager.Users.Where(x=>x.Enable == false).ToList();
+            var users = userManager.Users.Where(x => x.Enable == false).ToList();
             var allUsers = new List<AllUsersViewModel>();
 
             foreach (var user in users)
             {
-                
+
 
                 var model = new AllUsersViewModel()
                 {
@@ -349,7 +349,7 @@ namespace AuctionSystem.Core.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
-                   
+
                 };
 
                 allUsers.Add(model);
@@ -361,12 +361,26 @@ namespace AuctionSystem.Core.Services
         public async Task EnableUserAsync(string id)
         {
             var user = await repository.All<ApplicationUser>()
-                .Where (x=>x.Id == id && x.Enable == false)
+                .Where(x => x.Id == id && x.Enable == false)
                 .FirstOrDefaultAsync();
 
             if (user != null)
             {
                 user.Enable = true;
+                await repository.SaveChangesAsync();
+
+            }
+        }
+
+        public async Task DisableUserAsync(string id)
+        {
+            var user = await repository.All<ApplicationUser>()
+                .Where(x => x.Id == id && x.Enable == true)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                user.Enable = false;
                 await repository.SaveChangesAsync();
 
             }

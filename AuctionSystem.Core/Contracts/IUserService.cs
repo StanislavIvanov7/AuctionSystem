@@ -22,6 +22,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task EnableUserAsync(string id);
 
+        Task DisableUserAsync(string id);
+
         Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId);
 
         Task<IEnumerable<MyAuctionViewModel>> GetMyWinningAuctions(string userId);
