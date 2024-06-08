@@ -5,6 +5,7 @@ using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Frameworks;
 using System.Security.Claims;
 using static AuctionSystem.Core.Constants.CustomClaim;
 using static AuctionSystem.Core.Constants.RoleConstants;
@@ -41,6 +42,20 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             var model = await userService.AllUsersForEnableForAdminAreaAsync();
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Enable(string id)
+        {
+            if(await userService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+           
+            await userService.EnableUserAsync(id);
+
+            return RedirectToAction(nameof(AllUserForEnable));
         }
         [HttpGet]
         public async Task<IActionResult> ChangeUserRole(string id)

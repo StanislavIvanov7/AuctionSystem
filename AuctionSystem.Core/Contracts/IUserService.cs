@@ -20,6 +20,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task EditAsync(string id ,MyInformationViewModel model);
 
+        Task EnableUserAsync(string id);
+
         Task<IEnumerable<MyAuctionViewModel>> GetMyAuctions(string userId);
 
         Task<IEnumerable<MyAuctionViewModel>> GetMyWinningAuctions(string userId);

@@ -357,5 +357,19 @@ namespace AuctionSystem.Core.Services
 
             return allUsers;
         }
+
+        public async Task EnableUserAsync(string id)
+        {
+            var user = await repository.All<ApplicationUser>()
+                .Where (x=>x.Id == id && x.Enable == false)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                user.Enable = true;
+                await repository.SaveChangesAsync();
+
+            }
+        }
     }
 }
