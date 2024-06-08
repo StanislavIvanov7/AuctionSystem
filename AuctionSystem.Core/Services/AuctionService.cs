@@ -225,6 +225,8 @@ namespace AuctionSystem.Core.Services
                   MinBiddingStep = x.MinBiddingStep,
                   BiddingPeriodInDays = x.BiddingPeriodInDays,
                   StartingAuctionDateTime = x.StartingAuctionDateTime.ToString(),
+                  SellerId = x.SellerId,
+                  ConditionId = x.ConditionId,
                   
                   
 

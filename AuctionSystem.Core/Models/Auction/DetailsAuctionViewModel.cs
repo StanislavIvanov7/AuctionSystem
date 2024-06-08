@@ -15,6 +15,10 @@ namespace AuctionSystem.Core.Models.Auction
     {
         public int Id { get; set; }
 
+        public int ConditionId { get; set; }
+
+        public string SellerId { get; set; } = string.Empty;  
+
         public string Name { get; set; } = string.Empty;
     
         public string Description { get; set; } = string.Empty;
