@@ -35,8 +35,14 @@
                 <input asp-for="@Model.BiddingPeriodInDays" class="form-control" aria-required="true" placeholder="Write auctions bidding period in days here..." />
                 <span asp-validation-for="@Model.BiddingPeriodInDays" class="text-danger"></span>
             </div>
+
+            <div class="mb-3">
+                <label asp-for="@Model.Image" class="form-label-add-edit">Auction Main Image Url</label>
+                <input asp-for="@Model.Image" class="form-control" aria-required="true" placeholder="Write auctions main image url here..." />
+                <span asp-validation-for="@Model.Image" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <label>Image</label>
+                <label>Other Images Url</label>
                 <input type="text" name="imageUrls" class="form-control" />
                 <input type="text" name="imageUrls" class="form-control" />
                 <input type="text" name="imageUrls" class="form-control" />

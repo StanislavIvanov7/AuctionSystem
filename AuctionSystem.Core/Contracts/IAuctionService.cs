@@ -48,7 +48,7 @@ namespace AuctionSystem.Core.Contracts
 
         Task<Auction> GetAuctionByIdAsync(int id);
 
-        Task AddImagesAsync(Auction auction,List<string> imageUrls);
+        Task AddImagesAsync(Auction auction,string image,List<string> imageUrls);
 
         Task<IEnumerable<MyAuctionViewModel>> GetAllAuctionsForUser(string userId);
 

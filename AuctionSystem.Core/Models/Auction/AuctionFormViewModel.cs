@@ -49,6 +49,6 @@ namespace AuctionSystem.Core.Models.Auction
         public IEnumerable<AllAuctionConditionsViewModel> Conditions { get; set; } = new List<AllAuctionConditionsViewModel>();
 
 
-        public string Images { get; set; } = string.Empty;
+        public string Image { get; set; } = string.Empty;
     }
 }

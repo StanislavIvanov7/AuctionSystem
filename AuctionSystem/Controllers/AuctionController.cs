@@ -98,7 +98,7 @@ namespace AuctionSystem.Controllers
 
             var auction = await auctionService.GetAuctionByNameAsync(model.Name);
 
-            await auctionService.AddImagesAsync(auction, imageUrls);
+            await auctionService.AddImagesAsync(auction,model.Image, imageUrls);
             var days = auction.BiddingPeriodInDays;
             var endDate = auction.StartingAuctionDateTime.AddDays(days);
             Task.Run(() => EndAuctionAfterTimeExpires(auction.Id, endDate));

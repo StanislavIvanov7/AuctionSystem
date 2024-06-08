@@ -39,17 +39,25 @@ namespace AuctionSystem.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task AddImagesAsync(Auction auction, List<string> imageUrls)
+        public async Task AddImagesAsync(Auction auction,string image ,List<string> imageUrls)
         {
+
+            var a = await repository.All<Auction>()
+                        .Where(x => x.Id == auction.Id)
+                        .Include(x => x.Images)
+                        .FirstOrDefaultAsync();
+            a.Images.Add(new AuctionImage()
+            {
+                AuctionId = a.Id,
+                ImageUrl = image,
+                IsMain = true
+            });
+
             foreach (var imageUrl in imageUrls)
             {
                 if (!string.IsNullOrWhiteSpace(imageUrl))
                 {
-                    var a = await repository.All<Auction>()
-                        .Where(x => x.Id == auction.Id)
-                        .Include(x => x.Images)
-                        .FirstOrDefaultAsync();
-
+                    
                     a.Images.Add(new AuctionImage()
                     {
                         AuctionId = a.Id,
