@@ -270,7 +270,7 @@ namespace AuctionSystem.Core.Services
 
         public async Task<IEnumerable<DetailsUsersViewModel>> AllUsersForAdminAreaAsync()
         {
-            var users = userManager.Users.ToList();
+            var users = userManager.Users.Where(x=>x.Enable == true).ToList();
             var allUsers = new List<DetailsUsersViewModel>();
 
             foreach (var user in users)
