@@ -61,12 +61,14 @@ namespace AuctionSystem.Controllers
 
             if (!await biddingService.IsActiveAsync(auction.Id))
             {
-                return BadRequest();
+                TempData["IsActiveMessage"] = "This product is not active";
+                return View();
             }
 
             if (!await biddingService.IsValidAsync(auction.Id))
             {
-                return BadRequest();
+                TempData["IsActiveMessage"] = "This product is not active";
+                return View();
             }
 
           
