@@ -25,7 +25,7 @@ namespace AuctionSystem.Core.Services
         {
 
             
-            var users = userManager.Users.ToList();
+            var users = userManager.Users.Where(x=>x.Enable == true).ToList();
             var allUsers = new List<AllUsersViewModel>();
 
             foreach (var user in users)

@@ -46,11 +46,11 @@
 
         @if (User.IsModerator())
         {
-            <li><a class="nav-link text-dark" asp-area="Moderator" asp-controller="ModeratorHome" asp-action="Dashboard">Dashboard</a></li>
+            <li><a class="nav-link text-dark" asp-area="Moderator" asp-controller="ModeratorHome" asp-action="Dashboard">Moderator Area</a></li>
         }
         @if (User.IsAdmin())
         {
-            <li><a class="nav-link text-dark" asp-area="Administrator" asp-controller="AdministratorHome" asp-action="Dashboard">Dashboard</a></li>
+            <li><a class="nav-link text-dark" asp-area="Administrator" asp-controller="AdministratorHome" asp-action="Dashboard">Admin Area</a></li>
         }
 
 

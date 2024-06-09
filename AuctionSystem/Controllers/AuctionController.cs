@@ -172,7 +172,7 @@ namespace AuctionSystem.Controllers
             {
                 var model = await auctionService.GetAuctionForEditAsync(id);
 
-                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                model.Conditions = await auctionService.GetOnlyTwoAuctionConditionsAsync();
 
                 return View(model);
             }
@@ -239,7 +239,7 @@ namespace AuctionSystem.Controllers
 
             
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction("MyAuctions", "User");
 
 
         }

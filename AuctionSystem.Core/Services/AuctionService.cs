@@ -335,6 +335,17 @@ namespace AuctionSystem.Core.Services
             return auction;
         }
 
+        public async Task<IEnumerable<AllAuctionConditionsViewModel>> GetOnlyTwoAuctionConditionsAsync()
+        {
+            return await repository.AllAsReadOnly<AuctionCondition>()
+               .Select(x => new AllAuctionConditionsViewModel
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+               })
+               .Where(x=>x.Name == "Unregistered" || x.Name == "Awaiting approval").ToListAsync();
+        }
+
         public async Task ModeratorEditAsync(int id, ModeratorAuctionFormViewModel model)
         {
             var auction = await repository.GetByIdAsync<Auction>(id);

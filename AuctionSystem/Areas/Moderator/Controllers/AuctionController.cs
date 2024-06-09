@@ -33,7 +33,21 @@ namespace AuctionSystem.Areas.Moderator.Controllers
 
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var model = await auctionService.DetailsAuctionAsync(id);
 
+
+            return View(model);
+
+
+
+        }
         [HttpGet]
         public async Task<IActionResult> EditCondition(int id)
         {

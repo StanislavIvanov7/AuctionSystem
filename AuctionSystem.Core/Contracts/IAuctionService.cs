@@ -28,6 +28,8 @@ namespace AuctionSystem.Core.Contracts
 
         Task<IEnumerable<AllAuctionConditionsViewModel>> GetAuctionConditionsAsync();
 
+        Task<IEnumerable<AllAuctionConditionsViewModel>> GetOnlyTwoAuctionConditionsAsync();
+
         Task<bool> ConditionExistAsync(int id);
 
         Task SetConditionToFinish(int auctionId);

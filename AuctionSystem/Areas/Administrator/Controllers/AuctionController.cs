@@ -56,6 +56,12 @@ namespace AuctionSystem.Areas.Administrator.Controllers
                 return BadRequest();
             }
 
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+            if (auction.ConditionId == 1 || auction.ConditionId == 2)
+            {
+                return BadRequest();
+            }
+
             var model = await auctionService.GetModeratorAuctionForEditAsync(id);
 
             model.Conditions = await auctionService.GetAuctionConditionsAsync();
