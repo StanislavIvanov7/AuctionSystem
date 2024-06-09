@@ -55,7 +55,16 @@ namespace AuctionSystem.Controllers
             }
             var model = await auctionService.DetailsAuctionAsync(id);
 
-            return View(model);
+            if(model.ConditionId == 4)
+            {
+                return View(model);
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+            
         }
 
         [HttpGet]
@@ -120,7 +129,7 @@ namespace AuctionSystem.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> EditCondition(int id)
+        public async Task<IActionResult> TerminateAuction(int id)
         {
             if (await auctionService.ExistAsync(id) == false)
             {
@@ -128,14 +137,19 @@ namespace AuctionSystem.Controllers
             }
 
             var auction = await auctionService.GetAuctionByIdAsync(id);
+
+            if(auction.ConditionId != 4)
+            {
+                return BadRequest();
+            }
             string userId = GetUserId();
             if (User.IsCustomer() && userId == auction.SellerId)
             {
-                var model = await auctionService.GetModeratorAuctionForEditAsync(id);
-
-                model.Conditions = await auctionService.GetAuctionConditionsAsync();
-
-                return View(model);
+                
+                await auctionService.TerminateAuction(auction.Id);
+                
+                return RedirectToAction(nameof(All));
+               
             }
             else
             {
@@ -146,48 +160,48 @@ namespace AuctionSystem.Controllers
            
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EditCondition(int id, ModeratorAuctionFormViewModel model)
-        {
-            var auction = await auctionService.GetAuctionByIdAsync(id);
-            string userId = GetUserId();
-            if (User.IsCustomer() && userId == auction.SellerId && auction.ConditionId != 2)
-            {
-                if (await auctionService.ExistAsync(id) == false)
-                {
-                    return BadRequest();
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> EditCondition(int id, ModeratorAuctionFormViewModel model)
+        //{
+        //    var auction = await auctionService.GetAuctionByIdAsync(id);
+        //    string userId = GetUserId();
+        //    if (User.IsCustomer() && userId == auction.SellerId && auction.ConditionId != 2)
+        //    {
+        //        if (await auctionService.ExistAsync(id) == false)
+        //        {
+        //            return BadRequest();
+        //        }
 
 
-                if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-                {
-                    ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
-                }
+        //        if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+        //        {
+        //            ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+        //        }
 
 
 
-                if (!ModelState.IsValid)
-                {
-                    model.Conditions = await auctionService.GetAuctionConditionsAsync();
-                    return View(model);
-                }
+        //        if (!ModelState.IsValid)
+        //        {
+        //            model.Conditions = await auctionService.GetAuctionConditionsAsync();
+        //            return View(model);
+        //        }
 
-                await auctionService.ModeratorEditAsync(id, model);
+        //        await auctionService.ModeratorEditAsync(id, model);
 
             
 
-                return RedirectToAction(nameof(All));
-            }
-            else
-            {
+        //        return RedirectToAction(nameof(All));
+        //    }
+        //    else
+        //    {
 
-                return Unauthorized();
-            }
+        //        return Unauthorized();
+        //    }
 
           
 
 
-        }
+        //}
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

@@ -35,6 +35,21 @@ namespace AuctionSystem.Areas.Administrator.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var model = await auctionService.DetailsAuctionAsync(id);
+
+           
+                return View(model);
+            
+
+
+        }
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             if (await auctionService.ExistAsync(id) == false)
@@ -57,6 +72,11 @@ namespace AuctionSystem.Areas.Administrator.Controllers
                 return BadRequest();
             }
 
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+            if(auction.ConditionId == 1  || auction.ConditionId == 2)
+            {
+                return BadRequest();
+            }
         
             if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
             {
@@ -71,7 +91,7 @@ namespace AuctionSystem.Areas.Administrator.Controllers
                 return View(model);
             }
 
-            var auction = await auctionService.GetAuctionByIdAsync(id);
+          
            
             await auctionService.ModeratorEditAsync(id, model);
 

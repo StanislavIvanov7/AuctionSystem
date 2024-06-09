@@ -35,7 +35,7 @@ namespace AuctionSystem.Areas.Moderator.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> EditCondition(int id)
         {
             if (await auctionService.ExistAsync(id) == false)
             {
@@ -55,7 +55,7 @@ namespace AuctionSystem.Areas.Moderator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, ModeratorAuctionFormViewModel model)
+        public async Task<IActionResult> EditCondition(int id, ModeratorAuctionFormViewModel model)
         {
             if (await auctionService.ExistAsync(id) == false)
             {
@@ -105,6 +105,102 @@ namespace AuctionSystem.Areas.Moderator.Controllers
             //}
 
             await auctionService.ModeratorEditAsync(id, model);
+
+            //else if(User.IsModerator() || User.IsAdmin())
+            //{
+            //    await auctionService.EditConditionAsync(id, model);
+            //}
+
+            //await auctionService.EditAsync(id, model);
+
+            return RedirectToAction(nameof(All));
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+
+            if(auction.ConditionId == 2)
+            {
+                var model = await auctionService.GetAuctionForEditAsync(id);
+
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+
+                return View(model);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+            //if (User.IsAdmin() == false)
+            //{
+            //    return Unauthorized();
+            //}
+
+            
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, AuctionFormViewModel model)
+        {
+            if (await auctionService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+            var auction = await auctionService.GetAuctionByIdAsync(id);
+
+            if(auction.ConditionId != 2)
+            {
+                return Unauthorized();
+            }
+
+            if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
+            {
+                ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
+            }
+
+
+
+            if (!ModelState.IsValid)
+            {
+                model.Conditions = await auctionService.GetAuctionConditionsAsync();
+                return View(model);
+            }
+
+           
+            //var userId = GetUserId();
+
+            //if (auction.ConditionId == 1 && userId == auction.SellerId)
+            //{
+            //    await auctionService.EditAsync(id, model);
+
+            //    //return BadRequest();
+            //}
+
+            //else if (auction.ConditionId == 2 && User.IsModerator())
+            //{
+
+            //    await auctionService.EditAsync(id, model);
+
+            //    //return BadRequest();
+            //}
+
+            //else if (User.IsCustomer() && userId == auction.SellerId)
+            //{
+            //    await auctionService.EditAsync(id, model);
+
+            //}
+
+            await auctionService.EditAsync(id, model);
 
             //else if(User.IsModerator() || User.IsAdmin())
             //{

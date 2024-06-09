@@ -39,9 +39,19 @@
 
               @if (Model.ConditionId == 2 && User.IsModerator())
               {
-                 <a asp-area="Moderator" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                <a asp-area="Moderator" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
 
-              }
+            }
+            else
+            {
+               
+                    <a asp-area="Moderator" asp-controller="Auction" asp-action="EditCondition" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit Condition</a>
+
+                
+            }
+
+
+            <a asp-area="Moderator" asp-controller="Auction" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
                
 
       

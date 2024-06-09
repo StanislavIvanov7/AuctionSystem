@@ -378,6 +378,15 @@ namespace AuctionSystem.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        public async Task TerminateAuction(int auctionId)
+        {
+
+            var auction = await GetAuctionByIdAsync(auctionId);
+
+            auction.ConditionId = 6;
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<bool> UserExistAsync(string id)
         {
             return await repository.AllAsReadOnly<ApplicationUser>()

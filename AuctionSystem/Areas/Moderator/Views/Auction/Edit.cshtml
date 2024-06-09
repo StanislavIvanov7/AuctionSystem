@@ -1,4 +1,4 @@
-﻿@model ModeratorAuctionFormViewModel
+﻿@model AuctionFormViewModel
 @{
     ViewBag.Title = "Edit Auction";
 }
@@ -10,6 +10,31 @@
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form asp-action="Edit" method="post">
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label-add-edit">Edit Product Name</label>
+                <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="Write product name here..." />
+                <span asp-validation-for="@Model.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Description" class="form-label-add-edit">Edit Product Description</label>
+                <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5" placeholder="Write product description here..."></textarea>
+                <span asp-validation-for="@Model.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.InitialPrice" class="form-label-add-edit">Edit Auction Initial Price</label>
+                <input asp-for="@Model.InitialPrice" class="form-control" aria-required="true" placeholder="Write auction initial price here..." />
+                <span asp-validation-for="@Model.InitialPrice" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.BiddingPeriodInDays" class="form-label-add-edit">Edit Auction Bidding Period In Days</label>
+                <input asp-for="@Model.BiddingPeriodInDays" class="form-control" aria-required="true" placeholder="Write auction bidding period in days here..." />
+                <span asp-validation-for="@Model.BiddingPeriodInDays" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.MinBiddingStep" class="form-label-add-edit">Edit Auction Min Bidding Step</label>
+                <input asp-for="@Model.MinBiddingStep" class="form-control" aria-required="true" placeholder="Write auction min bidding step here..." />
+                <span asp-validation-for="@Model.MinBiddingStep" class="text-danger"></span>
+            </div>
             <div class="mb-3">
                 <label asp-for="@Model.ConditionId" class="form-label-add-edit">Edit Auction Condition</label>
                 <select asp-for="@Model.ConditionId" class="form-control" aria-required="true">

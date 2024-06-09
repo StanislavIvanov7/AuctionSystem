@@ -171,7 +171,7 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
             await userManager.AddToRoleAsync(applicationUser, CustomerRole);
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(AllUserForEnable));
 
         }
 

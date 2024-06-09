@@ -35,9 +35,9 @@
                 <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@a.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
             }
 
-            else if (User.IsCustomer() && User.Id() == a.SellerId && a.ConditionId != 2)
+            else if (User.IsCustomer() && User.Id() == a.SellerId && a.ConditionId != 2 && a.ConditionId == 4)
             {
-                <a asp-area="" asp-controller="Auction" asp-action="EditCondition" asp-route-id="@a.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+                <a asp-area="" asp-controller="Auction" asp-action="TerminateAuction" asp-route-id="@a.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Terminate Auction</a>
             }
 
             
