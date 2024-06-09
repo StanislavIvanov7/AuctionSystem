@@ -77,7 +77,7 @@ namespace AuctionSystem.Controllers
             }
 
             var model = new AuctionFormViewModel();
-            //model.Conditions = await auctionService.GetAuctionConditionsAsync();
+            
 
             return View(model);
         }
@@ -91,14 +91,9 @@ namespace AuctionSystem.Controllers
                 return Unauthorized();
             }
 
-            //if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-            //{
-            //    ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
-
-            //}
             if (!ModelState.IsValid)
             {
-                //model.Conditions = await auctionService.GetAuctionConditionsAsync();
+               
                 return View(model);
             }
             string userId = GetUserId();
@@ -160,48 +155,7 @@ namespace AuctionSystem.Controllers
            
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> EditCondition(int id, ModeratorAuctionFormViewModel model)
-        //{
-        //    var auction = await auctionService.GetAuctionByIdAsync(id);
-        //    string userId = GetUserId();
-        //    if (User.IsCustomer() && userId == auction.SellerId && auction.ConditionId != 2)
-        //    {
-        //        if (await auctionService.ExistAsync(id) == false)
-        //        {
-        //            return BadRequest();
-        //        }
-
-
-        //        if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
-        //        {
-        //            ModelState.AddModelError(nameof(model.ConditionId), "Condition does not exist");
-        //        }
-
-
-
-        //        if (!ModelState.IsValid)
-        //        {
-        //            model.Conditions = await auctionService.GetAuctionConditionsAsync();
-        //            return View(model);
-        //        }
-
-        //        await auctionService.ModeratorEditAsync(id, model);
-
-            
-
-        //        return RedirectToAction(nameof(All));
-        //    }
-        //    else
-        //    {
-
-        //        return Unauthorized();
-        //    }
-
-          
-
-
-        //}
+       
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -250,10 +204,7 @@ namespace AuctionSystem.Controllers
                 return BadRequest();
             }
 
-            //if (User.IsAdmin() == false)
-            //{
-            //    return Unauthorized();
-            //}
+          
 
             if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
             {
@@ -275,7 +226,7 @@ namespace AuctionSystem.Controllers
             {
                 await auctionService.EditAsync(id, model);
 
-                //return BadRequest();
+              
             }
 
             else if (auction.ConditionId == 2 && User.IsModerator())
@@ -283,28 +234,10 @@ namespace AuctionSystem.Controllers
 
                 await auctionService.EditAsync(id, model);
 
-                //return BadRequest();
+                
             }
 
-            //else if (User.IsCustomer() && userId == auction.SellerId)
-            //{
-            //    await auctionService.EditAsync(id, model);
-
-            //}
-
-            //else
-            //{
-            //    return BadRequest();
-            //}
-
-           
-
-            //else if(User.IsModerator() || User.IsAdmin())
-            //{
-            //    await auctionService.EditConditionAsync(id, model);
-            //}
-
-            //await auctionService.EditAsync(id, model);
+            
 
             return RedirectToAction(nameof(All));
 

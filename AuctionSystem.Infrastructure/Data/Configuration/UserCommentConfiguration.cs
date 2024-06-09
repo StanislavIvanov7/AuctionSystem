@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AuctionSystem.Infrastructure.Data.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
 namespace AuctionSystem.Infrastructure.Data.Configuration

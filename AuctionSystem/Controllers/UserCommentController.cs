@@ -1,6 +1,5 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.UserComment;
-using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -45,7 +44,7 @@ namespace AuctionSystem.Controllers
         {
 
             var model = new UserCommentFormViewModel();
-            //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+        
 
             return View(model);
         }
@@ -61,7 +60,7 @@ namespace AuctionSystem.Controllers
             }
             if (!ModelState.IsValid)
             {
-                //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+               
                 return View(model);
             }
 
@@ -81,11 +80,6 @@ namespace AuctionSystem.Controllers
             var userId = ClaimsPrincipalExtensions.Id(this.User);
             return userId;
         }
-        //public async Task<IActionResult> All()
-        //{
-        //    var model = await userCommentService.AllFitnessCardAsync();
-
-        //    return View(model);
-        //}
+        
     }
 }

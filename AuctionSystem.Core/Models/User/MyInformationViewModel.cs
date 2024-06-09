@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static AuctionSystem.Infrastructure.Constants.DataConstants.ApplicationUser;
+﻿using System.ComponentModel.DataAnnotations;
 using static AuctionSystem.Core.Constants.MessageConstants;
+using static AuctionSystem.Infrastructure.Constants.DataConstants.ApplicationUser;
 
 namespace AuctionSystem.Core.Models.User
 {

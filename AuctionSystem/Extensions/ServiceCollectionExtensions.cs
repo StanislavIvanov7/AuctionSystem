@@ -1,5 +1,4 @@
-﻿using AuctionSystem.Controllers;
-using AuctionSystem.Core.Contracts;
+﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data;
 using AuctionSystem.Infrastructure.Data.Common;

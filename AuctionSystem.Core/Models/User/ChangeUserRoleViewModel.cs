@@ -1,11 +1,5 @@
-﻿using AuctionSystem.Core.Models.Auction;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static AuctionSystem.Core.Constants.MessageConstants;
 using static AuctionSystem.Infrastructure.Constants.DataConstants.ApplicationUser;
 

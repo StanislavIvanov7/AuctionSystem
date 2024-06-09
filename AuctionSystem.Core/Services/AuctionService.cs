@@ -65,14 +65,7 @@ namespace AuctionSystem.Core.Services
                         IsMain = false
                     });
 
-                    //var auctionImage = new AuctionImage()
-                    //{
-                    //    AuctionId = auction.Id,
-                    //    ImageUrl = imageUrl,
-                    //    IsMain = false,
-                    //};
-                    //auction.Images.Add(auctionImage);
-                    //await repository.AddAsync(auctionImage);
+                    
                 }
             }
             await repository.SaveChangesAsync();
@@ -259,20 +252,7 @@ namespace AuctionSystem.Core.Services
             }
         }
 
-        //public async Task EditConditionAsync(int id, AuctionFormViewModel model)
-        //{
-        //    var auction = await repository.GetByIdAsync<Auction>(id);
-
-
-
-        //    if (auction != null)
-        //    {
-                
-        //        auction.ConditionId = model.ConditionId;
-
-        //        await repository.SaveChangesAsync();
-        //    }
-        //}
+       
 
         public async Task<bool> ExistAsync(int id)
         {

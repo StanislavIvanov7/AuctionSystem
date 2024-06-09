@@ -44,8 +44,6 @@ namespace AuctionSystem.Core.Contracts
 
         Task ModeratorEditAsync(int id, ModeratorAuctionFormViewModel model);
 
-        //Task EditConditionAsync(int id, AuctionFormViewModel model);
-
         Task<Auction> GetAuctionByNameAsync(string name);
 
         Task<Auction> GetAuctionByIdAsync(int id);

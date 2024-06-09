@@ -1,6 +1,4 @@
-﻿using AuctionSystem.Core.Models.AuctionComment;
-using AuctionSystem.Core.Models.User;
-using AuctionSystem.Core.Models.UserComment;
+﻿using AuctionSystem.Core.Models.UserComment;
 
 namespace AuctionSystem.Core.Contracts
 {

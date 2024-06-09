@@ -8,9 +8,6 @@ namespace AuctionSystem.Areas.Moderator.Controllers
     [Authorize(Roles = ModeratorRole)]
     public class ModeratorBaseController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+     
     }
 }

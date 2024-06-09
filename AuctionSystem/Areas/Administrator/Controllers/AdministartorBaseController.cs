@@ -8,9 +8,6 @@ namespace AuctionSystem.Areas.Administrator.Controllers
     [Authorize(Roles = AdminRole)]
     public class AdministartorBaseController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
     }
 }

@@ -1,6 +1,4 @@
 ﻿using AuctionSystem.Core.Contracts;
-using AuctionSystem.Core.Models.Auction;
-using AuctionSystem.Core.Models.AuctionComment;
 using AuctionSystem.Core.Models.User;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
@@ -26,17 +24,7 @@ namespace AuctionSystem.Core.Services
         public async Task<IEnumerable<AllUsersViewModel>> AllUsersAsync()
         {
 
-            //var users = await repository.AllAsReadOnly<ApplicationUser>()
-            //    .Select(x => new AllUsersViewModel()
-            //    {
-            //        Id = x.Id,
-            //        FirstName = x.FirstName,
-            //        LastName = x.LastName,
-            //        Email = x.Email,
-            //        PhoneNumber = x.PhoneNumber,
-            //        UserRole = await userManager.GetRolesAsync(user)
-
-            //    }).ToListAsync();
+            
             var users = userManager.Users.ToList();
             var allUsers = new List<AllUsersViewModel>();
 
@@ -128,7 +116,7 @@ namespace AuctionSystem.Core.Services
                 .Where(x => x.UserId == userId)
                 .Select(x => new MyAuctionCommentViewModel()
                 {
-                    //Id = x.Id,
+                   
                     Content = x.Content,
                     AuctionName = x.Auction.Name,
                     AuctionImageUrl = x.Auction.Images.First().ImageUrl

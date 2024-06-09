@@ -1,12 +1,5 @@
-﻿using AuctionSystem.Core.Models.Auction;
-using AuctionSystem.Core.Models.Bidding;
-using AuctionSystem.Core.Models.User;
+﻿using AuctionSystem.Core.Models.Bidding;
 using AuctionSystem.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuctionSystem.Core.Contracts
 {

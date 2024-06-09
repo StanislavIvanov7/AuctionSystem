@@ -76,32 +76,22 @@ namespace AuctionSystem.Controllers
             var minBiddingPrice = auction.LastPrice + auction.MinBiddingStep;
             if (minBiddingPrice > model.LastPrice)
             {
-                //ModelState.AddModelError(nameof(model.Id), $"Price must be bigger than {minBiddingPrice}");
+                
                 return View(model);
             }
-            //var days = auction.BiddingPeriodInDays;
-            //var finalDateTime = auction.StartingAuctionDateTime.AddDays(days);
-
-
-            //if (finalDateTime > DateTime.Now)
-            //{
-
-            //    return BadRequest();
-
-            //}
+           
 
 
             if (!ModelState.IsValid)
             {
-                //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+                
                 return View(model);
             }
 
             var userId = GetUserId();
             await biddingService.AddBiddingAsync(model, userId);
             await biddingService.SetNewValuesForAuctionAsync(model,auction.Id ,userId);
-            //auction.LastPrice = model.LastPrice;
-
+         
 
 
             return RedirectToAction("All", "Auction");

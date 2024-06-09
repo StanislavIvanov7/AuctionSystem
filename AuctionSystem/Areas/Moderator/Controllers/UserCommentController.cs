@@ -1,5 +1,4 @@
 ﻿using AuctionSystem.Core.Contracts;
-using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 

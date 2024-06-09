@@ -1,8 +1,4 @@
-﻿using AuctionSystem.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using static AuctionSystem.Core.Constants.MessageConstants;
 using static AuctionSystem.Infrastructure.Constants.DataConstants.Auction;
 

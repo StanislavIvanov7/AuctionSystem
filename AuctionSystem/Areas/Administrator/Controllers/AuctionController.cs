@@ -1,7 +1,6 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.Auction;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AuctionSystem.Areas.Administrator.Controllers
 {

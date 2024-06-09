@@ -108,10 +108,7 @@ namespace AuctionSystem.Controllers
 
           
 
-            //if (await userManager.IsInRoleAsync(user, AdminRole))
-            //{
-            //    return RedirectToAction("DashBoard", "Home", new { area = "Admin" });
-            //}
+           
             return Redirect(model.ReturnUrl ?? "/Home/Index");
         }
         [HttpGet]

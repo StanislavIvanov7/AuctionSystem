@@ -1,6 +1,5 @@
 ﻿using AuctionSystem.Core.Contracts;
 using AuctionSystem.Core.Models.AuctionComment;
-using AuctionSystem.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -41,7 +40,7 @@ namespace AuctionSystem.Controllers
         {
 
             var model = new AuctionCommentFormViewModel();
-            //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+           
 
             return View(model);
         }
@@ -57,7 +56,7 @@ namespace AuctionSystem.Controllers
             }
             if (!ModelState.IsValid)
             {
-                //model.Auctions = await auctionCommentService.GetAuctionNamesAsync();
+               
                 return View(model);
             }
 

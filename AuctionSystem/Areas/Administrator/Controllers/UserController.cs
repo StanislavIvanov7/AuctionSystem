@@ -1,11 +1,8 @@
 ﻿using AuctionSystem.Core.Contracts;
-using AuctionSystem.Core.Models.Auction;
 using AuctionSystem.Core.Models.User;
-using AuctionSystem.Core.Services;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Frameworks;
 using System.Security.Claims;
 using static AuctionSystem.Core.Constants.CustomClaim;
 using static AuctionSystem.Core.Constants.RoleConstants;
@@ -102,7 +99,7 @@ namespace AuctionSystem.Areas.Administrator.Controllers
                 var removeResult = await userManager.RemoveFromRoleAsync(user, currentRole);
                 if (!removeResult.Succeeded)
                 {
-                    //ModelState.AddModelError("", "Error removing user from current role.");
+                    
                     return View(model);
                 }
             }
@@ -110,7 +107,7 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             var addResult = await userManager.AddToRoleAsync(user, model.SelectedRole);
             if (!addResult.Succeeded)
             {
-                //ModelState.AddModelError("", "Error adding user to new role.");
+               
                 return View(model);
             }
 

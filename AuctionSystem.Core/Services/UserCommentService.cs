@@ -1,15 +1,8 @@
 ﻿using AuctionSystem.Core.Contracts;
-using AuctionSystem.Core.Models.AuctionComment;
-using AuctionSystem.Core.Models.User;
 using AuctionSystem.Core.Models.UserComment;
 using AuctionSystem.Infrastructure.Data.Common;
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuctionSystem.Core.Services
 {

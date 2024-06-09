@@ -42,10 +42,7 @@ namespace AuctionSystem.Areas.Moderator.Controllers
                 return BadRequest();
             }
 
-            //if (User.IsAdmin() == false)
-            //{
-            //    return Unauthorized();
-            //}
+           
 
             var model = await auctionService.GetModeratorAuctionForEditAsync(id);
 
@@ -62,10 +59,7 @@ namespace AuctionSystem.Areas.Moderator.Controllers
                 return BadRequest();
             }
 
-            //if (User.IsAdmin() == false)
-            //{
-            //    return Unauthorized();
-            //}
+            
 
             if (await auctionService.ConditionExistAsync(model.ConditionId) == false)
             {
@@ -81,37 +75,11 @@ namespace AuctionSystem.Areas.Moderator.Controllers
             }
 
             var auction = await auctionService.GetAuctionByIdAsync(id);
-            //var userId = GetUserId();
-
-            //if (auction.ConditionId == 1 && userId == auction.SellerId)
-            //{
-            //    await auctionService.EditAsync(id, model);
-
-            //    //return BadRequest();
-            //}
-
-            //else if (auction.ConditionId == 2 && User.IsModerator())
-            //{
-
-            //    await auctionService.EditAsync(id, model);
-
-            //    //return BadRequest();
-            //}
-
-            //else if (User.IsCustomer() && userId == auction.SellerId)
-            //{
-            //    await auctionService.EditAsync(id, model);
-
-            //}
+            
 
             await auctionService.ModeratorEditAsync(id, model);
 
-            //else if(User.IsModerator() || User.IsAdmin())
-            //{
-            //    await auctionService.EditConditionAsync(id, model);
-            //}
-
-            //await auctionService.EditAsync(id, model);
+           
 
             return RedirectToAction(nameof(All));
 
@@ -141,10 +109,7 @@ namespace AuctionSystem.Areas.Moderator.Controllers
                 return Unauthorized();
             }
 
-            //if (User.IsAdmin() == false)
-            //{
-            //    return Unauthorized();
-            //}
+            
 
             
         }
@@ -177,37 +142,10 @@ namespace AuctionSystem.Areas.Moderator.Controllers
             }
 
            
-            //var userId = GetUserId();
-
-            //if (auction.ConditionId == 1 && userId == auction.SellerId)
-            //{
-            //    await auctionService.EditAsync(id, model);
-
-            //    //return BadRequest();
-            //}
-
-            //else if (auction.ConditionId == 2 && User.IsModerator())
-            //{
-
-            //    await auctionService.EditAsync(id, model);
-
-            //    //return BadRequest();
-            //}
-
-            //else if (User.IsCustomer() && userId == auction.SellerId)
-            //{
-            //    await auctionService.EditAsync(id, model);
-
-            //}
-
+           
             await auctionService.EditAsync(id, model);
 
-            //else if(User.IsModerator() || User.IsAdmin())
-            //{
-            //    await auctionService.EditConditionAsync(id, model);
-            //}
-
-            //await auctionService.EditAsync(id, model);
+        
 
             return RedirectToAction(nameof(All));
 
