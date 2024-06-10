@@ -26,14 +26,14 @@ namespace AuctionSystem.Core.Models.Auction
         public decimal InitialPrice { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Range(
+        [Range(typeof(int),
             MinLengthMinBiddingStep,
             MaxLengthMinBiddingStep,
             ErrorMessage = "Min bidding step must be a positive number and less than {2}")]
         public int MinBiddingStep { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Range(
+        [Range(typeof(int),
             MinLengthBiddingPeriodInDays,
             MaxLengthBiddingPeriodInDays,
             ErrorMessage = "Min bidding period in days must be a positive number and less than {2}")]
