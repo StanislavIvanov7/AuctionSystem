@@ -67,6 +67,13 @@ namespace AuctionSystem.Controllers
             
         }
 
+        //public async void CompleteAuction(int auctionId)
+        //{
+        //    var auction = await auctionService.GetAuctionByIdAsync(auctionId);
+
+        //    if(auction!= null && )
+        //}
+
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -81,48 +88,57 @@ namespace AuctionSystem.Controllers
 
             return View(model);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Add(AuctionFormViewModel model,List<string> imageUrls)
+        public async Task<IActionResult> Add(AuctionFormViewModel model, List<string> imageUrls)
         {
-
-            if (User.IsCustomer() == false)
+            if (!User.IsCustomer())
             {
                 return Unauthorized();
             }
 
             if (!ModelState.IsValid)
             {
-               
                 return View(model);
             }
+
             string userId = GetUserId();
 
-            await auctionService.AddAsync(model, userId);
+           int auctionId =  await auctionService.AddAsync(model, userId);
 
-            var auction = await auctionService.GetAuctionByNameAsync(model.Name);
+            var auction = await auctionService.GetAuctionByIdAsync(auctionId);
+            await auctionService.AddImagesAsync(auction, model.Image, imageUrls);
 
-            await auctionService.AddImagesAsync(auction,model.Image, imageUrls);
             var days = auction.BiddingPeriodInDays;
             var endDate = auction.StartingAuctionDateTime.AddDays(days);
-            Task.Run(() => EndAuctionAfterTimeExpires(auction.Id, endDate));
 
-
+          
+            ScheduleAuctionCompletion(auction.Id, endDate);
 
             return RedirectToAction(nameof(All));
-
         }
 
-        private async Task EndAuctionAfterTimeExpires(int auctionId, DateTime endDate)
+        private void ScheduleAuctionCompletion(int auctionId, DateTime endDate)
         {
-            await Task.Delay(endDate - DateTime.Now);
+           
+            var delay = endDate - DateTime.Now;
 
-
-            await auctionService.SetConditionToFinish(auctionId);
-         
-            
-
+            if (delay <= TimeSpan.Zero)
+            {
+                
+                Task.Run(() => EndAuctionAfterTimeExpires(auctionId));
+            }
+            else
+            {
+              
+                Task.Delay(delay).ContinueWith(_ => EndAuctionAfterTimeExpires(auctionId));
+            }
         }
+
+        private async Task EndAuctionAfterTimeExpires(int auctionId)
+        {
+            await auctionService.SetConditionToFinish(auctionId);
+        }
+        
         [HttpGet]
         public async Task<IActionResult> TerminateAuction(int id)
         {

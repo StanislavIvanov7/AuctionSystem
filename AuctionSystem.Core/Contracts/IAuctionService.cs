@@ -36,7 +36,7 @@ namespace AuctionSystem.Core.Contracts
 
         Task TerminateAuction(int auctionId);
 
-        Task AddAsync(AuctionFormViewModel model, string userId);
+        Task<int> AddAsync(AuctionFormViewModel model, string userId);
 
         Task<AuctionFormViewModel> GetAuctionForEditAsync(int id);
 

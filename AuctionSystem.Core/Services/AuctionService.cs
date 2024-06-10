@@ -17,7 +17,7 @@ namespace AuctionSystem.Core.Services
             repository = _repository;
         }
 
-        public async Task AddAsync(AuctionFormViewModel model, string userId)
+        public async Task<int> AddAsync(AuctionFormViewModel model, string userId)
         {
             Auction auction = new Auction()
             {
@@ -37,6 +37,8 @@ namespace AuctionSystem.Core.Services
 
             await repository.AddAsync(auction);
             await repository.SaveChangesAsync();
+
+            return auction.Id;
         }
 
         public async Task AddImagesAsync(Auction auction,string image ,List<string> imageUrls)
