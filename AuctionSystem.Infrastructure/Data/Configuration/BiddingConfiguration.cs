@@ -23,7 +23,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 Id = 1,
                 Price = 20000,
                 DateAndTimeOfBidding = fixedDate,
-                BuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
+                BuyerId = "7930926e-9ca6-4c83-8921-bb432b90c8f6",
                 AuctionId = 1
             };
 
