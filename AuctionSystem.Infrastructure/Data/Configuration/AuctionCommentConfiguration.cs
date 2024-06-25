@@ -22,7 +22,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 Id = 6,
                 AuctionId = 1,
                 Content = "Very good car",
-                UserId = "39fb9235-83a6-4bb9-9236-490a99f6bb83"
+                UserId = "cd87d0e2-4047-473e-924a-3e10406c5583"
             };
 
             comments.Add(comment);

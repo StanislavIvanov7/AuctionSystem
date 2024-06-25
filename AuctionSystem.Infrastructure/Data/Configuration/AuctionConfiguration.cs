@@ -27,9 +27,9 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 MinBiddingStep = 100,
                 BiddingPeriodInDays = 5,
                 ConditionId = 5,
-                SellerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
+                SellerId = "cd87d0e2-4047-473e-924a-3e10406c5583",
                 LastPrice = 20000,
-                LastBuyerId = "7930926e-9ca6-4c83-8921-bb432b90c8f6",
+                LastBuyerId = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
                 BiddingCount = 1,
                 StartingAuctionDateTime = fixedDate,
             };

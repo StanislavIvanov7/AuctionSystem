@@ -25,22 +25,22 @@ public static class ApplicationBuilderExtension
             await roleManager.CreateAsync(role3);
 
             var admin = await userManager.FindByEmailAsync("stanislav@abv.bg");
-            var customer = await userManager.FindByEmailAsync("petq@abv.bg");
-            var moderator = await userManager.FindByEmailAsync("pesho@abv.bg");
+            var moderator = await userManager.FindByEmailAsync("petq@abv.bg");
+            var customer = await userManager.FindByEmailAsync("pesho@abv.bg");
 
             if (admin != null)
             {
                 await userManager.AddToRoleAsync(admin, role.Name);
             }
 
-            if(customer != null)
+            if(moderator != null)
             {
-                await userManager.AddToRoleAsync(customer, role2.Name);
+                await userManager.AddToRoleAsync(moderator, role2.Name);
             }
 
-            if (moderator != null)
+            if (customer != null)
             {
-                await userManager.AddToRoleAsync(moderator, role3.Name);
+                await userManager.AddToRoleAsync(customer, role3.Name);
             }
         }
 

@@ -2,6 +2,7 @@
 using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace AuctionSystem.Infrastructure.Data
 {
@@ -15,6 +16,9 @@ namespace AuctionSystem.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
             builder.ApplyConfiguration(new AuctionConditionConfiguration());
             builder.ApplyConfiguration(new AuctionConfiguration());
             builder.ApplyConfiguration(new AuctionImageConfiguration());

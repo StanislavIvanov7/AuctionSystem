@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuctionSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240603100305_AddedUserCommentTable")]
-    partial class AddedUserCommentTable
+    [Migration("20240625135522_InitialMigrationWithSeedData")]
+    partial class InitialMigrationWithSeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,9 @@ namespace AuctionSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Enable")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
@@ -97,6 +100,84 @@ namespace AuctionSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0a2830ef-8be3-4ef6-910b-33b680d659d3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c37f9e70-f9ff-4e55-8c95-83ce9708cef7",
+                            Email = "stanislav@abv.bg",
+                            EmailConfirmed = false,
+                            Enable = true,
+                            FirstName = "Stanislav",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "STANISLAV@ABV.BG",
+                            NormalizedUserName = "STANISLAV@ABV.BG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKWMFkl7AX/tLiH5YsPsX3Dq/tpWz3nWir4Z3EZlGvPetA4BnxbplEiAgbvgoFmNyQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9e406138-c088-4d10-810a-8cb287aa339b",
+                            TwoFactorEnabled = false,
+                            UserName = "stanislav@abv.bg"
+                        },
+                        new
+                        {
+                            Id = "0e136956-3e82-4e00-8f60-b274cdf40833",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e105f213-ede3-4a80-842f-3c9dc11968f3",
+                            Email = "petq@abv.bg",
+                            EmailConfirmed = false,
+                            Enable = true,
+                            FirstName = "Petq",
+                            LastName = "Ivanova",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PETQ@ABV.BG",
+                            NormalizedUserName = "PETQ@ABV.BG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA6z9dwlBH7tWOjytCxnRXyppvEkLyGpZe8kgTLmsSO42yDBQrsJcX4A5LG0ipmkvQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ddfff353-d2cc-4d0c-a9cd-c40f2914296b",
+                            TwoFactorEnabled = false,
+                            UserName = "petq@abv.bg"
+                        },
+                        new
+                        {
+                            Id = "cd87d0e2-4047-473e-924a-3e10406c5583",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ddd19b43-78e7-4f76-ada7-a863c26dda43",
+                            Email = "pesho@abv.bg",
+                            EmailConfirmed = false,
+                            Enable = true,
+                            FirstName = "Pesho",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PESHO@ABV.BG",
+                            NormalizedUserName = "PESHO@ABV.BG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI3Z0d7r2sGUdrya083s+YIwZL3gNHejHgWhjXmQNjNLr8k76kX/0rtfK6WclL10aQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "eccde9ba-4a3c-4bc1-9bee-3a8988b80b6f",
+                            TwoFactorEnabled = false,
+                            UserName = "pesho@abv.bg"
+                        },
+                        new
+                        {
+                            Id = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ec2261ab-a653-4698-bbf8-03187c3e1877",
+                            Email = "teodor@abv.bg",
+                            EmailConfirmed = false,
+                            Enable = true,
+                            FirstName = "Teodor",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TEODOR@ABV.BG",
+                            NormalizedUserName = "TEODOR@ABV.BG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMMvPmUxbEXmTzVVI3EVFNy2fXTYx/wYItqlFu70sMGcbHmXYNTsj2yXh37gHAe0Wg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d258ec24-1129-4a44-84b4-4597aecc18e9",
+                            TwoFactorEnabled = false,
+                            UserName = "teodor@abv.bg"
+                        });
                 });
 
             modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Auction", b =>
@@ -153,6 +234,10 @@ namespace AuctionSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasComment("Auction Seller Identifier");
 
+                    b.Property<DateTime>("StartingAuctionDateTime")
+                        .HasColumnType("datetime2")
+                        .HasComment("Starting Date And Time Of Auction");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ConditionId");
@@ -169,16 +254,17 @@ namespace AuctionSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BiddingCount = 5,
+                            BiddingCount = 1,
                             BiddingPeriodInDays = 5,
                             ConditionId = 5,
                             Description = "Mercedes C200 2018 car for sale with a starting price of 12,000lv and a minimum bid of BGN 100.On actual kilometers without any remarks.",
                             InitialPrice = 12000m,
-                            LastBuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
+                            LastBuyerId = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
                             LastPrice = 20000m,
                             MinBiddingStep = 100,
                             Name = "Car auction",
-                            SellerId = "ea9548dc-aac6-49b5-abe1-561136ac48c7"
+                            SellerId = "cd87d0e2-4047-473e-924a-3e10406c5583",
+                            StartingAuctionDateTime = new DateTime(2024, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -221,7 +307,7 @@ namespace AuctionSystem.Infrastructure.Migrations
                             Id = 6,
                             AuctionId = 1,
                             Content = "Very good car",
-                            UserId = "39fb9235-83a6-4bb9-9236-490a99f6bb83"
+                            UserId = "cd87d0e2-4047-473e-924a-3e10406c5583"
                         });
                 });
 
@@ -343,6 +429,10 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("AuctionId")
+                        .HasColumnType("int")
+                        .HasComment("Auction Identifier");
+
                     b.Property<string>("BuyerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
@@ -358,6 +448,8 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuctionId");
+
                     b.HasIndex("BuyerId");
 
                     b.ToTable("Biddings");
@@ -368,7 +460,8 @@ namespace AuctionSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BuyerId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
+                            AuctionId = 1,
+                            BuyerId = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
                             DateAndTimeOfBidding = new DateTime(2024, 5, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Price = 20000m
                         });
@@ -413,8 +506,8 @@ namespace AuctionSystem.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "The best customer",
-                            ReceivingCommentUserId = "39fb9235-83a6-4bb9-9236-490a99f6bb83",
-                            SendingCommentUserId = "9e4d170a-cfb8-4e35-b754-7f9586f48ce4"
+                            ReceivingCommentUserId = "cd87d0e2-4047-473e-924a-3e10406c5583",
+                            SendingCommentUserId = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8"
                         });
                 });
 
@@ -443,6 +536,29 @@ namespace AuctionSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9e42b0be-39c7-48bd-883b-10726fbd7573",
+                            ConcurrencyStamp = "1dc1ba21-620d-4e97-a08a-535d97a9612f",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "346e1559-a879-404e-8555-4708cda20f06",
+                            ConcurrencyStamp = "02672c13-8fc0-4f95-a0d6-2762a47062c1",
+                            Name = "Moderator",
+                            NormalizedName = "MODERATOR"
+                        },
+                        new
+                        {
+                            Id = "e870b2a7-d550-4201-a4d6-a40bd996790a",
+                            ConcurrencyStamp = "d37fb5f1-1c80-4fa2-bafe-e09185bf377a",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -532,6 +648,28 @@ namespace AuctionSystem.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "cd87d0e2-4047-473e-924a-3e10406c5583",
+                            RoleId = "9e42b0be-39c7-48bd-883b-10726fbd7573"
+                        },
+                        new
+                        {
+                            UserId = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
+                            RoleId = "9e42b0be-39c7-48bd-883b-10726fbd7573"
+                        },
+                        new
+                        {
+                            UserId = "0e136956-3e82-4e00-8f60-b274cdf40833",
+                            RoleId = "346e1559-a879-404e-8555-4708cda20f06"
+                        },
+                        new
+                        {
+                            UserId = "0a2830ef-8be3-4ef6-910b-33b680d659d3",
+                            RoleId = "e870b2a7-d550-4201-a4d6-a40bd996790a"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -612,11 +750,19 @@ namespace AuctionSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Bidding", b =>
                 {
+                    b.HasOne("AuctionSystem.Infrastructure.Data.Models.Auction", "Auction")
+                        .WithMany("Biddings")
+                        .HasForeignKey("AuctionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AuctionSystem.Infrastructure.Data.Models.ApplicationUser", "Buyer")
                         .WithMany()
                         .HasForeignKey("BuyerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Auction");
 
                     b.Navigation("Buyer");
                 });
@@ -693,6 +839,8 @@ namespace AuctionSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("AuctionSystem.Infrastructure.Data.Models.Auction", b =>
                 {
+                    b.Navigation("Biddings");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
