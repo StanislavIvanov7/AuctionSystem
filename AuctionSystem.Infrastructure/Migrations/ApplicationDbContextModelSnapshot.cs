@@ -244,7 +244,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Auctions");
+                    b.ToTable("Auctions", (string)null);
 
                     b.HasComment("Auction table");
 
@@ -295,7 +295,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AuctionComments");
+                    b.ToTable("AuctionComments", (string)null);
 
                     b.HasComment("Auction Comment Table");
 
@@ -326,7 +326,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuctionConditions");
+                    b.ToTable("AuctionConditions", (string)null);
 
                     b.HasComment("Auction Condition table");
 
@@ -390,7 +390,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasIndex("AuctionId");
 
-                    b.ToTable("AuctionImages");
+                    b.ToTable("AuctionImages", (string)null);
 
                     b.HasComment("Auction Image Table");
 
@@ -450,7 +450,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Biddings");
+                    b.ToTable("Biddings", (string)null);
 
                     b.HasComment("Bidding Table");
 
@@ -495,7 +495,7 @@ namespace AuctionSystem.Infrastructure.Migrations
 
                     b.HasIndex("SendingCommentUserId");
 
-                    b.ToTable("UserComments");
+                    b.ToTable("UserComments", (string)null);
 
                     b.HasComment("User Comment Table");
 

@@ -30,8 +30,8 @@ namespace AuctionSystem.Core.Services
                 {
                     Id = x.Id,
                     Content = x.Content,
-                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
-                    SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+                    ReceivingCommentUserName = x.Receiver.FirstName + " " + x.Receiver.LastName,
+                    SendingCommentUserName = x.Sender.FirstName + " " + x.Sender.LastName,
                 }).ToListAsync();
             return comments;
         }
@@ -48,7 +48,7 @@ namespace AuctionSystem.Core.Services
                 {
                     Id = x.Id,
                     Content = x.Content,
-                    SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+                    SendingCommentUserName = x.Sender.FirstName + " " + x.Sender.LastName,
                     UserId = x.SendingCommentUserId
                 }).ToListAsync();
             return comments;
@@ -61,7 +61,7 @@ namespace AuctionSystem.Core.Services
                 {
                     Id = x.Id,
                     Content = x.Content,
-                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
+                    ReceivingCommentUserName = x.Receiver.FirstName + " " + x.Receiver.LastName,
                     UserId = x.ReceivingCommentUserId
                 }).ToListAsync();
             return comments;
@@ -74,7 +74,7 @@ namespace AuctionSystem.Core.Services
                {
                    Id = x.Id,
                    Content = x.Content,
-                   SendingCommentUserName = x.User.FirstName + " " + x.User.LastName,
+                   SendingCommentUserName = x.Sender.FirstName + " " + x.Sender.LastName,
                })
                .FirstAsync();
             return comment;

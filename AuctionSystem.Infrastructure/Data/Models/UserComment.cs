@@ -20,8 +20,8 @@ namespace AuctionSystem.Infrastructure.Data.Models
         [MaxLength(MaxLengthContent)]
         public string Content { get; set; } = string.Empty;
         [ForeignKey(nameof(ReceivingCommentUserId))]
-        public ApplicationUser User2 { get; set; } = null!;
+        public ApplicationUser Receiver { get; set; } = null!;
         [ForeignKey(nameof(SendingCommentUserId))]
-        public ApplicationUser User { get; set; } = null!;
+        public ApplicationUser Sender { get; set; } = null!;
     }
 }

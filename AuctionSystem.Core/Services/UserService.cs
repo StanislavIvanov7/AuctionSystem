@@ -135,7 +135,7 @@ namespace AuctionSystem.Core.Services
                 {
                     Id = x.Id,
                     Content = x.Content,
-                    ReceivingCommentUserName = x.User2.FirstName + " " + x.User2.LastName,
+                    ReceivingCommentUserName = x.Receiver.FirstName + " " + x.Receiver.LastName,
                 }).ToListAsync();
             return comments;
         }
