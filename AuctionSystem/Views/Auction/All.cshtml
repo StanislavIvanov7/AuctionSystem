@@ -1,20 +1,15 @@
 ﻿@model AuctionQueryViewModel
-
 @{
     ViewBag.Title = "All auction";
 }
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <form method="get">
     <div class="row justify-content-center" >
-       
         <div class="form-group col-md-3">
             <label asp-for="SearchTerm"></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="...">
         </div>
-
         <div class="form-group col-md-3">
             <div class="form-group">
                 <label asp-for="Sorting"></label>
@@ -25,7 +20,6 @@
                 </select>
             </div>
         </div>
-
         <div class="col-md-3">
             <div class="form-group mt-4 p-2">
                 <input type="submit" value="Search" class="btn btn-primary" />
@@ -33,19 +27,15 @@
         </div>
     </div>
 </form>
-
-
 @{
     var previousPage = Model.CurrentPage - 1;
     if (previousPage < 1)
     {
         previousPage = 1;
     }
-
     var maxPage = Math.Ceiling((double)Model.TotalAuctionCount /
         Model.AuctionPerPage);
 }
-
 <div class="row mb-5">
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
         <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
@@ -56,12 +46,10 @@
            asp-route-searchTerm="@Model.SearchTerm"
            asp-route-sorting="@((int)Model.Sorting)"><<</a>
     </div>
-
     @{
         var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
         !Model.Auction.Any();
     }
-
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-primary
            @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
@@ -73,14 +61,11 @@
            asp-route-sorting="@((int)Model.Sorting)">>></a>
     </div>
 </div>
-
 @if (!Model.Auction.Any())
 {
     <h2 class="text-center">No auction found by the given criteria!</h2>
 }
-
 <div class="row">
-
     @foreach (var auction in Model.Auction)
     {
         <partial name="_AuctionPartial" model="@auction" />

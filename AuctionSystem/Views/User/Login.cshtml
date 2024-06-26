@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
 <h1 class="text-center">@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4 offset-md-4">
@@ -39,8 +38,6 @@
                     </p>
                 </div>
             </form>
-
-           
             @if (await userService.IsEnableAsync(User.Id()) == false)
             {
                 @TempData["Message"]
@@ -48,7 +45,6 @@
         </section>
     </div>
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

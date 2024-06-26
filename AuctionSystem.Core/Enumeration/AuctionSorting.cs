@@ -5,6 +5,5 @@
         MinPriceAuction = 0,
         LastActiveAuction = 1,
         AuctionWithTheMostBids = 2,
-
     }
 }

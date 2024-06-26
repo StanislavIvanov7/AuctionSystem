@@ -1,24 +1,18 @@
 ﻿using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace AuctionSystem.Infrastructure.Data.Configuration
 {
     public class AuctionImageConfiguration : IEntityTypeConfiguration<AuctionImage>
     {
-        
-
         public void Configure(EntityTypeBuilder<AuctionImage> builder)
         {
             builder.HasData(SeedAuctionImages());
         }
-
         private List<AuctionImage> SeedAuctionImages()
         {
             List<AuctionImage> images = new List<AuctionImage>();
-
             AuctionImage image;
-
             image = new AuctionImage()
             {
                 Id = 1,
@@ -26,20 +20,15 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 AuctionId = 1,
                 IsMain = true,
             };
-            
             images.Add(image);
-
             image = new AuctionImage()
             {
                 Id = 2,
                 ImageUrl = "https://res.cloudinary.com/driveau/image/upload/v1616453173/cms/uploads/2018-mercedes-benz-c200-508.jpg",
                 AuctionId = 1,
                 IsMain = false,
-
             };
-
             images.Add(image);
-
             image = new AuctionImage()
             {
                 Id = 3,
@@ -47,9 +36,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 AuctionId = 1,
                 IsMain = false,
             };
-
             images.Add(image);
-
             return images;
         }
     }

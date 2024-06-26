@@ -1,13 +1,9 @@
 ﻿@model AllAuctionViewModel
-
 <div class="col-md-3">
     <div class="card mb-4">
-
         <div>
             @if (Model.Images != null && Model.Images.Any())
             {
-               
-
                 foreach (var image in Model.Images)
                 {
                     if (image.IsMain)
@@ -20,12 +16,8 @@
                     }
                 }
             }
-            
         </div>
-
-       
             <div class="card-body text-center">
-
                 <h5 class="card-title mt-1">@Model.Name</h5>
                 <p class="mb-0">Last Price: @Model.LastPrice lv.</p>
                 <p class="mb-0">Initial Price: @Model.InitialPrice lv.</p>
@@ -33,22 +25,11 @@
                 <p class="mb-0">Condition: @Model.Condition</p>
                 <p class="mb-0">Min bidding step: @Model.MinBiddingStep</p>
                 <p class="mb-0">Bidding period in days: @Model.BiddingPeriodInDays</p>
-
                 @if(Model.ConditionId != 1 && Model.ConditionId != 2)
                 {
                     <a asp-area="Administrator" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit Condition</a>
                 }
-               
-
             <a asp-area="Administrator" asp-controller="Auction" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
-
-
-          
             </div>
-        
-        
     </div>
 </div>
-
-            
-

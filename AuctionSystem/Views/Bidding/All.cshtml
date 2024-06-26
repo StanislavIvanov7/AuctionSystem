@@ -2,17 +2,14 @@
 @{
     ViewBag.Title = "All Biddings";
 }
-
 <style>
     .card-body {
         font-size: 1.1em;
         font-weight: bold;
     }
 </style>
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <div class="text-center row flex gap-4 m-4 justify-content-center">
     @foreach (var b in Model)
     {
@@ -24,18 +21,10 @@
                 <p class="mb-0">Date Of Bidding: @b.DateAndTimeOfBidding</p>
                 <p class="mb-0">User : @b.BiddingUser</p>
                 <p class="mb-0">Auction Name: @b.AuctionName</p>
-               
             </div>
-
-           
-
-
         </div>
     }
-
-
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

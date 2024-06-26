@@ -6,7 +6,6 @@ namespace AuctionSystem.Core.Models.Auction
     {
         [Required(ErrorMessage = RequiredMessage)]
         public int ConditionId { get; set; }
-
         public IEnumerable<AllAuctionConditionsViewModel> Conditions { get; set; } = new List<AllAuctionConditionsViewModel>();
     }
 }

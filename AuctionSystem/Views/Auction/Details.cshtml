@@ -2,16 +2,12 @@
 @{
     ViewBag.Title = "Auction Details";
 }
-
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <div class="row">
     <div class="card w-100">
         <div class="card-body">
             <h3 class="card-title text-center">@Model.Name</h3>
-         
             <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
             <p class="mb-0"><span class="fw-bold">Product Initial Price: </span>@Model.InitialPrice lv.</p>
             <p class="mb-0"><span class="fw-bold">Product Last Price: </span>@Model.LastPrice lv.</p>
@@ -27,18 +23,14 @@
         {
             <a asp-area="" asp-controller="Auction" asp-action="TerminateAuction" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Terminate auction</a>
         }
-
         else if(@Model.ConditionId == 1 && User.Id() == @Model.SellerId)
         {
             <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
         }
-
         else if (Model.ConditionId == 2 && User.IsModerator())
         {
             <a asp-area="" asp-controller="Auction" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
-       
         }
-     
         <a asp-controller="Auction" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back To All Auction</a>
         <a asp-controller="User" asp-action="SellerProfile" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Seller Profile</a>
         <a asp-controller="Bidding" asp-action="AllBiddingsForAuction" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">All Bidding For Auction</a>

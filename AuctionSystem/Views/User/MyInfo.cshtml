@@ -2,37 +2,26 @@
 @{
     ViewBag.Title = "My Profile Info";
 }
-
 <style> 
     .card-body {
         font-size: 1.1em;
         font-weight: bold;
     }
 </style>
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <div class="text-center row flex gap-4 m-4 justify-content-center">
-    
         <div class="card col-4" style="width: 20rem; ">
             <div class="card-body">
-
                 <h5 class="card-title mt-1">User Profile</h5>
                 <p class="card-title mt-1">First Name: @Model.FirstName</p>
                 <p class="mb-0" >Last Name: @Model.LastName</p>
                 <p class="mb-0">Email: @Model.Email</p>
                 <p class="mb-0">Phone Number: @Model.PhoneNumber</p>
-
             </div>
-
             <a asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit Profile</a>
-
-
         </div>
-    
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static AuctionSystem.Core.Constants.CustomClaim;
 using static AuctionSystem.Core.Constants.RoleConstants;
-
 namespace AuctionSystem.Areas.Administrator.Controllers
 {
     public class UserController : AdministartorBaseController
@@ -14,33 +13,26 @@ namespace AuctionSystem.Areas.Administrator.Controllers
         private readonly IUserService userService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-
         public UserController(IUserService _userService,
               UserManager<ApplicationUser> _userManager,
               SignInManager<ApplicationUser> _signInManager)
         {
-           
             userService = _userService;
             userManager = _userManager;
             signInManager = _signInManager;
         }
-
         [HttpGet]
         public async Task<IActionResult> All()
         {
             var model = await userService.AllUsersForAdminAreaAsync();
-
             return View(model);
         }
-
         [HttpGet]
         public async Task<IActionResult> AllUserForEnable()
         {
             var model = await userService.AllUsersForEnableForAdminAreaAsync();
-
             return View(model);
         }
-
         [HttpGet]
         public async Task<IActionResult> Enable(string id)
         {
@@ -48,13 +40,9 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             {
                 return BadRequest();
             }
-
-           
             await userService.EnableUserAsync(id);
-
             return RedirectToAction(nameof(AllUserForEnable));
         }
-
         [HttpGet]
         public async Task<IActionResult> DisableUsers(string id)
         {
@@ -62,29 +50,20 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             {
                 return BadRequest();
             }
-
-
             await userService.DisableUserAsync(id);
-
             return RedirectToAction(nameof(All));
         }
         [HttpGet]
         public async Task<IActionResult> ChangeUserRole(string id)
         {
-
             if(await userService.ExistAsync(id) == false)
             {
                 return BadRequest();
             }
-
             var model = await userService.GetUserForEditAsync(id);
-
-
             return View(model);
         }
-
         [HttpPost]
-     
         public async Task<IActionResult> ChangeUserRole(ChangeUserRoleViewModel model)
         {
             var user = await userManager.FindByIdAsync(model.UserId);
@@ -92,70 +71,51 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             {
                 return NotFound();
             }
-
             var currentRole = (await userManager.GetRolesAsync(user)).FirstOrDefault();
             if (currentRole != null)
             {
                 var removeResult = await userManager.RemoveFromRoleAsync(user, currentRole);
                 if (!removeResult.Succeeded)
                 {
-                    
                     return View(model);
                 }
             }
-
             var addResult = await userManager.AddToRoleAsync(user, model.SelectedRole);
             if (!addResult.Succeeded)
             {
-               
                 return View(model);
             }
-
             return RedirectToAction(nameof(All));
         }
-
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-
             if (User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
-
             var model = new RegisterFormModel();
-           
-
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Add(RegisterFormModel model)
         {
-
             if (User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
-
-
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
             ApplicationUser applicationUser = new ApplicationUser()
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-
             };
-
             await userManager.SetEmailAsync(applicationUser, model.Email);
             await userManager.SetUserNameAsync(applicationUser, model.Email);
-
             var result = await userManager.CreateAsync(applicationUser, model.Password);
-
             if (!result.Succeeded)
             {
                 foreach (var error in result.Errors)
@@ -164,14 +124,10 @@ namespace AuctionSystem.Areas.Administrator.Controllers
                 }
                 return View(model);
             }
-
             await userManager.AddClaimAsync(applicationUser, new System.Security.Claims.Claim(UserFullNameClaim, $"{applicationUser.FirstName} {applicationUser.LastName}"));
             await userManager.AddToRoleAsync(applicationUser, CustomerRole);
-
             return RedirectToAction(nameof(AllUserForEnable));
-
         }
-
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
@@ -179,38 +135,27 @@ namespace AuctionSystem.Areas.Administrator.Controllers
             {
                 return BadRequest();
             }
-
-
             if (User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
-
             var model = await userService.GetUserForDeleteAsync(id);
-
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-
             if (await userService.ExistAsync(id) == false)
             {
                 return BadRequest();
             }
-
             if (User.IsAdmin() == false)
             {
                 return Unauthorized();
             }
-
             await userService.RemoveAsync(id);
-
             return RedirectToAction(nameof(All));
-
         }
-
         private string GetUserId()
         {
             var userId = ClaimsPrincipalExtensions.Id(this.User);
@@ -218,4 +163,3 @@ namespace AuctionSystem.Areas.Administrator.Controllers
         }
     }
 }
-

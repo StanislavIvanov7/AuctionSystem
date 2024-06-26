@@ -2,23 +2,19 @@
 @{
     ViewBag.Title = "All Enable Users";
 }
-
 <style>
     .card-body {
         font-size: 1.1em;
         font-weight: bold;
     }
 </style>
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <div class="text-center row flex gap-4 m-4 justify-content-center">
     @foreach (var u in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
             <div class="card-body">
-
                 <h5 class="card-title mt-1">User Information</h5>
                 <p class="card-title mt-1">First Name: @u.FirstName</p>
                 <p class="mb-0">Last Name: @u.LastName</p>
@@ -26,16 +22,12 @@
                 <p class="mb-0">Phone Number: @u.PhoneNumber</p>
                 <p class="mb-0">User Role: @u.UserRole</p>
             </div>
-
             <a asp-area="Administrator" asp-controller="User" asp-action="ChangeUserRole" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Change user role</a>
             <a asp-area="Administrator" asp-controller="User" asp-action="Delete" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Delete user</a>
             <a asp-area="Administrator" asp-controller="User" asp-action="DisableUsers" asp-route-id="@u.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Diasble User</a>
         </div>
     }
-
-
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

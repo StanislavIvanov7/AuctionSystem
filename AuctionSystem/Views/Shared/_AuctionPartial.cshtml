@@ -1,15 +1,9 @@
 ﻿@model AllAuctionViewModel
-
-
-
 <div class="col-md-3">
     <div class="card mb-4">
-     
         <div>
             @if (Model.Images != null && Model.Images.Any())
             {
-               
-
                 foreach (var image in Model.Images)
                 {
                     if (image.IsMain)
@@ -20,15 +14,10 @@
                     {
                         <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 95px; height: 80px;" />
                     }
-                    
                 }
             }
-            
         </div>
-
-       
             <div class="card-body text-center">
-
                 <h5 class="card-title mt-1">@Model.Name</h5>
                 <p class="mb-0">Last Price: @Model.LastPrice lv.</p>
                 <p class="mb-0">Initial Price: @Model.InitialPrice lv.</p>
@@ -36,18 +25,9 @@
                 <p class="mb-0">Condition: @Model.Condition</p>
                 <p class="mb-0">Min bidding step: @Model.MinBiddingStep</p>
                 <p class="mb-0">Bidding period in days: @Model.BiddingPeriodInDays</p>
-
-
                 <a asp-controller="Auction" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Details</a>
-
-
             <a asp-controller="AuctionComment" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Add comment for auction</a>
             <a asp-controller="Bidding" asp-action="Bidding" asp-route-id="@Model.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Bidding</a>
             </div>
-        
-        
     </div>
 </div>
-
-            
-

@@ -2,38 +2,29 @@
 @{
     ViewBag.Title = "My Winning Auctions";
 }
-
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
-
 <div class="text-center row flex gap-4 m-4 justify-content-center">
     @foreach (var a in Model)
     {
         <div class="card col-4" style="width: 20rem; ">
             @if (a.Images != null && a.Images.Any())
             {
-
                 foreach (var image in a.Images)
                 {
                     <img src="@image.ImageUrl" alt="Product Image" class="img-thumbnail" style="width: 150px; height: 100px;" />
                 }
             }
             <div class="card-body">
-
                 <h5 class="card-title mt-1">@a.Name</h5>
                 <p class="mb-0">Price: @a.LastPrice lv.</p>
                 <p class="mb-0">Description: @a.Description</p>
                 <p class="mb-0">Min bidding step: @a.MinBiddingStep</p>
                 <p class="mb-0">Bidding period in days: @a.BiddingPeriodInDays</p>
-
             </div>
-
-
         </div>
     }
 </div>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
