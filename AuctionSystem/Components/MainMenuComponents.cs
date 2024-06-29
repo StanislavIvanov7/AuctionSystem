@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 namespace AuctionSystem.Components
 {
     public class MainMenuComponents : ViewComponent

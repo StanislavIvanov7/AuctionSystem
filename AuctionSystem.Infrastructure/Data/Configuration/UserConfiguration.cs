@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using AuctionSystem.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AuctionSystem.Infrastructure.Data.Models;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AuctionSystem.Infrastructure.Data.Configuration
 {
     public class UserConfiguration : IEntityTypeConfiguration<ApplicationUser>
@@ -17,11 +11,14 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
         {
             builder.HasData(SeedUsers());
         }
+
         private List<ApplicationUser> SeedUsers()
         {
             ApplicationUser user;
-            var hasher = new PasswordHasher<ApplicationUser>(); 
             List<ApplicationUser> users = new List<ApplicationUser>();
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
             user = new ApplicationUser()
             {
                 Id = "0a2830ef-8be3-4ef6-910b-33b680d659d3",
@@ -37,6 +34,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 PasswordHash = hasher.HashPassword(null, "stanislav123"),
             };
             users.Add(user);
+
             user = new ApplicationUser()
             {
                 Id = "0e136956-3e82-4e00-8f60-b274cdf40833",
@@ -52,6 +50,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 PasswordHash = hasher.HashPassword(null, "petq123"),
             };
             users.Add(user);
+
             user = new ApplicationUser()
             {
                 Id = "cd87d0e2-4047-473e-924a-3e10406c5583",
@@ -67,6 +66,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 PasswordHash = hasher.HashPassword(null, "pesho123"),
             };
             users.Add(user);
+
             user = new ApplicationUser()
             {
                 Id = "70280028-a1a0-4b5e-89d8-b4e65cbae8d8",
@@ -82,6 +82,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 PasswordHash = hasher.HashPassword(null, "teodor123"),
             };
             users.Add(user);
+
             return users;
         }
     }

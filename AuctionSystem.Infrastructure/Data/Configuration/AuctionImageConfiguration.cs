@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AuctionSystem.Infrastructure.Data.Configuration
 {
     public class AuctionImageConfiguration : IEntityTypeConfiguration<AuctionImage>
@@ -9,10 +10,12 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
         {
             builder.HasData(SeedAuctionImages());
         }
+
         private List<AuctionImage> SeedAuctionImages()
         {
             List<AuctionImage> images = new List<AuctionImage>();
             AuctionImage image;
+
             image = new AuctionImage()
             {
                 Id = 1,
@@ -21,6 +24,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 IsMain = true,
             };
             images.Add(image);
+
             image = new AuctionImage()
             {
                 Id = 2,
@@ -29,6 +33,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 IsMain = false,
             };
             images.Add(image);
+
             image = new AuctionImage()
             {
                 Id = 3,
@@ -37,6 +42,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 IsMain = false,
             };
             images.Add(image);
+
             return images;
         }
     }

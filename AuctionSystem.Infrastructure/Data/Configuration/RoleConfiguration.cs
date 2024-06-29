@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AuctionSystem.Infrastructure.Data.Configuration
 {
     public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
@@ -14,10 +10,12 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
         {
             builder.HasData(SeedRoles());
         }
+
         private List<IdentityRole> SeedRoles()
         {
             IdentityRole role;
             List<IdentityRole> roles = new List<IdentityRole>();
+
             role = new IdentityRole()
             {
                 Id = "9e42b0be-39c7-48bd-883b-10726fbd7573",
@@ -25,6 +23,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 NormalizedName = "CUSTOMER",
             };
             roles.Add(role);
+
             role = new IdentityRole()
             {
                 Id = "346e1559-a879-404e-8555-4708cda20f06",
@@ -32,6 +31,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 NormalizedName = "MODERATOR",
             };
             roles.Add(role);
+
             role = new IdentityRole()
             {
                 Id = "e870b2a7-d550-4201-a4d6-a40bd996790a",
@@ -39,6 +39,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 NormalizedName = "ADMINISTRATOR",
             };
             roles.Add(role);
+
             return roles;
         }
     }

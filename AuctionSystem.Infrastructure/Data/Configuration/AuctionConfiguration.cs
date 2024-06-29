@@ -1,6 +1,7 @@
 ﻿using AuctionSystem.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace AuctionSystem.Infrastructure.Data.Configuration
 {
     public class AuctionConfiguration : IEntityTypeConfiguration<Auction>
@@ -9,11 +10,14 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
         {
             builder.HasData(SeedAuction());
         }
+
         private List<Auction> SeedAuction()
         {
             List<Auction> auctions = new List<Auction>();
             Auction auction;
+
             var fixedDate = new DateTime(2024, 5, 24);
+
             auction = new Auction()
             {
                 Id = 1,
@@ -30,6 +34,7 @@ namespace AuctionSystem.Infrastructure.Data.Configuration
                 StartingAuctionDateTime = fixedDate,
             };
             auctions.Add(auction);
+
             return auctions;
         }
     }
