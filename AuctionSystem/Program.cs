@@ -22,14 +22,11 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
+app.MapControllerRoute(
       name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-    );
-    endpoints.MapDefaultControllerRoute();
-    endpoints.MapRazorPages();
-});
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
+app.MapRazorPages();
+
 await app.CreateRolesAsync();
 await app.RunAsync();
